@@ -79,6 +79,7 @@
 		692520E02B98CCC600319760 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 692520DF2B98CCC600319760 /* FirebaseStorage */; };
 		692520E22B98CCC600319760 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 692520E12B98CCC600319760 /* FirebaseStorageCombine-Community */; };
 		692520E42B98E34000319760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 692520E32B98E33F00319760 /* GoogleService-Info.plist */; };
+		F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3958EF12BBAFE170087E872 /* CalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		692520A22B98BEB800319760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		692520A52B98BEB800319760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		692520E32B98E33F00319760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F3958EF12BBAFE170087E872 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				691E738C2BB4594A0039704B /* Start.swift */,
 				6923A8292BB1C08300BA99F1 /* NewEventView.swift */,
 				6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */,
+				F3958EF12BBAFE170087E872 /* CalendarView.swift */,
 				6923A8272BB1BA9200BA99F1 /* DataManager.swift */,
 				692520A22B98BEB800319760 /* Assets.xcassets */,
 				692520E32B98E33F00319760 /* GoogleService-Info.plist */,
@@ -353,6 +356,7 @@
 				6923A8242BB1B90900BA99F1 /* ListView.swift in Sources */,
 				692520A12B98BEB400319760 /* ContentView.swift in Sources */,
 				691E738D2BB4594A0039704B /* Start.swift in Sources */,
+				F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */,
 				6925209F2B98BEB400319760 /* ACSCJAApp.swift in Sources */,
 				6923A81E2BA341F700BA99F1 /* StudentLogin.swift in Sources */,
 				6923A82A2BB1C08300BA99F1 /* NewEventView.swift in Sources */,
