@@ -27,14 +27,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("S")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("22")
-                            .font(.subheadline)
-                            .fontWeight(.black)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
                             .frame(width: 45, height: 25)
@@ -50,13 +49,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("M")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("23")
-                            .font(.subheadline)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .fontWeight(.black)
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
@@ -73,13 +72,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("T")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("24")
-                            .font(.subheadline)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .fontWeight(.black)
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
@@ -96,13 +95,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("W")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("25")
-                            .font(.subheadline)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .fontWeight(.black)
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
@@ -119,13 +118,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("T")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("26")
-                            .font(.subheadline)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .fontWeight(.black)
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
@@ -142,13 +141,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("F")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("27")
-                            .font(.subheadline)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .fontWeight(.black)
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
@@ -165,13 +164,13 @@ struct CalendarView: View {
                 }, label: {
                     VStack{
                         Text("S")
-                            .font(.subheadline)
+                            .font(.custom("Popppins-Regular", size: 17))
                             .foregroundColor(.black)
                             .padding(.top, 12)
                             .frame(width: 45, height: 25)
                         
                         Text("28")
-                            .font(.subheadline)
+                            .font(.custom("Poppins-Bold", size: 17))
                             .fontWeight(.black)
                             .foregroundColor(.red)
                             .padding(.bottom, 12)
@@ -188,19 +187,13 @@ struct CalendarView: View {
                 ScrollView{
                     VStack{
                         Text("Time")
-                        ForEach(0...mar28schedule.count-1, id: \.self) { ind in
-                            let startTime = Int(mar28schedule[ind][1])
-                            let endTime = Int(mar28schedule[ind][2])
-                        }
-                       
+                            .font(.custom("Poppins-Bold", size: 15))
                     }
-                    .font(.custom("Poppins", size: 15))
                 }
             }
+            
         }
-        
     }
-    
 }
 
 #Preview {

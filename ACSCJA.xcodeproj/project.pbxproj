@@ -80,6 +80,8 @@
 		692520E22B98CCC600319760 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 692520E12B98CCC600319760 /* FirebaseStorageCombine-Community */; };
 		692520E42B98E34000319760 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 692520E32B98E33F00319760 /* GoogleService-Info.plist */; };
 		F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3958EF12BBAFE170087E872 /* CalendarView.swift */; };
+		F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */; };
+		F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,9 @@
 		692520A52B98BEB800319760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		692520E32B98E33F00319760 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F3958EF12BBAFE170087E872 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		F39EBEAD2BBD968100B3D516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +194,8 @@
 		6925209D2B98BEB400319760 /* ACSCJA */ = {
 			isa = PBXGroup;
 			children = (
+				F39EBEAD2BBD968100B3D516 /* Info.plist */,
+				F39EBEA82BBD95F000B3D516 /* Fonts */,
 				6925209E2B98BEB400319760 /* ACSCJAApp.swift */,
 				692520A02B98BEB400319760 /* ContentView.swift */,
 				6923A81D2BA341F700BA99F1 /* StudentLogin.swift */,
@@ -211,6 +218,15 @@
 				692520A52B98BEB800319760 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F39EBEA82BBD95F000B3D516 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */,
+				F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +356,9 @@
 			files = (
 				692520A62B98BEB800319760 /* Preview Assets.xcassets in Resources */,
 				692520E42B98E34000319760 /* GoogleService-Info.plist in Resources */,
+				F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */,
 				692520A32B98BEB800319760 /* Assets.xcassets in Resources */,
+				F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +513,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ACSCJA/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ACSCJA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -523,6 +542,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ACSCJA/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ACSCJA/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
