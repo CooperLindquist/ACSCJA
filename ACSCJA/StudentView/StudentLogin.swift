@@ -17,7 +17,7 @@ struct StudentLogin: View {
         
     var body: some View {
         if userIsLoggedIn {
-            ListView()
+            HomePageView()
         }
         else {
             content
