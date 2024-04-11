@@ -65,6 +65,7 @@ struct HomePageView: View {
                     Spacer()
                     Button(action: {
                         changeButton(buttonName: "house")
+                        
                     }, label: {
                         Image(systemName: house)
                             .resizable()
@@ -127,7 +128,7 @@ struct HomePageView: View {
         }
     }
     func changeButton(buttonName: String) {
-        var str = buttonName
+        let str = buttonName
         house = "house"
         calendar = "calendar"
         court = "sportscourt"
