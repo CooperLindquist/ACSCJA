@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 
+
 struct StudentLogin: View {
     @State private var email = ""
     @State private var password = ""
@@ -16,15 +17,24 @@ struct StudentLogin: View {
     @State private var showErrorAlert = false
         
     var body: some View {
-        if userIsLoggedIn {
-            HomePageView()
-        }
-        else {
-            content
-                .alert(isPresented: $showErrorAlert) {
-                    Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+        NavigationView{
+            if userIsLoggedIn {
+                NavigationLink(destination: TabBarView()) {
+                    Text("Enter")
+                        .foregroundColor(.black)
+                        .border(Color.blue)
                 }
+            }
+
+            else {
+                content
+                    .alert(isPresented: $showErrorAlert) {
+                        Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                    }
+            }
         }
+        .navigationBarBackButtonHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+        
         
         
         
@@ -92,6 +102,7 @@ struct StudentLogin: View {
             }
             
         }
+        
     
     func login() {
             Auth.auth().signIn(withEmail: email, password: password) { result, error in

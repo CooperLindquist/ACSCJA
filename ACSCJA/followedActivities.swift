@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct followedActivity: Identifiable, Equatable {
+    let name: String
+    let id = UUID()
+}
