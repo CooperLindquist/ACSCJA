@@ -19,13 +19,41 @@ struct ProfileView: View {
                     .fontWeight(.heavy)
                     .foregroundColor(Color.white)
                     .font(.system(size: 40))
-                VStack {
-                    ForEach(activity, id: \.self) { item in
-                        Text(item)
-                    }
-                }
-                .frame(maxHeight: 500)
+                    .padding(.trailing, 100.0)
+                Text("Followed Activities")
+                    .foregroundColor(Color.white)
+                    .padding(.trailing, 180.0)
             }
+            
+            .offset(y: -300)
+                    
+            VStack(alignment: .leading) {
+                
+                
+                ForEach(activity, id: \.self) { item in
+                    
+                        Text(item)
+                            .foregroundColor(Color.white)
+                            .padding()
+                        
+                        
+                    
+                }
+                
+                .frame(maxWidth: 320)
+                .background(
+                    Rectangle()
+                        .fill(Color.white)
+                        .opacity(0.4)
+                        .cornerRadius(10)
+                    
+                    
+                )
+            }
+            .offset(y: -100)
+                
+                
+            
         }
     }
 }
