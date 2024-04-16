@@ -16,6 +16,7 @@ struct TabBarView: View {
     @State var person = "person"
     @State var screen: AnyView = AnyView(HomePageView())
     
+    
     init() {
         house = "house.fill"
     }
