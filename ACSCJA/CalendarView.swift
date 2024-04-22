@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct CalendarView: View {
     @State var dateSelected = 0
     @State var time = 8
@@ -15,8 +16,9 @@ struct CalendarView: View {
     //        Array(repeating: "", count: 24)
     //    }
     //    @State var mar28schedule = ["", "", "", "", "", "", "", "", "", "", "", "", "Super awesome soccer game", "", "", "Football game", "Banana race", "", "", "", "", "", "", ""]
-    @State var mar28schedule = [["super awesome soccer game", "12", "14"], ["football game", "15", "17"], ["badminton battle", "16", "19"], ["Car", "18", "20"]]
+    @State var mar28schedule = [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]]
     @State var times = []
+    @State var positional: [[Int]] = [[]]
     //@State var positions: [Int] = []
 //    init() {
 //            _positions = State(initialValue: position(list: mar28schedule))
@@ -30,7 +32,7 @@ struct CalendarView: View {
             HStack{
                 Button(action: {
                     dateSelected = 1
-
+                    
                 }, label: {
                     VStack{
                         Text("S")
@@ -191,10 +193,10 @@ struct CalendarView: View {
                 .cornerRadius(15)
             }
             Divider()
-            ScrollView{
-            HStack{
-                Spacer()
-                Spacer()
+            ScrollView(){
+                HStack{
+                    Spacer()
+                    Spacer()
                     VStack{
                         Text("Time")
                             .font(.custom("Poppins-Regular", size: 17))
@@ -204,49 +206,95 @@ struct CalendarView: View {
                                 .padding(.bottom, 7.0)
                         }
                     }
-//                    .onAppear{
-//                        positions = position(list : mar28schedule)
-//                        print(positions[1] * 2)
-//                    }
-                Spacer()
-                Spacer()
-                Divider()
-                ZStack{
-                    Text("Event")
-                        .font(.custom("Poppins-Regular", size: 17))
-                        .position(x: 25, y: 12)
-                    ForEach(0..<mar28schedule.count, id: \.self) {index in
-                        Button {
-                            //New screen for information
-                        } label: {
-                            Text(mar28schedule[index][0])
-                                .font(.custom("Poppins-Regular", size: 16))
-                                .foregroundColor(Color.black)
-                                .frame(width: 140.0, height: 110.0)
-                            
+                                        .onAppear{
+                                            positional = findPos(list : mar28schedule)
+                                        }
+                    Spacer()
+                    Spacer()
+                    Divider()
+                    ScrollView(.horizontal){
+                        ZStack{
+                            Text("Event")
+                                .font(.custom("Poppins-Regular", size: 17))
+                                .position(x: 25, y: 12)
+                            ForEach(0..<mar28schedule.count, id: \.self) {index in
+                                Button {
+                                    //New screen for information
+                                } label: {
+                                    Text(mar28schedule[index][0])
+                                        .font(.custom("Poppins-Regular", size: 16))
+                                        .foregroundColor(Color.black)
+                                        .frame(width: 140.0, height: 32 + 40 * CGFloat(diff(list : mar28schedule, x : index)))
+                                    
+                                }
+                                .background(Color("SelectBgr"))
+                                .cornerRadius(10)
+                                .position(x: 75 + 150 * CGFloat(pickPos(positions : positional, x : index)), y: CGFloat(sumOf(list : mar28schedule, x : index) * 20 + 33))
+                            }
                         }
-                        .background(Color("SelectBgr"))
-                        .cornerRadius(10)
-                        .position(x: 75 + 150 * CGFloat(position(list : mar28schedule, index : index)), y: CGFloat((mar28schedule[index][1] as NSString) .integerValue * 40 + 70))
-                    }
+                        .frame(width: 1000)
+                        //your fucntion sucks make so like lists and like if you can put it there put it there
                     }
                 }
             }
         }
+    }
+    func diff(list : [[String]], x : Int) -> Int{
+        let first = (list[x][1] as NSString).integerValue
+        let next = (list[x][2] as NSString).integerValue
+        return abs(first - next)
+    }
+    func sumOf(list : [[String]], x : Int) -> Int{
+        let first = (list[x][1] as NSString).integerValue
+        let next = (list[x][2] as NSString).integerValue
+        return first + next
+    }
+   
+}
+func findPos(list : [[String]]) -> [[Int]] {
+    var fin: [[Int]] = [[]]
+    for x in 0..<list.count{
+        let startTime = (list[x][1] as NSString).integerValue
+        print(startTime)
+        fin = placed(list : list, fin : fin, startTime : startTime, x : x)
         
     }
-    func position(list : [[String]], index : Int) -> Int{
-        var fin = 0
-        let startTime = (list[index][1] as NSString).integerValue
-        for i in 0..<index {
-            if startTime >= (list[i][1] as NSString).integerValue && startTime <= (list[i][2] as NSString).integerValue{
-                fin += 1
+    print (fin)
+    return fin
+}
+func placed(list : [[String]], fin : [[Int]], startTime : Int, x : Int) -> [[Int]]{
+    var temp = fin
+    for i in 0..<fin.count {
+        var fits = true
+        for j in 0..<fin[i].count{
+            print(i)
+            print(j)
+            let startTemp = (list[fin[i][j]][1] as NSString).integerValue
+            let endTemp = (list[fin[i][j]][2] as NSString).integerValue
+            print (startTemp)
+            print (endTemp)
+            if startTime <= endTemp{
+                fits = false
             }
         }
-        return fin
+        if fits{
+            temp[i].append(x)
+            return temp
+        }
     }
+    temp.append([x])
+    return temp
 }
-
+func pickPos(positions : [[Int]], x : Int) -> Int{
+    for i in 0..<positions.count{
+        for j in 0..<positions[i].count{
+            if x == positions[i][j]{
+                return i
+            }
+        }
+    }
+    return 0
+}
 
 #Preview {
     CalendarView()
