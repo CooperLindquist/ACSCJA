@@ -1,23 +1,18 @@
 //
-//  NewEventView.swift
+//  AddScoreView.swift
 //  ACSCJA
 //
-//  Created by 90310805 on 3/25/24.
+//  Created by 90310805 on 4/25/24.
 //
 
 import SwiftUI
 
-
-
-struct NewEventView: View {
+struct AddScoreView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        
-
-         
     }
 }
 
 #Preview {
-    NewEventView()
+    AddScoreView()
 }
