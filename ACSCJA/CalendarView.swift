@@ -9,14 +9,17 @@ import SwiftUI
 
 
 struct CalendarView: View {
-    @State var dateSelected = 0
+    @State var dateSelected = 1
     @State var time = 8
     @State var temp = ""
+    @State var calIndex = 0
     //    var mar28schedule : [String] {
     //        Array(repeating: "", count: 24)
     //    }
     //    @State var mar28schedule = ["", "", "", "", "", "", "", "", "", "", "", "", "Super awesome soccer game", "", "", "Football game", "Banana race", "", "", "", "", "", "", ""]
-    @State var mar28schedule = [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]]
+    @State var schedule = [[["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
+                           
+       [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]]]
     @State var times = []
     @State var positional: [[Int]] = [[]]
     //@State var positions: [Int] = []
@@ -31,8 +34,9 @@ struct CalendarView: View {
         VStack{
             HStack{
                 Button(action: {
-                    dateSelected = 1
-                    
+                    dateSelected = 0
+                    calIndex = 0
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("S")
@@ -50,12 +54,14 @@ struct CalendarView: View {
                     
                     
                 })
-                .background(dateSelected == 1 ? Color("SelectBgr") : .white)
+                .background(dateSelected == 0 ? Color("SelectBgr") : .white)
                 .cornerRadius(15)
                 
                 Button(action: {
                     print("poop")
-                    dateSelected = 2
+                    dateSelected = 1
+                    calIndex = 1
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("M")
@@ -74,11 +80,13 @@ struct CalendarView: View {
                     
                     
                 })
-                .background(dateSelected == 2 ? Color("SelectBgr") : .white)
+                .background(dateSelected == 1 ? Color("SelectBgr") : .white)
                 .cornerRadius(15)
                 
                 Button(action: {
-                    dateSelected = 3
+                    dateSelected = 2
+                    
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("T")
@@ -95,13 +103,15 @@ struct CalendarView: View {
                             .frame(width: 45, height: 25)
                     }
                     
-                    .background(dateSelected == 3 ? Color("SelectBgr") : .white)
+                    .background(dateSelected == 2 ? Color("SelectBgr") : .white)
                 })
                 
                 .cornerRadius(15)
                 
                 Button(action: {
-                    dateSelected = 4
+                    dateSelected = 3
+                    
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("W")
@@ -118,13 +128,15 @@ struct CalendarView: View {
                             .frame(width: 45, height: 25)
                     }
                     
-                    .background(dateSelected == 4 ? Color("SelectBgr") : .white)
+                    .background(dateSelected == 3 ? Color("SelectBgr") : .white)
                 })
                 
                 .cornerRadius(15)
                 
                 Button(action: {
-                    dateSelected = 5
+                    dateSelected = 4
+                    
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("T")
@@ -141,13 +153,15 @@ struct CalendarView: View {
                             .frame(width: 45, height: 25)
                     }
                     
-                    .background(dateSelected == 5 ? Color("SelectBgr") : .white)
+                    .background(dateSelected == 4 ? Color("SelectBgr") : .white)
                 })
                 
                 .cornerRadius(15)
                 
                 Button(action: {
-                    dateSelected = 6
+                    dateSelected = 5
+                    
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("F")
@@ -164,13 +178,15 @@ struct CalendarView: View {
                             .frame(width: 45, height: 25)
                     }
                     
-                    .background(dateSelected == 6 ? Color("SelectBgr") : .white)
+                    .background(dateSelected == 5 ? Color("SelectBgr") : .white)
                 })
                 
                 .cornerRadius(15)
                 
                 Button(action: {
-                    dateSelected = 7
+                    dateSelected = 6
+                    
+                    positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
                         Text("S")
@@ -187,7 +203,7 @@ struct CalendarView: View {
                             .frame(width: 45, height: 25)
                     }
                     
-                    .background(dateSelected == 7 ? Color("SelectBgr") : .white)
+                    .background(dateSelected == 6 ? Color("SelectBgr") : .white)
                 })
                 
                 .cornerRadius(15)
@@ -207,7 +223,7 @@ struct CalendarView: View {
                         }
                     }
                                         .onAppear{
-                                            positional = findPos(list : mar28schedule)
+                                            positional = findPos(list : schedule[dateSelected])
                                         }
                     Spacer()
                     Spacer()
@@ -217,19 +233,19 @@ struct CalendarView: View {
                             Text("Event")
                                 .font(.custom("Poppins-Regular", size: 17))
                                 .position(x: 25, y: 12)
-                            ForEach(0..<mar28schedule.count, id: \.self) {index in
+                            ForEach(0..<schedule[dateSelected].count, id: \.self) {index in
                                 Button {
                                     //New screen for information
                                 } label: {
-                                    Text(mar28schedule[index][0])
+                                    Text(schedule[dateSelected][index][0])
                                         .font(.custom("Poppins-Regular", size: 16))
                                         .foregroundColor(Color.black)
-                                        .frame(width: 140.0, height: 32 + 40 * CGFloat(diff(list : mar28schedule, x : index)))
+                                        .frame(width: 140.0, height: 32 + 40 * CGFloat(diff(list : schedule[dateSelected], x : index)))
                                     
                                 }
                                 .background(Color("SelectBgr"))
                                 .cornerRadius(10)
-                                .position(x: 75 + 150 * CGFloat(pickPos(positions : positional, x : index)), y: CGFloat(sumOf(list : mar28schedule, x : index) * 20 + 33))
+                                .position(x: 75 + 150 * CGFloat(pickPos(positions : positional, x : index)), y: CGFloat(sumOf(list : schedule[dateSelected], x : index) * 20 + 33))
                             }
                         }
                         .frame(width: 1000)
@@ -239,16 +255,17 @@ struct CalendarView: View {
             }
         }
     }
-    func diff(list : [[String]], x : Int) -> Int{
-        let first = (list[x][1] as NSString).integerValue
-        let next = (list[x][2] as NSString).integerValue
-        return abs(first - next)
-    }
-    func sumOf(list : [[String]], x : Int) -> Int{
-        let first = (list[x][1] as NSString).integerValue
-        let next = (list[x][2] as NSString).integerValue
-        return first + next
-    }
+ 
+func diff(list : [[String]], x : Int) -> Int{
+    let first = (list[x][1] as NSString).integerValue
+    let next = (list[x][2] as NSString).integerValue
+    return abs(first - next)
+}
+func sumOf(list : [[String]], x : Int) -> Int{
+    let first = (list[x][1] as NSString).integerValue
+    let next = (list[x][2] as NSString).integerValue
+    return first + next
+}
    
 }
 func findPos(list : [[String]]) -> [[Int]] {

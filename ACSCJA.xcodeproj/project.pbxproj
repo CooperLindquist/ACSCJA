@@ -18,7 +18,6 @@
 		6923A81E2BA341F700BA99F1 /* StudentLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923A81D2BA341F700BA99F1 /* StudentLogin.swift */; };
 		6923A8262BB1B96C00BA99F1 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */; };
 		6923A8282BB1BA9200BA99F1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923A8272BB1BA9200BA99F1 /* DataManager.swift */; };
-		6923A82A2BB1C08300BA99F1 /* NewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923A8292BB1C08300BA99F1 /* NewEventView.swift */; };
 		6923A82C2BB1C74400BA99F1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A82B2BB1C74400BA99F1 /* FirebaseAnalytics */; };
 		6923A82E2BB1C74400BA99F1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A82D2BB1C74400BA99F1 /* FirebaseAnalyticsOnDeviceConversion */; };
 		6923A8302BB1C74400BA99F1 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A82F2BB1C74400BA99F1 /* FirebaseAnalyticsSwift */; };
@@ -106,7 +105,6 @@
 		6923A81D2BA341F700BA99F1 /* StudentLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLogin.swift; sourceTree = "<group>"; };
 		6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
 		6923A8272BB1BA9200BA99F1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		6923A8292BB1C08300BA99F1 /* NewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventView.swift; sourceTree = "<group>"; };
 		6925209B2B98BEB400319760 /* ACSCJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACSCJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6925209E2B98BEB400319760 /* ACSCJAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSCJAApp.swift; sourceTree = "<group>"; };
 		692520A22B98BEB800319760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 				69348DFA2BD6A4AD002DC202 /* ViewModel.swift */,
 				69348DFC2BD6A8C3002DC202 /* DBTest.swift */,
 				691E738C2BB4594A0039704B /* Start.swift */,
-				6923A8292BB1C08300BA99F1 /* NewEventView.swift */,
 				69348DE82BC83101002DC202 /* HomePageView.swift */,
 				69348DEA2BC83114002DC202 /* TabBarView.swift */,
 				69348DEE2BC8662C002DC202 /* ActivitesView.swift */,
@@ -435,7 +432,6 @@
 				6923A81E2BA341F700BA99F1 /* StudentLogin.swift in Sources */,
 				69348DFD2BD6A8C3002DC202 /* DBTest.swift in Sources */,
 				69348DE92BC83101002DC202 /* HomePageView.swift in Sources */,
-				6923A82A2BB1C08300BA99F1 /* NewEventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
