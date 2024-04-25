@@ -13,20 +13,21 @@ struct CalendarView: View {
     @State var time = 8
     @State var temp = ""
     @State var calIndex = 0
-    //    var mar28schedule : [String] {
-    //        Array(repeating: "", count: 24)
-    //    }
-    //    @State var mar28schedule = ["", "", "", "", "", "", "", "", "", "", "", "", "Super awesome soccer game", "", "", "Football game", "Banana race", "", "", "", "", "", "", ""]
     @State var schedule = [[["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
                            
-       [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]]]
+       [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
+                           
+        [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
+                           
+        [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
+                           
+        [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
+                                              
+        [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
+    
+        [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]]]
     @State var times = []
     @State var positional: [[Int]] = [[]]
-    //@State var positions: [Int] = []
-//    init() {
-//            _positions = State(initialValue: position(list: mar28schedule))
-//        // Initialize positions array with result of position function
-//        }
     
     
     var body: some View {
@@ -85,7 +86,7 @@ struct CalendarView: View {
                 
                 Button(action: {
                     dateSelected = 2
-                    
+                    calIndex = 2
                     positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
@@ -110,7 +111,7 @@ struct CalendarView: View {
                 
                 Button(action: {
                     dateSelected = 3
-                    
+                    calIndex = 3
                     positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
@@ -135,7 +136,7 @@ struct CalendarView: View {
                 
                 Button(action: {
                     dateSelected = 4
-                    
+                    calIndex = 4
                     positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
@@ -160,7 +161,7 @@ struct CalendarView: View {
                 
                 Button(action: {
                     dateSelected = 5
-                    
+                    calIndex = 5
                     positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
@@ -185,7 +186,7 @@ struct CalendarView: View {
                 
                 Button(action: {
                     dateSelected = 6
-                    
+                    calIndex = 6
                     positional = findPos(list : schedule[dateSelected])
                 }, label: {
                     VStack{
