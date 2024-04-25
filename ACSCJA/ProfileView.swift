@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    let activity : [String] = []
+    let activity : [String] = ["Baseball", "poopy butt", "car"]
     
     
     var body: some View {

@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Score : Identifiable {
+    
+    var id : String
+    var AwayTeam : String
+    var EPScore : Int
+    var OtherScore : Int
+    var Sport : String
+}

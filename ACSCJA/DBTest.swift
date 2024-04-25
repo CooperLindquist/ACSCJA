@@ -1,18 +1,23 @@
-//
-//  DBTest.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 4/22/24.
-//
-
 import SwiftUI
+import Firebase
 
 struct DBTest: View {
+    @ObservedObject var model = ViewModel.shared // Use shared instance
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(model.list) { item in
+            Text("\(item.EPScore)")
+        }
+    }
+    
+    init() {
+        model.getData()
     }
 }
 
-#Preview {
-    DBTest()
+#if DEBUG
+struct DBTest_Previews: PreviewProvider {
+    static var previews: some View {
+        DBTest()
+    }
 }
+#endif
