@@ -90,10 +90,10 @@
 		69348E0F2BDA9B59002DC202 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69348E0E2BDA9B59002DC202 /* FirebaseAnalyticsSwift */; };
 		69348E112BDA9B59002DC202 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 69348E102BDA9B59002DC202 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		69348E132BDA9B59002DC202 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 69348E122BDA9B59002DC202 /* FirebaseAppCheck */; };
-		69DD94462BE3F34400529A29 /* StudentLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94452BE3F34400529A29 /* StudentLogin.swift */; };
-		69DD94482BE3F37900529A29 /* ScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94472BE3F37900529A29 /* ScoresView.swift */; };
-		69DD944A2BE3F39900529A29 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94492BE3F39900529A29 /* ViewModel.swift */; };
-		69DD944E2BE3F3F000529A29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69DD944D2BE3F3F000529A29 /* GoogleService-Info.plist */; };
+		69DD94552BE3F6EC00529A29 /* StudentLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94512BE3F6EC00529A29 /* StudentLogin.swift */; };
+		69DD94562BE3F6EC00529A29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69DD94522BE3F6EC00529A29 /* GoogleService-Info.plist */; };
+		69DD94582BE3F72A00529A29 /* ScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94572BE3F72A00529A29 /* ScoresView.swift */; };
+		69DD945A2BE3F7D500529A29 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94592BE3F7D500529A29 /* ViewModel.swift */; };
 		F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3958EF12BBAFE170087E872 /* CalendarView.swift */; };
 		F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */; };
 		F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */; };
@@ -113,10 +113,10 @@
 		69348DF02BC86CDA002DC202 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		69348DF22BC872AB002DC202 /* followedActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followedActivities.swift; sourceTree = "<group>"; };
 		69348DF82BD6A3EC002DC202 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
-		69DD94452BE3F34400529A29 /* StudentLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentLogin.swift; path = ../../../../StudentLogin.swift; sourceTree = "<group>"; };
-		69DD94472BE3F37900529A29 /* ScoresView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoresView.swift; path = ../../../../ScoresView.swift; sourceTree = "<group>"; };
-		69DD94492BE3F39900529A29 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = ../../../../ViewModel.swift; sourceTree = "<group>"; };
-		69DD944D2BE3F3F000529A29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		69DD94512BE3F6EC00529A29 /* StudentLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLogin.swift; sourceTree = "<group>"; };
+		69DD94522BE3F6EC00529A29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		69DD94572BE3F72A00529A29 /* ScoresView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresView.swift; sourceTree = "<group>"; };
+		69DD94592BE3F7D500529A29 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		F3958EF12BBAFE170087E872 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -225,13 +225,13 @@
 			isa = PBXGroup;
 			children = (
 				F39EBEAD2BBD968100B3D516 /* Info.plist */,
-				69DD944D2BE3F3F000529A29 /* GoogleService-Info.plist */,
+				69DD94522BE3F6EC00529A29 /* GoogleService-Info.plist */,
 				F39EBEA82BBD95F000B3D516 /* Fonts */,
 				6925209E2B98BEB400319760 /* ACSCJAApp.swift */,
-				69DD94472BE3F37900529A29 /* ScoresView.swift */,
+				69DD94572BE3F72A00529A29 /* ScoresView.swift */,
+				69DD94512BE3F6EC00529A29 /* StudentLogin.swift */,
+				69DD94592BE3F7D500529A29 /* ViewModel.swift */,
 				69348DF82BD6A3EC002DC202 /* Score.swift */,
-				69DD94452BE3F34400529A29 /* StudentLogin.swift */,
-				69DD94492BE3F39900529A29 /* ViewModel.swift */,
 				691E738C2BB4594A0039704B /* Start.swift */,
 				69348DE82BC83101002DC202 /* HomePageView.swift */,
 				69348DEA2BC83114002DC202 /* TabBarView.swift */,
@@ -401,7 +401,7 @@
 			files = (
 				692520A62B98BEB800319760 /* Preview Assets.xcassets in Resources */,
 				F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */,
-				69DD944E2BE3F3F000529A29 /* GoogleService-Info.plist in Resources */,
+				69DD94562BE3F6EC00529A29 /* GoogleService-Info.plist in Resources */,
 				692520A32B98BEB800319760 /* Assets.xcassets in Resources */,
 				F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */,
 			);
@@ -417,16 +417,16 @@
 				69348DF92BD6A3EC002DC202 /* Score.swift in Sources */,
 				6923A8262BB1B96C00BA99F1 /* CalendarEvent.swift in Sources */,
 				69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */,
-				69DD94462BE3F34400529A29 /* StudentLogin.swift in Sources */,
 				6923A8282BB1BA9200BA99F1 /* DataManager.swift in Sources */,
 				69348DF32BC872AB002DC202 /* followedActivities.swift in Sources */,
+				69DD945A2BE3F7D500529A29 /* ViewModel.swift in Sources */,
 				69348DF12BC86CDA002DC202 /* ProfileView.swift in Sources */,
 				691E738D2BB4594A0039704B /* Start.swift in Sources */,
 				F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */,
+				69DD94552BE3F6EC00529A29 /* StudentLogin.swift in Sources */,
 				69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */,
-				69DD944A2BE3F39900529A29 /* ViewModel.swift in Sources */,
 				6925209F2B98BEB400319760 /* ACSCJAApp.swift in Sources */,
-				69DD94482BE3F37900529A29 /* ScoresView.swift in Sources */,
+				69DD94582BE3F72A00529A29 /* ScoresView.swift in Sources */,
 				69348DE92BC83101002DC202 /* HomePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
