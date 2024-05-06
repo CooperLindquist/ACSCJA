@@ -9,7 +9,11 @@ import SwiftUI
 
 struct CalendarEvent: Identifiable {
     var id: String
-    var time: String
-    var what: String
+    var Date: String
+    var Description: String
+    var EndTime: String
+    var Name: String
+    var StartTime: String
+   
     
 }
