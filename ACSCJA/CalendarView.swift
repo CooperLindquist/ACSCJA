@@ -9,11 +9,12 @@ import SwiftUI
 
 
 struct CalendarView: View {
-    @State var dateSelected = 1
+    @ObservedObject var model = CalendarViewModel()
+    @State var dateSelected = 0
     @State var time = 8
     @State var temp = ""
     @State var calIndex = 0
-    @State var schedule = [[["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
+    @State var schedule = [[["Super Awesome Soccer Game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
                            
        [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
                            
@@ -224,6 +225,7 @@ struct CalendarView: View {
                         }
                     }
                                         .onAppear{
+                                            model.getData()
                                             positional = findPos(list : schedule[dateSelected])
                                         }
                     Spacer()

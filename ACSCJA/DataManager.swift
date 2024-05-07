@@ -1,10 +1,10 @@
-////
-////  DataManager.swift
-////  ACSCJA
-////
-////  Created by 90310805 on 3/25/24.
-////
 //
+//  DataManager.swift
+//  ACSCJA
+//
+//  Created by 90310805 on 3/25/24.
+//
+
 //import SwiftUI
 //import Firebase
 //
