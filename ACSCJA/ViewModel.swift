@@ -22,6 +22,7 @@ class ViewModel: ObservableObject {
                     let data = document.data()
                     guard
                         let awayTeam = data["AwayTeam"] as? String,
+                        let date = data["Date"] as? String,
                         let epsScore = data["EPScore"] as? Int,
                         let otherScore = data["OtherScore"] as? Int,
                         let sport = data["Sport"] as? String
@@ -32,6 +33,7 @@ class ViewModel: ObservableObject {
                     
                     return Score(
                         id: document.documentID,
+                        Date: date,
                         AwayTeam: awayTeam,
                         EPScore: epsScore,
                         OtherScore: otherScore,

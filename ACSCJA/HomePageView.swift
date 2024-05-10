@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
-
 struct HomePageView: View {
+    @ObservedObject var model = ViewModel()
     @State var house = "house"
     @State var calendar = "calendar"
     @State var court = "sportscourt"
     @State var magnify = "magnifyingglass.circle"
     @State var person = "person"
+    @State var sport = "Baseball"
+   
     
     init() {
         house = "house.fill"
@@ -36,11 +38,67 @@ struct HomePageView: View {
                             .multilineTextAlignment(.center)
                             .padding(.trailing, 200.0)
                         
-                        Image("HomePageBox")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 350.0)
+//                        Image("HomePageBox")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 350.0)
                         
+                        ForEach(model.array.filter { $0.Sport == sport }, id: \.self) { item in
+                            // Your view code for displaying each item
+                        
+
+                           
+                        
+                            VStack {
+                                ZStack {
+                                    Image("HomePageBox")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 350.0)
+                                    Text("Eden Prairie vs \(item.AwayTeam)")
+                                        .foregroundColor(Color.white)
+                                        .multilineTextAlignment(.center)
+                                        .offset(y: -59)
+                                    HStack {
+                                        Image("EPEagle")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(height: 55)
+                                        
+                                        Text("\(item.EPScore) - \(item.OtherScore)")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.white)
+                                            .font(.system(size: 30))
+                                        if let awayTeamImage = UIImage(named: item.AwayTeam) {
+                                            Image(uiImage: awayTeamImage)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(height: 60)
+                                        } else {
+                                            Text("No \n Image")
+                                        }
+                                        
+                                    }
+                                    .padding(.trailing)
+                                    HStack {
+                                        Text(item.Sport)
+                                            .fontWeight(.heavy)
+                                            .offset(y: 50)
+                                        
+                                        
+                                        Text(item.Date)
+                                            .fontWeight(.heavy)
+                                            .offset(y: 50)
+                                        
+                                        
+                                    }
+                                    
+                                    
+                                
+                                    
+                                }
+                            }
+                        }
                         Text("Upcoming activities")
                             .foregroundColor(Color.white)
                             .padding(.trailing, 200.0)
@@ -68,6 +126,9 @@ struct HomePageView: View {
                 
             }
             .frame(width: 10.0)
+        }
+        .onAppear {
+            model.getData()
         }
     }
     func changeButton(buttonName: String) {

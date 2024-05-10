@@ -29,7 +29,14 @@ struct ScoresView: View {
                            
                     
                    
-                    ForEach(model.array, id: \.id) { item in
+                    ForEach(model.array.sorted(by: {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                        if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
+                            return date1 < date2
+                        }
+                        return false
+                    }), id: \.id) { item in
                         VStack {
                             ZStack {
                                 Image("HomePageBox")
@@ -61,10 +68,18 @@ struct ScoresView: View {
                                     
                                 }
                                 .padding(.trailing)
-                                Text(item.Sport)
-                                    .fontWeight(.heavy)
-                                    .offset(y: 50)
-                                    .underline()
+                                HStack {
+                                    Text(item.Sport)
+                                        .fontWeight(.heavy)
+                                        .offset(y: 50)
+                                        
+                                    
+                                    Text(item.Date)
+                                        .fontWeight(.heavy)
+                                        .offset(y: 50)
+                                        
+                                    
+                                }
                                 
                                 
                                 

@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Score : Identifiable {
-    
+struct Score: Identifiable, Hashable {
     var id : String
+    var Date : String
     var AwayTeam : String
     var EPScore : Int
     var OtherScore : Int
     var Sport : String
+    func hash(into hasher: inout Hasher) {
+           hasher.combine(id)
+           // Hash other properties if needed
+       }
 }

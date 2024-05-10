@@ -16,7 +16,6 @@
 		6923A8122BA1EF2A00BA99F1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A8112BA1EF2A00BA99F1 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		6923A8142BA1EF2A00BA99F1 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A8132BA1EF2A00BA99F1 /* FirebaseAppCheck */; };
 		6923A8262BB1B96C00BA99F1 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */; };
-		6923A8282BB1BA9200BA99F1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6923A8272BB1BA9200BA99F1 /* DataManager.swift */; };
 		6923A82C2BB1C74400BA99F1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A82B2BB1C74400BA99F1 /* FirebaseAnalytics */; };
 		6923A82E2BB1C74400BA99F1 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A82D2BB1C74400BA99F1 /* FirebaseAnalyticsOnDeviceConversion */; };
 		6923A8302BB1C74400BA99F1 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6923A82F2BB1C74400BA99F1 /* FirebaseAnalyticsSwift */; };
@@ -95,6 +94,10 @@
 		69DD94582BE3F72A00529A29 /* ScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94572BE3F72A00529A29 /* ScoresView.swift */; };
 		69DD945A2BE3F7D500529A29 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94592BE3F7D500529A29 /* ViewModel.swift */; };
 		69DD945C2BE9163B00529A29 /* AddScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD945B2BE9163B00529A29 /* AddScoreView.swift */; };
+		69DD945E2BEA852B00529A29 /* ArchivedScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD945D2BEA852B00529A29 /* ArchivedScore.swift */; };
+		69DD94602BEA85DC00529A29 /* ArchivedScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD945F2BEA85DC00529A29 /* ArchivedScoreView.swift */; };
+		69DD94642BEA868600529A29 /* ArchivedScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94632BEA868600529A29 /* ArchivedScoreViewModel.swift */; };
+		69DD94682BEE681800529A29 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94672BEE681800529A29 /* SignUpView.swift */; };
 		F34775B52BE922950068D0C9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34775B42BE922950068D0C9 /* CalendarViewModel.swift */; };
 		F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3958EF12BBAFE170087E872 /* CalendarView.swift */; };
 		F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */; };
@@ -104,7 +107,6 @@
 /* Begin PBXFileReference section */
 		691E738C2BB4594A0039704B /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
-		6923A8272BB1BA9200BA99F1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		6925209B2B98BEB400319760 /* ACSCJA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACSCJA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6925209E2B98BEB400319760 /* ACSCJAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSCJAApp.swift; sourceTree = "<group>"; };
 		692520A22B98BEB800319760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +122,10 @@
 		69DD94572BE3F72A00529A29 /* ScoresView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresView.swift; sourceTree = "<group>"; };
 		69DD94592BE3F7D500529A29 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		69DD945B2BE9163B00529A29 /* AddScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScoreView.swift; sourceTree = "<group>"; };
+		69DD945D2BEA852B00529A29 /* ArchivedScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedScore.swift; sourceTree = "<group>"; };
+		69DD945F2BEA85DC00529A29 /* ArchivedScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedScoreView.swift; sourceTree = "<group>"; };
+		69DD94632BEA868600529A29 /* ArchivedScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedScoreViewModel.swift; sourceTree = "<group>"; };
+		69DD94672BEE681800529A29 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		F34775B42BE922950068D0C9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		F3958EF12BBAFE170087E872 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -233,10 +239,14 @@
 				F39EBEA82BBD95F000B3D516 /* Fonts */,
 				6925209E2B98BEB400319760 /* ACSCJAApp.swift */,
 				69DD94572BE3F72A00529A29 /* ScoresView.swift */,
+				69DD945F2BEA85DC00529A29 /* ArchivedScoreView.swift */,
 				69DD945B2BE9163B00529A29 /* AddScoreView.swift */,
 				69DD94512BE3F6EC00529A29 /* StudentLogin.swift */,
+				69DD94672BEE681800529A29 /* SignUpView.swift */,
 				69DD94592BE3F7D500529A29 /* ViewModel.swift */,
+				69DD94632BEA868600529A29 /* ArchivedScoreViewModel.swift */,
 				69348DF82BD6A3EC002DC202 /* Score.swift */,
+				69DD945D2BEA852B00529A29 /* ArchivedScore.swift */,
 				691E738C2BB4594A0039704B /* Start.swift */,
 				69348DE82BC83101002DC202 /* HomePageView.swift */,
 				69348DEA2BC83114002DC202 /* TabBarView.swift */,
@@ -246,7 +256,6 @@
 				6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */,
 				F3958EF12BBAFE170087E872 /* CalendarView.swift */,
 				F34775B42BE922950068D0C9 /* CalendarViewModel.swift */,
-				6923A8272BB1BA9200BA99F1 /* DataManager.swift */,
 				692520A22B98BEB800319760 /* Assets.xcassets */,
 				692520A42B98BEB800319760 /* Preview Content */,
 			);
@@ -421,11 +430,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				69DD945C2BE9163B00529A29 /* AddScoreView.swift in Sources */,
+				69DD94602BEA85DC00529A29 /* ArchivedScoreView.swift in Sources */,
 				69348DF92BD6A3EC002DC202 /* Score.swift in Sources */,
 				6923A8262BB1B96C00BA99F1 /* CalendarEvent.swift in Sources */,
 				69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */,
-				6923A8282BB1BA9200BA99F1 /* DataManager.swift in Sources */,
+				69DD94682BEE681800529A29 /* SignUpView.swift in Sources */,
 				69348DF32BC872AB002DC202 /* followedActivities.swift in Sources */,
+				69DD94642BEA868600529A29 /* ArchivedScoreViewModel.swift in Sources */,
 				69DD945A2BE3F7D500529A29 /* ViewModel.swift in Sources */,
 				69348DF12BC86CDA002DC202 /* ProfileView.swift in Sources */,
 				F34775B52BE922950068D0C9 /* CalendarViewModel.swift in Sources */,
@@ -433,6 +444,7 @@
 				F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */,
 				69DD94552BE3F6EC00529A29 /* StudentLogin.swift in Sources */,
 				69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */,
+				69DD945E2BEA852B00529A29 /* ArchivedScore.swift in Sources */,
 				6925209F2B98BEB400319760 /* ACSCJAApp.swift in Sources */,
 				69DD94582BE3F72A00529A29 /* ScoresView.swift in Sources */,
 				69348DE92BC83101002DC202 /* HomePageView.swift in Sources */,
@@ -569,6 +581,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ACSCJA/Preview Content\"";
+				DEVELOPMENT_TEAM = MSTHY4DS5U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ACSCJA/Info.plist;
@@ -598,6 +611,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ACSCJA/Preview Content\"";
+				DEVELOPMENT_TEAM = MSTHY4DS5U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ACSCJA/Info.plist;
