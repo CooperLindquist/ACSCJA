@@ -1,5 +1,5 @@
 //
-//  ArchivedScore.swift
+//  ArchivedScore2.swift
 //  ACSCJA
 //
 //  Created by 90310805 on 4/22/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ArchivedScore : Identifiable {
+struct ArchivedScore2 : Identifiable {
     
     var id : String
     var Date : String
