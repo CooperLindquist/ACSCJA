@@ -14,6 +14,7 @@ struct CalendarEvent: Identifiable {
     var EndTime: String
     var Name: String
     var StartTime: String
+    //var names: [String]
    
     
 }

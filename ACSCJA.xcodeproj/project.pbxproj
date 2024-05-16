@@ -98,6 +98,8 @@
 		69DD94602BEA85DC00529A29 /* ArchivedScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD945F2BEA85DC00529A29 /* ArchivedScoreView.swift */; };
 		69DD94642BEA868600529A29 /* ArchivedScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94632BEA868600529A29 /* ArchivedScoreViewModel.swift */; };
 		69DD94682BEE681800529A29 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DD94672BEE681800529A29 /* SignUpView.swift */; };
+		F310FFBC2BF592CB00A32DA9 /* AddCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */; };
+		F310FFBF2BF5994000A32DA9 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F310FFBE2BF5994000A32DA9 /* Poppins-Medium.ttf */; };
 		F34775B52BE922950068D0C9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34775B42BE922950068D0C9 /* CalendarViewModel.swift */; };
 		F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3958EF12BBAFE170087E872 /* CalendarView.swift */; };
 		F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */; };
@@ -112,7 +114,7 @@
 		692520A22B98BEB800319760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		692520A52B98BEB800319760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		69348DE82BC83101002DC202 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
-		69348DEA2BC83114002DC202 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		69348DEA2BC83114002DC202 /* TabBarView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; tabWidth = 5; };
 		69348DEE2BC8662C002DC202 /* ActivitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesView.swift; sourceTree = "<group>"; };
 		69348DF02BC86CDA002DC202 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		69348DF22BC872AB002DC202 /* followedActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followedActivities.swift; sourceTree = "<group>"; };
@@ -126,6 +128,8 @@
 		69DD945F2BEA85DC00529A29 /* ArchivedScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedScoreView.swift; sourceTree = "<group>"; };
 		69DD94632BEA868600529A29 /* ArchivedScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedScoreViewModel.swift; sourceTree = "<group>"; };
 		69DD94672BEE681800529A29 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarView.swift; sourceTree = "<group>"; };
+		F310FFBE2BF5994000A32DA9 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		F34775B42BE922950068D0C9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		F3958EF12BBAFE170087E872 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				69348DF22BC872AB002DC202 /* followedActivities.swift */,
 				6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */,
 				F3958EF12BBAFE170087E872 /* CalendarView.swift */,
+				F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */,
 				F34775B42BE922950068D0C9 /* CalendarViewModel.swift */,
 				692520A22B98BEB800319760 /* Assets.xcassets */,
 				692520A42B98BEB800319760 /* Preview Content */,
@@ -275,6 +280,7 @@
 			children = (
 				F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */,
 				F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */,
+				F310FFBE2BF5994000A32DA9 /* Poppins-Medium.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 				692520A62B98BEB800319760 /* Preview Assets.xcassets in Resources */,
 				F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */,
 				69DD94562BE3F6EC00529A29 /* GoogleService-Info.plist in Resources */,
+				F310FFBF2BF5994000A32DA9 /* Poppins-Medium.ttf in Resources */,
 				692520A32B98BEB800319760 /* Assets.xcassets in Resources */,
 				F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */,
 			);
@@ -431,6 +438,7 @@
 			files = (
 				69DD945C2BE9163B00529A29 /* AddScoreView.swift in Sources */,
 				69DD94602BEA85DC00529A29 /* ArchivedScoreView.swift in Sources */,
+				F310FFBC2BF592CB00A32DA9 /* AddCalendarView.swift in Sources */,
 				69348DF92BD6A3EC002DC202 /* Score.swift in Sources */,
 				6923A8262BB1B96C00BA99F1 /* CalendarEvent.swift in Sources */,
 				69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */,

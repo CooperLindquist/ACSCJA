@@ -11,6 +11,7 @@ import SwiftUI
 
 class CalendarViewModel: ObservableObject {
     @Published var array = [CalendarEvent]()
+    @Published var names = [String]()
     func getData() {
         let db = Firestore.firestore()
         db.collection("CalendarEvent").getDocuments { snapshot, error in
