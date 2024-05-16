@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ArchivedScore2 : Identifiable {
+struct ArchivedScore : Identifiable {
     
     var id : String
     var Date : String
