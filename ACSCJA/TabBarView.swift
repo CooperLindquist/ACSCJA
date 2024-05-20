@@ -30,7 +30,7 @@ struct TabBarView: View {
             }
             .navigationBarBackButtonHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
         }
-        .padding(.bottom, -49.0)
+        .padding(.bottom, 50.0)
         
         VStack{
             ZStack{
@@ -106,7 +106,7 @@ struct TabBarView: View {
                 
             }
             .frame(width: 10.0)
-            .offset(y: 135)
+            .offset(y: 475)
         }
         
     }
