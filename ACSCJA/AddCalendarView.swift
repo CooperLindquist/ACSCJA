@@ -20,9 +20,10 @@ struct AddCalendarView: View {
                 Text("Name of Event")
                     .font(.custom("Poppins-Medium", size: 15))
                     .foregroundColor(.white)
-//                TextField("", text: $name)
-//                    .foregroundColor(.white)
+                TextField("Banana Man", text: $name)
+                    .foregroundColor(.white)
             }
+            .padding(.leading)
         }
     }
 }

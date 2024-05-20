@@ -138,6 +138,7 @@ struct StudentLogin: View {
             }
             .offset(x: 110, y: 290)
         }
+        .ignoresSafeArea()
         .overlay(
             ZStack {
                 if isLoading {
