@@ -1,14 +1,5 @@
-//
-//  StudentLogin.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 3/14/24.
-//
-
 import SwiftUI
 import Firebase
-
-
 
 extension Color {
     init(hex: String) {
@@ -34,25 +25,32 @@ struct StudentLogin: View {
     @State private var userIsLoggedIn = false
     @State private var errorMessage = ""
     @State private var showErrorAlert = false
-    @State var isLoading: Bool = false
+    @State private var isLoading = false
     @AppStorage("log_Status") var log_Status = false
     
     var body: some View {
-        NavigationView {
-            if userIsLoggedIn {
-                NavigationLink(destination: TabBarView()) {
-                    Text("Enter")
-                        .foregroundColor(.black)
-                        .border(Color.blue)
+        NavigationStack {
+            ZStack {
+                if userIsLoggedIn {
+                    TabBarView() // Present TabBarView() if user is logged in
+                } else {
+                    content
+                        .alert(isPresented: $showErrorAlert) {
+                            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                        }
                 }
-            } else {
-                content
-                    .alert(isPresented: $showErrorAlert) {
-                        Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-                    }
+                if isLoading {
+                    Color.black.opacity(0.25)
+                        .ignoresSafeArea()
+                    
+                    ProgressView()
+                        .frame(width: 60, height: 60)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                }
             }
         }
-        .navigationBarBackButtonHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+        .navigationBarBackButtonHidden(true)
     }
     
     var content: some View {
@@ -138,26 +136,13 @@ struct StudentLogin: View {
             }
             .offset(x: 110, y: 290)
         }
-        .ignoresSafeArea()
-        .overlay(
-            ZStack {
-                if isLoading {
-                    Color.black
-                        .opacity(0.25)
-                        .ignoresSafeArea()
-                    
-                    ProgressView()
-                        .font(.title2)
-                        .frame(width: 60, height: 60)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                }
-            }
-        )
+        .offset(y: 0)
     }
     
     func login() {
+        isLoading = true
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            isLoading = false
             if let error = error {
                 errorMessage = error.localizedDescription
                 showErrorAlert = true
@@ -172,6 +157,7 @@ struct StudentLogin: View {
 #Preview {
     StudentLogin()
 }
+
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -183,4 +169,3 @@ extension View {
             }
         }
 }
-

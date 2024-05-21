@@ -10,25 +10,39 @@ import Firebase
 
 struct ScoresView: View {
     @ObservedObject var model = ViewModel()
+    @State private var showingAddScoreSheet = false // State variable to control the first sheet presentation
+    @State private var showingSecondSheet = false // State variable to control the second sheet presentation
+    @State private var userInput: String = "" // State variable to store user input
+    @State private var passwordMatched = false // State variable to track if the password matches
     
     var body: some View {
-        
         ZStack {
             Image("HomePageBackground")
+            
             ScrollView {
-
-
                 VStack {
-                      
+                    HStack {
                         Text("Scores")
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
                             .font(.system(size: 45))
-                            .padding(.trailing, 180.0)
+                            .padding(.trailing, 60.0)
                         
-                           
+                        Button(action: {
+                            showingAddScoreSheet.toggle() // Toggle the first sheet presentation
+                        }, label: {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(Color.blue)
+                                .frame(width: 25.0)
+                        })
+                        .offset(x: 30 , y: 0)
+                        .padding()
+                    }
                     
-                   
+                    
+                    
                     ForEach(model.array.sorted(by: {
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -52,7 +66,7 @@ struct ScoresView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(height: 55)
-                                        
+                                    
                                     Text("\(item.EPScore) - \(item.OtherScore)")
                                         .fontWeight(.semibold)
                                         .foregroundColor(Color.white)
@@ -65,30 +79,21 @@ struct ScoresView: View {
                                     } else {
                                         Text("No \n Image")
                                     }
-                                    
                                 }
                                 .padding(.trailing)
                                 HStack {
                                     Text(item.Sport)
                                         .fontWeight(.heavy)
                                         .offset(y: 50)
-                                        
-                                    
                                     Text(item.Date)
                                         .fontWeight(.heavy)
                                         .offset(y: 50)
-                                        
-                                    
                                 }
-                                
-                                
-                                
-                                
                             }
                         }
                     }
                 }
-               .padding(.bottom, 300.0)
+                .padding(.bottom, 300.0)
             }
             .offset(y: 150)
         }
@@ -96,6 +101,27 @@ struct ScoresView: View {
         .onAppear {
             model.getData()
         }
+        .sheet(isPresented: $showingAddScoreSheet, onDismiss: {
+            // Handle user input here, for example, save to database
+            if userInput == "Joe" {
+                showingSecondSheet = true
+            }
+        }, content: {
+            VStack {
+                TextField("Enter password", text: $userInput)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Button("Done") {
+                    showingAddScoreSheet.toggle() // Dismiss the first sheet
+                }
+                .padding()
+            }
+            .padding()
+        })
+        .sheet(isPresented: $showingSecondSheet, content: {
+            AddScoreView() // Show second sheet if password matches
+        })
     }
 }
 
