@@ -51,31 +51,42 @@ struct CalendarView: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Spacer()
-                Button {
-                    dates = changeDates(disDay: dates[0][2], disMonth: dates[0][1], dates : dates, shift : -7)
-                    disMonth = dates[calIndex][1]
-                    actSchedule = getEvents(model : model.array, selectedDate : "\(dates[calIndex][0])" + "\(String(format: "%02d", dates[calIndex][1]))" + "\(String(format: "%02d", dates[calIndex][2]))")
-                    positional = findPos(list : actSchedule)
-                } label: {
-                    Text("<")
+            ZStack{
+                HStack{
+                    Spacer()
+                    Button {
+                        dates = changeDates(disDay: dates[0][2], disMonth: dates[0][1], dates : dates, shift : -7)
+                        disMonth = dates[calIndex][1]
+                        actSchedule = getEvents(model : model.array, selectedDate : "\(dates[calIndex][0])" + "\(String(format: "%02d", dates[calIndex][1]))" + "\(String(format: "%02d", dates[calIndex][2]))")
+                        positional = findPos(list : actSchedule)
+                    } label: {
+                        Text("<")
+                    }
+                    Spacer()
+                    Text("\(months[disMonth - 1])")
+                    Spacer()
+                    Button {
+                        dates = changeDates(disDay: dates[0][2], disMonth: dates[0][1], dates : dates, shift : 7)
+                        disMonth = dates[calIndex][1]
+                        actSchedule = getEvents(model : model.array, selectedDate : "\(dates[calIndex][0])" + "\(String(format: "%02d", dates[calIndex][1]))" + "\(String(format: "%02d", dates[calIndex][2]))")
+                        positional = findPos(list : actSchedule)
+                    } label: {
+                        Text(">")
+                    }
+                    Spacer()
                 }
-                Spacer()
-                Text("\(months[disMonth - 1])")
-                Spacer()
+                .foregroundColor(.black)
+                .font(.custom("Popppins-Regular", size: 18))
                 Button {
-                    dates = changeDates(disDay: dates[0][2], disMonth: dates[0][1], dates : dates, shift : 7)
-                    disMonth = dates[calIndex][1]
-                    actSchedule = getEvents(model : model.array, selectedDate : "\(dates[calIndex][0])" + "\(String(format: "%02d", dates[calIndex][1]))" + "\(String(format: "%02d", dates[calIndex][2]))")
-                    positional = findPos(list : actSchedule)
+                    
                 } label: {
-                    Text(">")
+                    Text("+")
+                        .font(.custom("Poppins-Regular", size: 35))
+                        .frame(height: 1.0)
                 }
-                Spacer()
+                .offset(x : 160, y : -5)
+
             }
-            .foregroundColor(.black)
-            .font(.custom("Popppins-Regular", size: 18))
             HStack{
                 Button(action: {
                     dateSelected = 0
@@ -85,7 +96,6 @@ struct CalendarView: View {
                     positional = findPos(list : actSchedule)
                     print(model.array.count)
                     
-                   
                     
                 }, label: {
                     VStack{
