@@ -1,10 +1,3 @@
-//
-//  ScoresView.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 4/11/24.
-//
-
 import SwiftUI
 import Firebase
 
@@ -16,88 +9,101 @@ struct ScoresView: View {
     @State private var passwordMatched = false // State variable to track if the password matches
     
     var body: some View {
-        ZStack {
-            Image("HomePageBackground")
-            
-            ScrollView {
-                VStack {
-                    HStack {
-                        Text("Scores")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .font(.system(size: 45))
-                            .padding(.trailing, 60.0)
-                        
-                        Button(action: {
-                            showingAddScoreSheet.toggle() // Toggle the first sheet presentation
-                        }, label: {
-                            Image(systemName: "plus")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(Color.blue)
-                                .frame(width: 25.0)
-                        })
-                        .offset(x: 30 , y: 0)
-                        .padding()
-                    }
-                    
-                    
-                    
-                    ForEach(model.array.sorted(by: {
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MM/dd/yyyy"
-                        if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
-                            return date1 < date2
-                        }
-                        return false
-                    }), id: \.id) { item in
-                        VStack {
-                            ZStack {
-                                Image("HomePageBox")
+        NavigationView {
+            ZStack {
+                Image("HomePageBackground")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                
+                ScrollView {
+                    VStack {
+                        HStack {
+                            Text("Scores")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 45))
+                                .padding(.trailing, 60.0)
+                            
+                            Button(action: {
+                                showingAddScoreSheet.toggle() // Toggle the first sheet presentation
+                            }, label: {
+                                Image(systemName: "plus")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 350.0)
-                                Text("Eden Prairie vs \(item.AwayTeam)")
-                                    .foregroundColor(Color.white)
-                                    .multilineTextAlignment(.center)
-                                    .offset(y: -59)
-                                HStack {
-                                    Image("EPEagle")
+                                    .foregroundColor(Color.blue)
+                                    .frame(width: 25.0)
+                            })
+                            .offset(x: 30, y: 0)
+                            .padding()
+                        }
+                        
+                        ForEach(model.array.sorted(by: {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MM/dd/yyyy"
+                            if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
+                                return date1 < date2
+                            }
+                            return false
+                        }), id: \.id) { item in
+                            VStack {
+                                ZStack {
+                                    Image("HomePageBox")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(height: 55)
-                                    
-                                    Text("\(item.EPScore) - \(item.OtherScore)")
-                                        .fontWeight(.semibold)
+                                        .frame(width: 350.0)
+                                    Text("Eden Prairie vs \(item.AwayTeam)")
                                         .foregroundColor(Color.white)
-                                        .font(.system(size: 30))
-                                    if let awayTeamImage = UIImage(named: item.AwayTeam) {
-                                        Image(uiImage: awayTeamImage)
+                                        .multilineTextAlignment(.center)
+                                        .offset(y: -59)
+                                    HStack {
+                                        Image("EPEagle")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(height: 60)
-                                    } else {
-                                        Text("No \n Image")
+                                            .frame(height: 55)
+                                        
+                                        Text("\(item.EPScore) - \(item.OtherScore)")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.white)
+                                            .font(.system(size: 30))
+                                        if let awayTeamImage = UIImage(named: item.AwayTeam) {
+                                            Image(uiImage: awayTeamImage)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(height: 60)
+                                        } else {
+                                            Text("No \n Image")
+                                        }
                                     }
-                                }
-                                .padding(.trailing)
-                                HStack {
-                                    Text(item.Sport)
-                                        .fontWeight(.heavy)
-                                        .offset(y: 50)
-                                    Text(item.Date)
-                                        .fontWeight(.heavy)
-                                        .offset(y: 50)
+                                    .padding(.trailing)
+                                    HStack {
+                                        Text(item.Sport)
+                                            .fontWeight(.heavy)
+                                            .offset(y: 50)
+                                        Text(item.Date)
+                                            .fontWeight(.heavy)
+                                            .offset(y: 50)
+                                    }
                                 }
                             }
                         }
+                        
+                        Text("Wanna See Old Scores?")
+                            .font(.system(size: 20))
+                        
+                        NavigationLink(destination: ArchivedScoreView()) {
+                            Text("Click Here")
+                                .font(.system(size: 20))
+                                .foregroundColor(.blue)
+                        }
                     }
+                    .padding(.bottom, 300.0)
                 }
-                .padding(.bottom, 300.0)
+                .refreshable {
+                    // Refresh the data
+                    model.getData()
+                }
             }
-            .offset(y: 150)
         }
-        .ignoresSafeArea()
         .onAppear {
             model.getData()
         }
@@ -122,6 +128,7 @@ struct ScoresView: View {
         .sheet(isPresented: $showingSecondSheet, content: {
             AddScoreView() // Show second sheet if password matches
         })
+        //.navigationBarBackButtonHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
     }
 }
 

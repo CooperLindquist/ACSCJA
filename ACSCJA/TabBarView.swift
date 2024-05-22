@@ -106,7 +106,7 @@ struct TabBarView: View {
                 
             }
             .frame(width: 10.0)
-            .offset(y: 475)
+            .offset(y: 490)
         }
         
     }

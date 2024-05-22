@@ -9,9 +9,10 @@ struct AddScoreView: View {
     @State private var sport: String = ""
     
     var body: some View {
-        
         ZStack {
             Image("HomePageBackground")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Text("Add Score")
@@ -45,7 +46,7 @@ struct AddScoreView: View {
                     .frame(maxWidth: 300)
                 
                 Button(action: {
-                    saveScore()
+                    saveOrUpdateScore()
                 }) {
                     Text("Save Score")
                         .padding()
@@ -54,8 +55,6 @@ struct AddScoreView: View {
                         .cornerRadius(8)
                 }
                 .padding()
-                
-                
                 
                 Button(action: {
                     clearCollection(collectionPath: "Score")
@@ -69,12 +68,9 @@ struct AddScoreView: View {
                 .padding()
             }
         }
-        .onAppear {
-            self.setupDocumentRemovalTimer()
-        }
     }
     
-    func updateScore() {
+    func saveOrUpdateScore() {
         guard let epsScore = Int(epsScoreString),
               let otherScore = Int(otherScoreString) else {
             // Handle invalid input
@@ -82,112 +78,65 @@ struct AddScoreView: View {
         }
         
         let db = Firestore.firestore()
-                
-        // Get the away team from the @State variable
-        let awayTeam = awayTeamString
-        
-        // Convert Date to string in "00/00/0000" format
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let dateString = dateFormatter.string(from: date)
         
-        // Query the collection to find the document(s) that match the Sport name
+        // Check if the document with the specified sport exists
         db.collection("Score")
             .whereField("Sport", isEqualTo: sport)
             .getDocuments { (snapshot, error) in
-                // ... existing code
                 if let error = error {
                     print("Error querying documents: \(error.localizedDescription)")
                     return
                 }
                 
-                guard let snapshot = snapshot else {
-                    print("Snapshot is nil")
-                    return
+                if let snapshot = snapshot, !snapshot.documents.isEmpty {
+                    // Move the existing document(s) to ArchivedScore collection
+                    for document in snapshot.documents {
+                        moveDocumentToArchive(document: document)
+                    }
                 }
                 
-                for document in snapshot.documents {
-                    // Update each matching document with the new scores
-                    db.collection("Score")
-                        .document(document.documentID)
-                        .updateData([
-                            "AwayTeam": awayTeam,
-                            "Date": dateString, // Store date as string
-                            "EPScore": epsScore,
-                            "OtherScore": otherScore
-                        ]) { error in
-                            if let error = error {
-                                print("Error updating document: \(error.localizedDescription)")
-                            } else {
-                                print("Document updated successfully")
-                                // Optionally, you can clear the text fields after updating
-                                self.awayTeamString = ""
-                                self.epsScoreString = ""
-                                self.otherScoreString = ""
-                                self.sport = ""
-                            }
-                        }
+                // Add a new document or update the existing one
+                db.collection("Score").addDocument(data: [
+                    "AwayTeam": awayTeamString,
+                    "Date": dateString,
+                    "EPScore": epsScore,
+                    "OtherScore": otherScore,
+                    "Sport": sport,
+                    "Timestamp": Date().timeIntervalSince1970
+                ]) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                    } else {
+                        print("Document added successfully")
+                        // Optionally, you can clear the text fields after saving
+                        self.awayTeamString = ""
+                        self.epsScoreString = ""
+                        self.otherScoreString = ""
+                        self.sport = ""
+                    }
                 }
-                
-        }
-        
+            }
     }
     
-    func saveScore() {
-            guard let epsScore = Int(epsScoreString),
-                  let otherScore = Int(otherScoreString) else {
-                // Handle invalid input
-                return
-            }
-            
-            let db = Firestore.firestore()
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-            let dateString = dateFormatter.string(from: date)
-            
-            // Add a timestamp for 7 days in the future
-            let futureTimestamp = Calendar.current.date(byAdding: .day, value: 7, to: date) ?? Date()
-            
-            db.collection("Score").addDocument(data: [
-                "AwayTeam": awayTeamString,
-                "Date": dateString,
-                "EPScore": epsScore,
-                "OtherScore": otherScore,
-                "Sport": sport,
-                "Timestamp": futureTimestamp.timeIntervalSince1970 // Add future timestamp
-            ]) { error in
-                if let error = error {
-                    print("Error adding document: \(error)")
-                } else {
-                    print("Document added successfully")
-                    // Optionally, you can clear the text fields after saving
-                    self.awayTeamString = ""
-                    self.epsScoreString = ""
-                    self.otherScoreString = ""
-                    self.sport = ""
-                }
-            }
-        }
-
-    private func addNewScore(db: Firestore, dateString: String, epsScore: Int, otherScore: Int) {
-        // Add the new score to "Score"
-        db.collection("Score").addDocument(data: [
-            "AwayTeam": awayTeamString,
-            "Date": dateString,
-            "EPScore": epsScore,
-            "OtherScore": otherScore,
-            "Sport": sport
-        ]) { error in
+    func moveDocumentToArchive(document: DocumentSnapshot) {
+        let db = Firestore.firestore()
+        let data = document.data() ?? [:]
+        
+        db.collection("ArchivedScore").addDocument(data: data) { error in
             if let error = error {
-                print("Error adding document: \(error)")
+                print("Error adding document to ArchivedScore: \(error.localizedDescription)")
             } else {
-                print("Document added successfully")
-                // Optionally, you can clear the text fields after saving
-                self.awayTeamString = ""
-                self.epsScoreString = ""
-                self.otherScoreString = ""
-                self.sport = ""
+                // Delete the original document from Score collection
+                db.collection("Score").document(document.documentID).delete { error in
+                    if let error = error {
+                        print("Error deleting document from Score: \(error.localizedDescription)")
+                    } else {
+                        print("Document moved to ArchivedScore and deleted from Score successfully")
+                    }
+                }
             }
         }
     }
@@ -219,48 +168,10 @@ struct AddScoreView: View {
             }
         }
     }
-    func setupDocumentRemovalTimer() {
-            // Create a Timer to call removeExpiredDocuments() every hour
-            Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { _ in
-                self.removeExpiredDocuments()
-            }
-        }
-    func removeExpiredDocuments() {
-            let db = Firestore.firestore()
-            let currentTimestamp = Date().timeIntervalSince1970
-            
-            db.collection("Score").whereField("Timestamp", isLessThan: currentTimestamp).getDocuments { (snapshot, error) in
-                if let error = error {
-                    print("Error removing expired documents: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let snapshot = snapshot else {
-                    print("Snapshot is nil")
-                    return
-                }
-                
-                let batch = db.batch()
-                for document in snapshot.documents {
-                    batch.deleteDocument(db.collection("Score").document(document.documentID))
-                }
-                
-                batch.commit { error in
-                    if let error = error {
-                        print("Error committing batch delete: \(error.localizedDescription)")
-                    } else {
-                        print("Expired documents removed successfully")
-                    }
-                }
-            }
-        }
-    }
-
-
+}
 
 struct AddScoreView_Previews: PreviewProvider {
     static var previews: some View {
         AddScoreView()
     }
 }
-
