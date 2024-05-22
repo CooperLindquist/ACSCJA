@@ -73,6 +73,7 @@
 		692520DE2B98CCC600319760 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 692520DD2B98CCC600319760 /* FirebaseRemoteConfigSwift */; };
 		692520E02B98CCC600319760 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 692520DF2B98CCC600319760 /* FirebaseStorage */; };
 		692520E22B98CCC600319760 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 692520E12B98CCC600319760 /* FirebaseStorageCombine-Community */; };
+		69332E0C2BFCE4E300212BA0 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 69332E0B2BFCE4E200212BA0 /* filter.png */; };
 		69348DE92BC83101002DC202 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DE82BC83101002DC202 /* HomePageView.swift */; };
 		69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DEA2BC83114002DC202 /* TabBarView.swift */; };
 		69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DEE2BC8662C002DC202 /* ActivitesView.swift */; };
@@ -113,6 +114,7 @@
 		6925209E2B98BEB400319760 /* ACSCJAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSCJAApp.swift; sourceTree = "<group>"; };
 		692520A22B98BEB800319760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		692520A52B98BEB800319760 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		69332E0B2BFCE4E200212BA0 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = filter.png; path = ../../../Desktop/filter.png; sourceTree = "<group>"; };
 		69348DE82BC83101002DC202 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		69348DEA2BC83114002DC202 /* TabBarView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; tabWidth = 5; };
 		69348DEE2BC8662C002DC202 /* ActivitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesView.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				F3958EF12BBAFE170087E872 /* CalendarView.swift */,
 				F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */,
 				F34775B42BE922950068D0C9 /* CalendarViewModel.swift */,
+				69332E0B2BFCE4E200212BA0 /* filter.png */,
 				692520A22B98BEB800319760 /* Assets.xcassets */,
 				692520A42B98BEB800319760 /* Preview Content */,
 			);
@@ -422,6 +425,7 @@
 			files = (
 				692520A62B98BEB800319760 /* Preview Assets.xcassets in Resources */,
 				F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */,
+				69332E0C2BFCE4E300212BA0 /* filter.png in Resources */,
 				69DD94562BE3F6EC00529A29 /* GoogleService-Info.plist in Resources */,
 				F310FFBF2BF5994000A32DA9 /* Poppins-Medium.ttf in Resources */,
 				692520A32B98BEB800319760 /* Assets.xcassets in Resources */,
