@@ -32,7 +32,7 @@ struct AdminTabBarView: View {
                 Button(action: {
                     selectTab("calendar")
                 }, label: {
-                    Image(systemName: selectedTab == "calendar" ? "calendar.fill" : "calendar")
+                    Image(systemName: selectedTab == "calendar" ? "calendar.circle.fill" : "calendar.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color.black)

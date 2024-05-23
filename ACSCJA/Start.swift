@@ -44,3 +44,9 @@ struct Start: View {
         }
     }
 }
+
+struct Start_Previews: PreviewProvider {
+    static var previews: some View {
+        Start(isSignedOut: .constant(true))
+    }
+}

@@ -46,7 +46,7 @@ struct ScoresView: View {
                                         .multilineTextAlignment(.center)
                                         .offset(y: -59)
                                     HStack {
-                                        Image("EPEagle")
+                                        Image("EP")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(height: 55)
