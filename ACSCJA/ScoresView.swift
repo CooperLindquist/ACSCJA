@@ -100,12 +100,12 @@ struct ScoresView: View {
                 }
                 .refreshable {
                     // Refresh the data
-                    model.getData()
+                    model.getData2()
                 }
             }
         }
         .onAppear {
-            model.getData()
+            model.getData2()
         }
         .sheet(isPresented: $showingAddScoreSheet, onDismiss: {
             // Handle user input here, for example, save to database

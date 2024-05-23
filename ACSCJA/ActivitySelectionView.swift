@@ -1,18 +1,25 @@
-//
-//  ActivitySelectionView.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 5/22/24.
-//
-
 import SwiftUI
 
 struct ActivitySelectionView: View {
+    let activities: [String]
+    var onSelect: (String) -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List(activities, id: \.self) { activity in
+                Button(action: {
+                    onSelect(activity)
+                }) {
+                    Text(activity)
+                }
+            }
+            .navigationTitle("Select Activity")
+        }
     }
 }
 
-#Preview {
-    ActivitySelectionView()
+struct ActivitySelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ActivitySelectionView(activities: ["Baseball", "Football", "Soccer"], onSelect: { _ in })
+    }
 }

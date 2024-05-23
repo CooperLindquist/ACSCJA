@@ -1,142 +1,103 @@
-//
-//  TabBarView.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 4/11/24.
-//
-
 import SwiftUI
 
-
 struct TabBarView: View {
-    @State var house = "house.fill"
-    @State var calendar = "calendar"
-    @State var court = "sportscourt"
-    @State var magnify = "magnifyingglass.circle"
-    @State var person = "person"
+    @Binding var isSignedOut: Bool
+    @State var selectedTab: String = "house"
     @State var screen: AnyView = AnyView(HomePageView())
-    
-    
-    init() {
-        house = "house.fill"
-    }
-    
+
     var body: some View {
-        VStack{
+        VStack {
             NavigationView {
                 screen
-                
-                
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
             }
-            .navigationBarBackButtonHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-        }
-        .padding(.bottom, 50.0)
-        
-        VStack{
-            ZStack{
-                Rectangle()
-                    .frame(width: 400.0, height: 80.0)
-                    .foregroundColor(.white)
-                    .offset(y: -94)
-                HStack{
-                    Spacer()
-                    Button(action: {
-                        changeButton(buttonName: "house")
-                        screen = AnyView(HomePageView())
-                        
-                    }, label: {
-                        Image(systemName: house)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.black)
-                            .frame(width: 35.0)
-                    })
-                    Spacer()
-                    
-                    Button(action: {
-                        changeButton(buttonName: "calendar")
-                        screen = AnyView(CalendarView())
-                        
-                    }, label: {
-                        Image(systemName: calendar)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.black)
-                            .frame(width: 35.0)
-                    })
-                    Spacer()
-                    Button(action: {
-                        changeButton(buttonName: "court")
-                        screen = AnyView(ScoresView())
-                    }, label: {
-                        Image(systemName: court)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.black)
-                            .frame(width: 40.0)
-                    })
-                    Spacer()
-                    Button(action: {
-                        changeButton(buttonName: "magnify")
-                        screen = AnyView(ActivitesView())
-                    }, label: {
-                        Image(systemName: magnify)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.black)
-                            .frame(width: 33.0)
-                    })
-                    Spacer()
-                    Button(action: {
-                        changeButton(buttonName: "person")
-                        screen = AnyView(ProfileView())
-                    }, label: {
-                        Image(systemName: person)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color.black)
-                            .frame(width: 28.0)
-                    })
-                    Spacer()
-                    
-                }
-                .frame(maxWidth: 400)
-                .offset(y: -100)
-                
-                
+            .onAppear {
+                screen = AnyView(HomePageView())
             }
-            .frame(width: 10.0)
-            .offset(y: 490)
+            
+            HStack {
+                Spacer()
+                Button(action: {
+                    selectTab("house")
+                }, label: {
+                    Image(systemName: selectedTab == "house" ? "house.fill" : "house")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.black)
+                        .frame(width: 35.0)
+                })
+                Spacer()
+                
+                Button(action: {
+                    selectTab("calendar")
+                }, label: {
+                    Image(systemName: selectedTab == "calendar" ? "calendar.fill" : "calendar")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.black)
+                        .frame(width: 35.0)
+                })
+                Spacer()
+                Button(action: {
+                    selectTab("court")
+                }, label: {
+                    Image(systemName: selectedTab == "court" ? "sportscourt.fill" : "sportscourt")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.black)
+                        .frame(width: 40.0)
+                })
+                Spacer()
+                Button(action: {
+                    selectTab("magnify")
+                }, label: {
+                    Image(systemName: selectedTab == "magnify" ? "magnifyingglass.circle.fill" : "magnifyingglass.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.black)
+                        .frame(width: 33.0)
+                })
+                Spacer()
+                Button(action: {
+                    selectTab("person")
+                }, label: {
+                    Image(systemName: selectedTab == "person" ? "person.fill" : "person")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.black)
+                        .frame(width: 28.0)
+                })
+                Spacer()
+            }
+            .frame(height: 80)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .shadow(radius: 10)
         }
-        
     }
-    func changeButton(buttonName: String) {
-        let str = buttonName
-        house = "house"
-        calendar = "calendar"
-        court = "sportscourt"
-        magnify = "magnifyingglass.circle"
-        person = "person"
-        if str == "house" {
-            house = "house.fill"
+    
+    private func selectTab(_ tab: String) {
+        selectedTab = tab
+        switch tab {
+        case "house":
+            screen = AnyView(HomePageView())
+        case "calendar":
+            screen = AnyView(CalendarView())
+        case "court":
+            screen = AnyView(ScoresView())
+        case "magnify":
+            screen = AnyView(ActivitesView())
+        case "person":
+            screen = AnyView(ProfileView(isSignedOut: $isSignedOut))
+        default:
+            screen = AnyView(HomePageView())
         }
-        else if str == "calendar" {
-            calendar = "calendar.fill"
-        }
-        else if str == "court" {
-            court = "sportscourt.fill"
-        }
-        else if str == "magnify" {
-            magnify = "magnifyingglass.circle.fill"
-        }
-        else if str == "person" {
-            person = "person.fill"
-        }
-        
-       
-        
     }
 }
-#Preview {
-    TabBarView()
+
+struct TabBarView_Previews: PreviewProvider {
+    static var previews: some View {
+        TabBarView(isSignedOut: .constant(false))
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Score: Identifiable, Hashable {
+struct Score: Identifiable, Hashable, Codable {
     var id : String
     var Date : String
     var AwayTeam : String

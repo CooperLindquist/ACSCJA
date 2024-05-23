@@ -1,32 +1,31 @@
-//
-//  File.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 4/25/24.
-//
-
-import Foundation
 import SwiftUI
 import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
+    }
 }
 
 @main
 struct ACSCJAApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    // Register app delegate for Firebase setup
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    // State variable to manage sign-out status
+    @State private var isSignedOut: Bool = true
 
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        StudentLogin()
-      }
+    var body: some Scene {
+        WindowGroup {
+            NavigationView {
+                if isSignedOut {
+                    StudentLogin(isSignedOut: $isSignedOut)
+                } else {
+                    TabBarView(isSignedOut: $isSignedOut)
+                }
+            }
+        }
     }
-  }
 }

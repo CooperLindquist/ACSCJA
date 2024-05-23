@@ -1,22 +1,15 @@
-//
-//  SignUpView.swift
-//  ACSCJA
-//
-//  Created by 90310805 on 5/10/24.
-//
-
 import SwiftUI
 import Firebase
-import Combine
 
 struct SignUpView: View {
+    @Binding var isSignedOut: Bool
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
     @State private var showErrorAlert = false
     @State private var isLoading: Bool = false
     @State private var navigateToLogin = false
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -27,7 +20,7 @@ struct SignUpView: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $navigateToLogin) {
-                StudentLogin()
+                StudentLogin(isSignedOut: $isSignedOut)
             }
         }
     }
@@ -50,7 +43,7 @@ struct SignUpView: View {
                 .offset(x: -100, y: -170)
             Text("EPHS Activities")
                 .fontWeight(.bold)
-                .foregroundColor(Color(hex: "#AE0000"))
+                .foregroundColor(Color("#AE0000"))
                 .offset(x: 15, y: -170)
             Text("Sign up")
                 .font(.custom("Poppins-Regular", size: 50))
@@ -119,7 +112,9 @@ struct SignUpView: View {
     }
 
     func signUp(email: String, password: String) {
+        isLoading = true
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
+            isLoading = false
             if let error = error {
                 // An error occurred while signing up
                 errorMessage = error.localizedDescription
@@ -138,10 +133,8 @@ struct SignUpView: View {
     }
 }
 
-
-
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(isSignedOut: .constant(true))
     }
 }
