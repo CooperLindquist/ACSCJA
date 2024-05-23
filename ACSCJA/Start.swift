@@ -1,37 +1,57 @@
 import SwiftUI
 
 struct Start: View {
-    @State private var showSheet = false
     @State private var isSignedOut = true  // Add this state variable
 
     var body: some View {
-        ZStack {
-            Color.red
-                .ignoresSafeArea()
-            
-            Image("Start")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(.horizontal)
-                .frame(width: 500.0)
-                .ignoresSafeArea()
-            
-            Button(action: {
-                showSheet = true
-            }, label: {
-                Text("Student")
-                    .frame(maxWidth: 294)
-                    .frame(maxHeight: 55)
-                    .background()
-                    .opacity(0)
-            })
-            .offset(x: -2, y: 161)
-        }
-        .sheet(isPresented: $showSheet) {
-            StudentLogin(isSignedOut: $isSignedOut)  // Pass the binding here
+        NavigationStack {
+            ZStack {
+                Color.red
+                    .ignoresSafeArea()
+                
+                Image("StartBackground")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.horizontal)
+                    .frame(width: 500.0)
+                    .ignoresSafeArea()
+                
+                VStack {
+                    NavigationLink(destination: StudentLogin(isSignedOut: $isSignedOut)) {
+                        Text("Student / Teacher")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: 280)
+                            .frame(maxHeight: 70)
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(LinearGradient(colors: [Color(red: 0.7, green: 0, blue: 0), Color(red: 0.7, green: 0, blue: 0)], startPoint: .top, endPoint: .bottomTrailing))
+                    )
+                    
+                    Spacer()
+                        .frame(height: 30.0)
+                    
+                    NavigationLink(destination: ScoresView()) {
+                        Text("Guest")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: 280)
+                            .frame(maxHeight: 70)
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(LinearGradient(colors: [Color(red: 0.7, green: 0, blue: 0), Color(red: 0.7, green: 0, blue: 0)], startPoint: .top, endPoint: .bottomTrailing))
+                    )
+                }
+                .offset(y: 250)
+            }
+            .navigationBarHidden(true) // Hide navigation bar
         }
     }
 }
+
+
 
 #Preview {
     Start()

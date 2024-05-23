@@ -21,7 +21,7 @@ struct ACSCJAApp: App {
         WindowGroup {
             NavigationView {
                 if isSignedOut {
-                    StudentLogin(isSignedOut: $isSignedOut)
+                    Start()
                 } else {
                     TabBarView(isSignedOut: $isSignedOut)
                 }

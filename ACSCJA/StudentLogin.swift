@@ -1,6 +1,22 @@
 import SwiftUI
 import Firebase
 
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.currentIndex = hex.hasPrefix("#") ? hex.index(after: hex.startIndex) : hex.startIndex
+
+        var rgbValue: UInt64 = 0
+        scanner.scanHexInt64(&rgbValue)
+
+        let red = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgbValue & 0x0000FF) / 255.0
+
+        self.init(red: red, green: green, blue: blue)
+    }
+}
+
 struct StudentLogin: View {
     @Binding var isSignedOut: Bool
     @State private var email = ""
@@ -10,12 +26,17 @@ struct StudentLogin: View {
     @State private var showErrorAlert = false
     @State private var isLoading = false
     @AppStorage("log_Status") var log_Status = false
+    @State private var isAdmin = false
 
     var body: some View {
         NavigationStack {
             ZStack {
                 if userIsLoggedIn {
-                    TabBarView(isSignedOut: $isSignedOut) // Pass the binding here
+                    if isAdmin {
+                        AdminTabBarView(isSignedOut: $isSignedOut) // Navigate to AdminTabBarView if admin
+                    } else {
+                        TabBarView(isSignedOut: $isSignedOut) // Otherwise, navigate to TabBarView
+                    }
                 } else {
                     content
                         .alert(isPresented: $showErrorAlert) {
@@ -54,7 +75,7 @@ struct StudentLogin: View {
                 .offset(x: -100, y: -170)
             Text("EPHS Activities")
                 .fontWeight(.bold)
-                .foregroundColor(Color("#AE0000"))
+                .foregroundColor(Color(hex: "#AE0000"))
                 .offset(x: 15, y: -170)
             Text("Sign in")
                 .font(.custom("Poppins-Regular", size: 50))
@@ -132,10 +153,24 @@ struct StudentLogin: View {
                 showErrorAlert = true
                 print(error.localizedDescription)
             } else {
-                userIsLoggedIn = true
                 if let user = Auth.auth().currentUser {
-                    print("User ID: \(user.uid)")
+                    checkIfAdmin(userID: user.uid) { isAdmin in
+                        self.isAdmin = isAdmin
+                        self.userIsLoggedIn = true
+                        print("User ID: \(user.uid), Is Admin: \(isAdmin)")
+                    }
                 }
+            }
+        }
+    }
+
+    func checkIfAdmin(userID: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("Admin").document(userID).getDocument { document, error in
+            if let document = document, document.exists {
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }

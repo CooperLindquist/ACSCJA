@@ -24,17 +24,7 @@ struct ScoresView: View {
                                 .font(.system(size: 45))
                                 .padding(.trailing, 60.0)
                             
-                            Button(action: {
-                                showingAddScoreSheet.toggle() // Toggle the first sheet presentation
-                            }, label: {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(Color.blue)
-                                    .frame(width: 25.0)
-                            })
-                            .offset(x: 30, y: 0)
-                            .padding()
+                            
                         }
                         
                         ForEach(model.array.sorted(by: {
