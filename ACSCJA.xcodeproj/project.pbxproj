@@ -103,6 +103,7 @@
 		69EA56782BFED6BF0008EDFB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA56772BFED6BF0008EDFB /* ContentView.swift */; };
 		69EA567A2BFEDAC80008EDFB /* AdminScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */; };
 		69EA567C2BFEDB500008EDFB /* AdminTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */; };
+		69EA567E2BFF86550008EDFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA567D2BFF86550008EDFB /* AppDelegate.swift */; };
 		F310FFBC2BF592CB00A32DA9 /* AddCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */; };
 		F310FFBF2BF5994000A32DA9 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F310FFBE2BF5994000A32DA9 /* Poppins-Medium.ttf */; };
 		F34775B52BE922950068D0C9 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34775B42BE922950068D0C9 /* CalendarViewModel.swift */; };
@@ -138,6 +139,7 @@
 		69EA56772BFED6BF0008EDFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminScoresView.swift; sourceTree = "<group>"; };
 		69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarView.swift; sourceTree = "<group>"; };
+		69EA567D2BFF86550008EDFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendarView.swift; sourceTree = "<group>"; };
 		F310FFBE2BF5994000A32DA9 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		F34775B42BE922950068D0C9 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				69DD94522BE3F6EC00529A29 /* GoogleService-Info.plist */,
 				F39EBEA82BBD95F000B3D516 /* Fonts */,
 				6925209E2B98BEB400319760 /* ACSCJAApp.swift */,
+				69EA567D2BFF86550008EDFB /* AppDelegate.swift */,
 				69DD94572BE3F72A00529A29 /* ScoresView.swift */,
 				69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */,
 				69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */,
@@ -459,6 +462,7 @@
 				69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */,
 				69DD94682BEE681800529A29 /* SignUpView.swift in Sources */,
 				69EA56762BFED6A80008EDFB /* ActivityViewModel.swift in Sources */,
+				69EA567E2BFF86550008EDFB /* AppDelegate.swift in Sources */,
 				69348DF32BC872AB002DC202 /* followedActivities.swift in Sources */,
 				69DD94642BEA868600529A29 /* ArchivedScoreViewModel.swift in Sources */,
 				69DD945A2BE3F7D500529A29 /* ViewModel.swift in Sources */,
