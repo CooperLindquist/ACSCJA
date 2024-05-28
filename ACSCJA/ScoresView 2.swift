@@ -1,7 +1,7 @@
 import SwiftUI
 import Firebase
 
-struct AdminScoresView: View {
+struct ScoresView: View {
     @ObservedObject var model = ViewModel()
     @State private var showingAddScoreSheet = false // State variable to control the first sheet presentation
     @State private var showingSecondSheet = false // State variable to control the second sheet presentation
@@ -18,23 +18,13 @@ struct AdminScoresView: View {
                 ScrollView {
                     VStack {
                         HStack {
-                            Text("Score")
+                            Text("Scores")
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.white)
                                 .font(.system(size: 45))
                                 .padding(.trailing, 60.0)
                             
-                            Button(action: {
-                                showingAddScoreSheet.toggle() // Toggle the first sheet presentation
-                            }, label: {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(Color.blue)
-                                    .frame(width: 25.0)
-                            })
-                            .offset(x: 30, y: 0)
-                            .padding()
+                            
                         }
                         
                         ForEach(model.array.sorted(by: {
@@ -133,9 +123,9 @@ struct AdminScoresView: View {
 }
 
 #if DEBUG
-struct AdminScoresView_Previews: PreviewProvider {
+struct ScoresView_Previews: PreviewProvider {
     static var previews: some View {
-        AdminScoresView()
+        ScoresView()
     }
 }
 #endif
