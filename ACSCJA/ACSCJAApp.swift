@@ -14,7 +14,7 @@ struct ACSCJAApp: App {
                 if isSignedOut {
                     Start(isSignedOut: $isSignedOut)
                 } else {
-                    AdminScoresView()
+                    AdminTabBarView(isSignedOut: $isSignedOut)
                 }
             }
         }

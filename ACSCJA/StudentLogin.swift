@@ -141,7 +141,7 @@ struct StudentLogin: View {
             }
             .offset(x: 110, y: 290)
         }
-        .offset(y: 0)
+        .offset(y: -60)
     }
 
     func login() {
