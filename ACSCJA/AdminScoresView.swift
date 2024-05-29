@@ -36,7 +36,7 @@ struct AdminScoresView: View {
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MM/dd/yyyy"
                             if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
-                                return date1 < date2
+                                return date1 > date2 // Reverse the sorting order
                             }
                             return false
                         }), id: \.id) { item in

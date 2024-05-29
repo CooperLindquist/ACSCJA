@@ -2,11 +2,16 @@ import SwiftUI
 import Firebase
 
 struct AddScoreView: View {
-    @State private var awayTeamString: String = ""
-    @State private var date = Date() // Change to use Date type instead of String
+    @State private var selectedAwayTeam: String = "Hopkins"
+    @State private var date = Date()
     @State private var epsScoreString: String = ""
     @State private var otherScoreString: String = ""
-    @State private var sport: String = ""
+    @State private var selectedSport: String = "Football"
+    @State private var customAwayTeam: String = ""
+    @State private var customSport: String = ""
+    
+    let awayTeams = ["Hopkins", "Edina", "Wayzata", "Buffalo", "Minnetonka", "STMA", "Other"]
+    let sports = ["Football", "Basketball", "Baseball", "Soccer", "Hockey", "Volleyball", "Lacrosse", "Other"]
     
     var body: some View {
         ZStack {
@@ -19,12 +24,33 @@ struct AddScoreView: View {
                     .font(.system(size: 60))
                     .fontWeight(.bold)
                     .underline()
-                TextField("Away Team", text: $awayTeamString)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(maxWidth: 300)
                 
-                DatePicker("Date", selection: $date, displayedComponents: .date) // Use DatePicker for date input
+                Menu {
+                    ForEach(awayTeams, id: \.self) { team in
+                        Button(action: {
+                            selectedAwayTeam = team
+                        }) {
+                            Text(team)
+                        }
+                    }
+                } label: {
+                    Text("Away Team: \(selectedAwayTeam)")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .frame(maxWidth: 300)
+                
+                if selectedAwayTeam == "Other" {
+                    TextField("Enter Away Team", text: $customAwayTeam)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(maxWidth: 300)
+                }
+                
+                DatePicker("Date", selection: $date, displayedComponents: .date)
                     .padding()
                     .frame(maxWidth: 300)
                 
@@ -40,10 +66,30 @@ struct AddScoreView: View {
                     .keyboardType(.numberPad)
                     .frame(maxWidth: 300)
                 
-                TextField("Sport", text: $sport)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .frame(maxWidth: 300)
+                Menu {
+                    ForEach(sports, id: \.self) { sport in
+                        Button(action: {
+                            selectedSport = sport
+                        }) {
+                            Text(sport)
+                        }
+                    }
+                } label: {
+                    Text("Sport: \(selectedSport)")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .frame(maxWidth: 300)
+                
+                if selectedSport == "Other" {
+                    TextField("Enter Sport", text: $customSport)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(maxWidth: 300)
+                }
                 
                 Button(action: {
                     saveOrUpdateScore()
@@ -51,21 +97,21 @@ struct AddScoreView: View {
                     Text("Save Score")
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.blue)
+                        .background(Color.green)
                         .cornerRadius(8)
                 }
                 .padding()
                 
-                Button(action: {
-                    clearCollection(collectionPath: "Score")
-                }) {
-                    Text("Clear All Scores")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                .padding()
+//                Button(action: {
+//                    clearCollection(collectionPath: "Score")
+//                }) {
+//                    Text("Clear All Scores")
+//                        .padding()
+//                        .foregroundColor(.white)
+//                        .background(Color.blue)
+//                        .cornerRadius(8)
+//                }
+//                .padding()
             }
         }
     }
@@ -82,9 +128,12 @@ struct AddScoreView: View {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let dateString = dateFormatter.string(from: date)
         
+        let awayTeam = selectedAwayTeam == "Other" ? customAwayTeam : selectedAwayTeam
+        let sportToSave = selectedSport == "Other" ? customSport : selectedSport
+        
         // Check if the document with the specified sport exists
         db.collection("Score")
-            .whereField("Sport", isEqualTo: sport)
+            .whereField("Sport", isEqualTo: sportToSave)
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error querying documents: \(error.localizedDescription)")
@@ -100,11 +149,11 @@ struct AddScoreView: View {
                 
                 // Add a new document or update the existing one
                 db.collection("Score").addDocument(data: [
-                    "AwayTeam": awayTeamString,
+                    "AwayTeam": awayTeam,
                     "Date": dateString,
                     "EPScore": epsScore,
                     "OtherScore": otherScore,
-                    "Sport": sport,
+                    "Sport": sportToSave,
                     "Timestamp": Date().timeIntervalSince1970
                 ]) { error in
                     if let error = error {
@@ -112,10 +161,12 @@ struct AddScoreView: View {
                     } else {
                         print("Document added successfully")
                         // Optionally, you can clear the text fields after saving
-                        self.awayTeamString = ""
+                        self.selectedAwayTeam = awayTeams[0]
+                        self.customAwayTeam = ""
                         self.epsScoreString = ""
                         self.otherScoreString = ""
-                        self.sport = ""
+                        self.selectedSport = sports[0]
+                        self.customSport = ""
                     }
                 }
             }
