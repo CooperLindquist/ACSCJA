@@ -110,6 +110,7 @@
 		F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3958EF12BBAFE170087E872 /* CalendarView.swift */; };
 		F39EBEAA2BBD966500B3D516 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */; };
 		F39EBEAC2BBD967200B3D516 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */; };
+		F3CD1A892BFF85AB00EA6284 /* AdminCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CD1A882BFF85AB00EA6284 /* AdminCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,6 +148,7 @@
 		F39EBEA92BBD966500B3D516 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		F39EBEAB2BBD967200B3D516 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		F39EBEAD2BBD968100B3D516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3CD1A882BFF85AB00EA6284 /* AdminCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +279,7 @@
 				69EA56772BFED6BF0008EDFB /* ContentView.swift */,
 				6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */,
 				F3958EF12BBAFE170087E872 /* CalendarView.swift */,
+				F3CD1A882BFF85AB00EA6284 /* AdminCalendarView.swift */,
 				F310FFBB2BF592CB00A32DA9 /* AddCalendarView.swift */,
 				F34775B42BE922950068D0C9 /* CalendarViewModel.swift */,
 				692520A22B98BEB800319760 /* Assets.xcassets */,
@@ -469,6 +472,7 @@
 				69348DF12BC86CDA002DC202 /* ProfileView.swift in Sources */,
 				F34775B52BE922950068D0C9 /* CalendarViewModel.swift in Sources */,
 				691E738D2BB4594A0039704B /* Start.swift in Sources */,
+				F3CD1A892BFF85AB00EA6284 /* AdminCalendarView.swift in Sources */,
 				F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */,
 				69DD94552BE3F6EC00529A29 /* StudentLogin.swift in Sources */,
 				69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */,
@@ -622,7 +626,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -653,7 +657,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -31,22 +31,16 @@ struct CalendarView: View {
     @State var time = 8
     @State var temp = ""
     @State var calIndex = 0
-    @State var schedule = [[["Super Awesome Soccer Game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
-                           
-       [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
-                           
-        [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
-                           
-        [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
-                           
-        [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]],
-                                              
-        [["Swimming and such", "3", "6"], ["car game", "5", "18"], ["UnderWater basket Weaving", "9", "10"], ["Car", "10", "15"], ["bean stock", "12", "12"], ["IDEK", "15", "20"]],
     
-        [["super awesome soccer game", "2", "7"], ["football game", "5", "14"], ["badminton battle", "6", "12"], ["Car", "8", "11"],["Craziest Event in all of history", "10", "13"], ["giant", "12", "12"], ["IDEK", "13", "14"]]]
     @State var actSchedule = [["","",""]]
     @State var times = []
     @State var positional: [[Int]] = [[]]
+    @State var frameWidth = 0
+    
+    @State private var showingAddScoreSheet = false
+    @State private var showingSecondSheet = false
+    @State private var userInput: String = ""
+    @State private var passwordMatched = false
     
     
     var body: some View {
@@ -77,14 +71,6 @@ struct CalendarView: View {
                 }
                 .foregroundColor(.black)
                 .font(.custom("Popppins-Regular", size: 18))
-                Button {
-                    
-                } label: {
-                    Text("+")
-                        .font(.custom("Poppins-Regular", size: 35))
-                        .frame(height: 1.0)
-                }
-                .offset(x : 160, y : -5)
 
             }
             HStack{
@@ -318,10 +304,15 @@ struct CalendarView: View {
                                 .position(x: 75 + 150 * CGFloat(pickPos(positions : positional, x : index)), y: CGFloat(sumOf(list : actSchedule, x : index) * 20 + 33))
                             }
                         }
-                        .frame(width: 1000)
+                        .frame(width: CGFloat(frameWidth))
                         //your fucntion sucks make so like lists and like if you can put it there put it there
                     }
                 }
+            }
+            .refreshable{
+                model.getData()
+                actSchedule = getEvents(model : model.array, selectedDate : "\(dates[calIndex][0])" + "\(String(format: "%02d", dates[calIndex][1]))" + "\(String(format: "%02d", dates[calIndex][2]))")
+                positional = findPos(list : actSchedule)
             }
         }
         .onAppear{
@@ -345,8 +336,31 @@ struct CalendarView: View {
             dates = changeDates(disDay: dates[0][2], disMonth: disMonth, dates : dates, shift : 0)
             actSchedule = getEvents(model : model.array, selectedDate : "\(dates[calIndex][0])" + "\(String(format: "%02d", dates[calIndex][1]))" + "\(String(format: "%02d", dates[calIndex][2]))")
             positional = findPos(list : actSchedule)
+            frameWidth = 1000
+            //largestPos(positions : positional[0]) * 50
             
         }
+        .sheet(isPresented: $showingAddScoreSheet, onDismiss: {
+            // Handle user input here, for example, save to database
+            if userInput == "Joe" {
+                showingSecondSheet = true
+            }
+        }, content: {
+            VStack {
+                TextField("Enter password", text: $userInput)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Button("Done") {
+                    showingAddScoreSheet.toggle() // Dismiss the first sheet
+                }
+                .padding()
+            }
+            .padding()
+        })
+        .sheet(isPresented: $showingSecondSheet, content: {
+            AddCalendarView() // Show second sheet if password matches
+        })
     }
  
 func diff(list : [[String]], x : Int) -> Int{
@@ -473,6 +487,15 @@ func changeDates(disDay : Int, disMonth: Int, dates : [[Int]], shift : Int) -> [
     fin = fixMonth(dates : fin)
     
     
+    return fin
+}
+func largestPos(positions : [Int]) -> Int{
+    var fin = 0
+    for i in positions{
+        if i > fin{
+            fin = i
+        }
+    }
     return fin
 }
 func fixMonth(dates: [[Int]]) -> [[Int]]{
