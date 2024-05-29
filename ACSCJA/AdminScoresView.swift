@@ -3,18 +3,15 @@ import Firebase
 
 struct AdminScoresView: View {
     @ObservedObject var model = ViewModel()
-    @State private var showingAddScoreSheet = false // State variable to control the first sheet presentation
-    @State private var showingSecondSheet = false // State variable to control the second sheet presentation
     @State private var userInput: String = "" // State variable to store user input
-    @State private var passwordMatched = false // State variable to track if the password matches
-    
+
     var body: some View {
         NavigationView {
             ZStack {
                 Image("HomePageBackground")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
-                
+
                 ScrollView {
                     VStack {
                         HStack {
@@ -24,19 +21,17 @@ struct AdminScoresView: View {
                                 .font(.system(size: 45))
                                 .padding(.trailing, 60.0)
                             
-                            Button(action: {
-                                showingAddScoreSheet.toggle() // Toggle the first sheet presentation
-                            }, label: {
+                            NavigationLink(destination: AddScoreView()) {
                                 Image(systemName: "plus")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .foregroundColor(Color.blue)
                                     .frame(width: 25.0)
-                            })
+                            }
                             .offset(x: 30, y: 0)
                             .padding()
                         }
-                        
+
                         ForEach(model.array.sorted(by: {
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -60,7 +55,7 @@ struct AdminScoresView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(height: 55)
-                                        
+
                                         Text("\(item.EPScore) - \(item.OtherScore)")
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.white)
@@ -86,10 +81,10 @@ struct AdminScoresView: View {
                                 }
                             }
                         }
-                        
+
                         Text("Wanna See Old Scores?")
                             .font(.system(size: 20))
-                        
+
                         NavigationLink(destination: ArchivedScoreView()) {
                             Text("Click Here")
                                 .font(.system(size: 20))
@@ -107,28 +102,6 @@ struct AdminScoresView: View {
         .onAppear {
             model.getData2()
         }
-        .sheet(isPresented: $showingAddScoreSheet, onDismiss: {
-            // Handle user input here, for example, save to database
-            if userInput == "Joe" {
-                showingSecondSheet = true
-            }
-        }, content: {
-            VStack {
-                TextField("Enter password", text: $userInput)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                Button("Done") {
-                    showingAddScoreSheet.toggle() // Dismiss the first sheet
-                }
-                .padding()
-            }
-            .padding()
-        })
-        .sheet(isPresented: $showingSecondSheet, content: {
-            AddScoreView() // Show second sheet if password matches
-        })
-        //.navigationBarBackButtonHidden(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
     }
 }
 
