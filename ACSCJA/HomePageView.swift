@@ -3,7 +3,7 @@ import Firebase
 
 struct HomePageView: View {
     @ObservedObject var model = ViewModel()
-    @State private var house = "house"
+    @State private var house = "house.fill"
     @State private var calendar = "calendar"
     @State private var court = "sportscourt"
     @State private var magnify = "magnifyingglass.circle"
@@ -11,10 +11,6 @@ struct HomePageView: View {
     @State private var userName: String = ""
     @State private var showingNamePrompt = false
     @AppStorage("userName") private var storedUserName: String = ""
-
-    init() {
-        house = "house.fill"
-    }
 
     var body: some View {
         NavigationView {
@@ -37,7 +33,14 @@ struct HomePageView: View {
                             .multilineTextAlignment(.center)
                             .padding(.trailing, 200.0)
 
-                        ForEach(model.filteredScores, id: \.self) { item in
+                        ForEach(model.array.sorted(by: {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MM/dd/yyyy"
+                            if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
+                                return date1 > date2 // Change sorting to descending order
+                            }
+                            return false
+                        }).prefix(1), id: \.id) { item in
                             VStack {
                                 ZStack {
                                     Image("HomePageBox")
@@ -49,11 +52,11 @@ struct HomePageView: View {
                                         .multilineTextAlignment(.center)
                                         .offset(y: -59)
                                     HStack {
-                                        Image("EPEagle")
+                                        Image("EP")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(height: 55)
-
+                                        
                                         Text("\(item.EPScore) - \(item.OtherScore)")
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.white)
@@ -72,7 +75,6 @@ struct HomePageView: View {
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
                                             .offset(y: 50)
-
                                         Text(item.Date)
                                             .fontWeight(.heavy)
                                             .offset(y: 50)
@@ -80,6 +82,7 @@ struct HomePageView: View {
                                 }
                             }
                         }
+                        
                         Text("Upcoming activities")
                             .foregroundColor(Color.white)
                             .padding(.trailing, 200.0)
@@ -103,7 +106,7 @@ struct HomePageView: View {
                 if storedUserName.isEmpty {
                     showingNamePrompt = true
                 }
-                model.getData()
+                model.getData2()
                 print("HomePageView appeared") // Debugging line
             }
             .sheet(isPresented: $showingNamePrompt) {
@@ -174,6 +177,8 @@ struct NamePromptView: View {
     }
 }
 
-#Preview {
-    HomePageView()
+struct HomePageView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomePageView()
+    }
 }
