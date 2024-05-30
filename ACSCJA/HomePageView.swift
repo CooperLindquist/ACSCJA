@@ -101,27 +101,32 @@ struct HomePageView: View {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Color.white)
                                         .shadow(radius: 5)
-                                    Image("calendarimage")
-                                        .resizable(capInsets: EdgeInsets())
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(height: 80.0)
-                                        .offset(x: 100)
                                     
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        Text("Activity: " + event.Name)
-                                            .font(.headline)
-                                            .foregroundColor(.black)
-                                        
-                                        
-                                        
-                                        Text("Time: \(event.StartTime) - \(event.EndTime)")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                        
-                                        Text("Description: " + event.Description)
-                                            .font(.caption)
-                                            .foregroundColor(.black)
-                                            .lineLimit(3)
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            Text("Activity: " + event.Name)
+                                                .font(.headline)
+                                                .foregroundColor(.black)
+                                            
+                                            
+                                            
+                                            Text("Time: \(event.StartTime) - \(event.EndTime)")
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                            
+                                            Text("Description: " + event.Description)
+                                                .font(.caption)
+                                                .foregroundColor(.black)
+                                                .lineLimit(3)
+                                            
+                                            
+                                            
+                                        }
+                                        Image("calendarimage")
+                                            .resizable(capInsets: EdgeInsets())
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(height: 80.0)
+                                            
                                         //                                Image("HomePageBox2")
                                         //                                    .resizable()
                                         //                                    .aspectRatio(contentMode: .fit)
