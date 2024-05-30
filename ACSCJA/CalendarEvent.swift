@@ -5,7 +5,7 @@
 //  Created by 90310805 on 3/25/24.
 //
 
-import SwiftUI
+import Foundation
 
 struct CalendarEvent: Identifiable {
     var id: String
@@ -14,7 +14,4 @@ struct CalendarEvent: Identifiable {
     var EndTime: String
     var Name: String
     var StartTime: String
-    //var names: [String]
-   
-    
 }

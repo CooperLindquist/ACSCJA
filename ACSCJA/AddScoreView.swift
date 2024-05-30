@@ -36,9 +36,11 @@ struct AddScoreView: View {
                 } label: {
                     Text("Away Team: \(selectedAwayTeam)")
                         .padding()
+                        .frame(maxWidth: 300)
                         .foregroundColor(.white)
                         .background(Color.blue)
                         .cornerRadius(8)
+                    
                 }
                 .padding()
                 .frame(maxWidth: 300)
@@ -77,6 +79,7 @@ struct AddScoreView: View {
                 } label: {
                     Text("Sport: \(selectedSport)")
                         .padding()
+                        .frame(maxWidth: 300)
                         .foregroundColor(.white)
                         .background(Color.blue)
                         .cornerRadius(8)
@@ -96,6 +99,7 @@ struct AddScoreView: View {
                 }) {
                     Text("Save Score")
                         .padding()
+                        .frame(maxWidth: 270)
                         .foregroundColor(.white)
                         .background(Color.green)
                         .cornerRadius(8)

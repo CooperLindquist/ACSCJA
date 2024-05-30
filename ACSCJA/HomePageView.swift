@@ -3,6 +3,7 @@ import Firebase
 
 struct HomePageView: View {
     @ObservedObject var model = ViewModel()
+    @ObservedObject var amodel = CalendarViewModel()
     @State private var house = "house.fill"
     @State private var calendar = "calendar"
     @State private var court = "sportscourt"
@@ -86,14 +87,68 @@ struct HomePageView: View {
                         Text("Upcoming activities")
                             .foregroundColor(Color.white)
                             .padding(.trailing, 200.0)
-                        Image("HomePageBox2")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 350.0)
-                        Image("HomePageBox2")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 350.0)
+                        
+                        ForEach(amodel.array.sorted(by: {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "MM/dd/yyyy"
+                            guard let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) else {
+                                return false
+                            }
+                            return date1 < date2
+                        }).prefix(2)) { event in
+                            VStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.white)
+                                        .shadow(radius: 5)
+                                    Image("calendarimage")
+                                        .resizable(capInsets: EdgeInsets())
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(height: 80.0)
+                                        .offset(x: 100)
+                                    
+                                    VStack(alignment: .leading, spacing: 10) {
+                                        Text("Activity: " + event.Name)
+                                            .font(.headline)
+                                            .foregroundColor(.black)
+                                        
+                                        
+                                        
+                                        Text("Time: \(event.StartTime) - \(event.EndTime)")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                        
+                                        Text("Description: " + event.Description)
+                                            .font(.caption)
+                                            .foregroundColor(.black)
+                                            .lineLimit(3)
+                                        //                                Image("HomePageBox2")
+                                        //                                    .resizable()
+                                        //                                    .aspectRatio(contentMode: .fit)
+                                        //                                    .frame(width: 350.0)
+                                        //                                Text("Activity: " + event.Name)
+                                        //                                    .foregroundColor(Color.white)
+                                        //                                    .offset(y: -140)
+                                        //                                Text("Time: \(event.StartTime) - \(event.EndTime)")
+                                        //                                    .foregroundColor(Color.white)
+                                        //                                    .offset(y: -120)
+                                        //                                Text(event.Description)
+                                        //
+                                    }
+                                    .padding()
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                
+                            
+
+    
+//
+                            }
+                            .padding()
+                        }
+                        
+
+                        
                     }
                     .padding(.top, 50.0)
                 }
@@ -103,6 +158,7 @@ struct HomePageView: View {
                     .offset(y: 385)
             }
             .onAppear {
+                amodel.getData()
                 if storedUserName.isEmpty {
                     showingNamePrompt = true
                 }
