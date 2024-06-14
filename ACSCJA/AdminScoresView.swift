@@ -15,9 +15,9 @@ struct AdminScoresView: View {
                 ScrollView {
                     VStack {
                         HStack {
-                            Text("Score")
+                            Text("Scores")
                                 .fontWeight(.bold)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(Color.white) // Set explicit color
                                 .font(.system(size: 45))
                                 .padding(.trailing, 60.0)
                             
@@ -25,7 +25,7 @@ struct AdminScoresView: View {
                                 Image(systemName: "plus")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(Color.blue)
+                                    .foregroundColor(Color.blue) // Set explicit color
                                     .frame(width: 25.0)
                             }
                             .offset(x: 30, y: 0)
@@ -47,7 +47,7 @@ struct AdminScoresView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 350.0)
                                     Text("Eden Prairie vs \(item.AwayTeam)")
-                                        .foregroundColor(Color.white)
+                                        .foregroundColor(Color.white) // Set explicit color
                                         .multilineTextAlignment(.center)
                                         .offset(y: -59)
                                     HStack {
@@ -58,7 +58,7 @@ struct AdminScoresView: View {
 
                                         Text("\(item.EPScore) - \(item.OtherScore)")
                                             .fontWeight(.semibold)
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(Color.white) // Set explicit color
                                             .font(.system(size: 30))
                                         if let awayTeamImage = UIImage(named: item.AwayTeam) {
                                             Image(uiImage: awayTeamImage)
@@ -67,28 +67,32 @@ struct AdminScoresView: View {
                                                 .frame(height: 60)
                                         } else {
                                             Text("No \n Image")
+                                                .foregroundColor(Color.white) // Set explicit color
                                         }
                                     }
                                     .padding(.trailing)
                                     HStack {
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
+                                            .foregroundColor(Color.white) // Set explicit color
                                             .offset(y: 50)
                                         Text(item.Date)
                                             .fontWeight(.heavy)
+                                            .foregroundColor(Color.white) // Set explicit color
                                             .offset(y: 50)
                                     }
                                 }
                             }
                         }
 
-                        Text("Wanna See Old Scores?")
+                        Text("Want To See Old Scores?")
                             .font(.system(size: 20))
+                            .foregroundColor(Color.white) // Set explicit color
 
                         NavigationLink(destination: ArchivedScoreView()) {
                             Text("Click Here")
                                 .font(.system(size: 20))
-                                .foregroundColor(.blue)
+                                .foregroundColor(.blue) // Set explicit color
                         }
                     }
                     .padding(.bottom, 300.0)

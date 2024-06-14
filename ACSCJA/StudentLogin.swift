@@ -26,17 +26,12 @@ struct StudentLogin: View {
     @State private var showErrorAlert = false
     @State private var isLoading = false
     @AppStorage("log_Status") var log_Status = false
-    @State private var isAdmin = false
 
     var body: some View {
         NavigationStack {
             ZStack {
                 if userIsLoggedIn {
-                    if isAdmin {
-                        AddScoreView() // Navigate to AdminTabBarView if admin
-                    } else {
-                        AddScoreView() // Otherwise, navigate to TabBarView
-                    }
+                    AddScoreView() // Navigate to AddScoreView
                 } else {
                     content
                         .alert(isPresented: $showErrorAlert) {
@@ -54,12 +49,14 @@ struct StudentLogin: View {
                 }
             }
         }
-        
     }
 
     var content: some View {
         ZStack {
             Image("LoginBackround")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
 
             Image("white")
                 .resizable()
@@ -72,6 +69,7 @@ struct StudentLogin: View {
                 .frame(width: 220.0)
                 .offset(y: -260)
             Text("Welcome to")
+                .foregroundColor(Color(hex: "#000000")) // Explicit color
                 .offset(x: -100, y: -170)
             Text("EPHS Activities")
                 .fontWeight(.bold)
@@ -79,10 +77,13 @@ struct StudentLogin: View {
                 .offset(x: 15, y: -170)
             Text("Sign in")
                 .font(.custom("Poppins-Regular", size: 50))
+                .foregroundColor(Color(hex: "#000000")) // Explicit color
                 .offset(x: -60, y: -100)
             Text("Enter your email address")
+                .foregroundColor(Color(hex: "#000000")) // Explicit color
                 .offset(x: -60, y: -20)
             Text("Enter your password")
+                .foregroundColor(Color(hex: "#000000")) // Explicit color
                 .offset(x: -70, y: 90)
 
             TextField("Username or email address", text: $email)
@@ -125,11 +126,12 @@ struct StudentLogin: View {
             }
             .background(
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(LinearGradient(colors: [Color(red: 0.7, green: 0, blue: 0), Color(red: 0.7, green: 0, blue: 0)], startPoint: .top, endPoint: .bottomTrailing))
+                    .fill(LinearGradient(colors: [Color(hex: "#AE0000"), Color(hex: "#AE0000")], startPoint: .top, endPoint: .bottomTrailing))
             )
             .offset(y: 240)
 
             Text("Don't have an account yet?")
+                .foregroundColor(Color(hex: "#000000")) // Explicit color
                 .offset(x: -30, y: 290)
 
             NavigationLink(destination: SignUpView()) {
@@ -141,7 +143,7 @@ struct StudentLogin: View {
             }
             .offset(x: 110, y: 290)
         }
-        .offset(y: -60)
+        .offset(y: -90)
     }
 
     func login() {
@@ -153,24 +155,7 @@ struct StudentLogin: View {
                 showErrorAlert = true
                 print(error.localizedDescription)
             } else {
-                if let user = Auth.auth().currentUser {
-                    checkIfAdmin(userID: user.uid) { isAdmin in
-                        self.isAdmin = isAdmin
-                        self.userIsLoggedIn = true
-                        print("User ID: \(user.uid), Is Admin: \(isAdmin)")
-                    }
-                }
-            }
-        }
-    }
-
-    func checkIfAdmin(userID: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        db.collection("Admin").document(userID).getDocument { document, error in
-            if let document = document, document.exists {
-                completion(true)
-            } else {
-                completion(false)
+                userIsLoggedIn = true
             }
         }
     }

@@ -103,6 +103,7 @@
 		69EA567A2BFEDAC80008EDFB /* AdminScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */; };
 		69EA567C2BFEDB500008EDFB /* AdminTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */; };
 		69EA567E2BFF86550008EDFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA567D2BFF86550008EDFB /* AppDelegate.swift */; };
+		DB5AA3112C1CEC4C0082AAA3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3102C1CEC4C0082AAA3 /* WebView.swift */; };
 		DBFF26CF2C1CA3E9009D839E /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BB2C1CA3E8009D839E /* OFL.txt */; };
 		DBFF26D02C1CA3E9009D839E /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */; };
 		DBFF26D12C1CA3E9009D839E /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */; };
@@ -156,6 +157,7 @@
 		69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminScoresView.swift; sourceTree = "<group>"; };
 		69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarView.swift; sourceTree = "<group>"; };
 		69EA567D2BFF86550008EDFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DB5AA3102C1CEC4C0082AAA3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DBFF26BB2C1CA3E8009D839E /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
 		DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				69DD945D2BEA852B00529A29 /* ArchivedScore.swift */,
 				691E738C2BB4594A0039704B /* Start.swift */,
 				69348DE82BC83101002DC202 /* HomePageView.swift */,
+				DB5AA3102C1CEC4C0082AAA3 /* WebView.swift */,
 				69348DEA2BC83114002DC202 /* TabBarView.swift */,
 				69348DEE2BC8662C002DC202 /* ActivitesView.swift */,
 				69348DF02BC86CDA002DC202 /* ProfileView.swift */,
@@ -559,6 +562,7 @@
 				69DD945E2BEA852B00529A29 /* ArchivedScore.swift in Sources */,
 				6925209F2B98BEB400319760 /* ACSCJAApp.swift in Sources */,
 				69EA567C2BFEDB500008EDFB /* AdminTabBarView.swift in Sources */,
+				DB5AA3112C1CEC4C0082AAA3 /* WebView.swift in Sources */,
 				69DD94582BE3F72A00529A29 /* ScoresView.swift in Sources */,
 				69348DE92BC83101002DC202 /* HomePageView.swift in Sources */,
 			);

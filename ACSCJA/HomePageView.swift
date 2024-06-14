@@ -1,5 +1,6 @@
 import SwiftUI
 import Firebase
+import WebKit
 
 struct HomePageView: View {
     @ObservedObject var model = ViewModel()
@@ -12,7 +13,7 @@ struct HomePageView: View {
     @State private var userName: String = ""
     @State private var showingNamePrompt = false
     @AppStorage("userName") private var storedUserName: String = ""
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -26,13 +27,13 @@ struct HomePageView: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
-                        .position(x: 190, y: 50)
+                        .padding(.top, 50)
+                        .padding(.horizontal)
 
-                    VStack {
+                    VStack(alignment: .leading, spacing: 20) {
                         Text("Scores at a glance")
                             .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .padding(.trailing, 200.0)
+                            .padding(.horizontal)
 
                         ForEach(model.array.sorted(by: {
                             let dateFormatter = DateFormatter()
@@ -47,120 +48,108 @@ struct HomePageView: View {
                                     Image("HomePageBox")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
+                                        .padding(.leading)
                                         .frame(width: 350.0)
                                     Text("Eden Prairie vs \(item.AwayTeam)")
                                         .foregroundColor(Color.white)
                                         .multilineTextAlignment(.center)
+                                        .padding(.leading)
                                         .offset(y: -59)
                                     HStack {
                                         Image("EP")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
+                                            .padding(.leading)
                                             .frame(height: 55)
                                         
                                         Text("\(item.EPScore) - \(item.OtherScore)")
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.white)
                                             .font(.system(size: 30))
+                                            .padding(.leading)
                                         if let awayTeamImage = UIImage(named: item.AwayTeam) {
                                             Image(uiImage: awayTeamImage)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
+                                                .padding(.leading)
                                                 .frame(height: 60)
                                         } else {
                                             Text("No \n Image")
+                                                .padding(.leading)
                                         }
                                     }
                                     .padding(.trailing)
                                     HStack {
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
+                                            .padding(.leading)
                                             .offset(y: 50)
                                         Text(item.Date)
                                             .fontWeight(.heavy)
+                                            .padding(.leading)
                                             .offset(y: 50)
                                     }
                                 }
+                                .offset(x: 10)
                             }
                         }
                         
                         Text("Upcoming activities")
                             .foregroundColor(Color.white)
-                            .padding(.trailing, 200.0)
-                        
-                        ForEach(amodel.array.sorted(by: {
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "MM/dd/yyyy"
-                            guard let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) else {
-                                return false
-                            }
-                            return date1 < date2
-                        }).prefix(2)) { event in
-                            VStack {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.white)
-                                        .shadow(radius: 5)
-                                    
-                                    HStack {
-                                        VStack(alignment: .leading, spacing: 10) {
-                                            Text("Activity: " + event.Name)
-                                                .font(.headline)
-                                                .foregroundColor(.black)
-                                            
-                                            
-                                            
-                                            Text("Time: \(event.StartTime) - \(event.EndTime)")
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                            
-                                            Text("Description: " + event.Description)
-                                                .font(.caption)
-                                                .foregroundColor(.black)
-                                                .lineLimit(3)
-                                            
-                                            
-                                            
-                                        }
-                                        Image("calendarimage")
-                                            .resizable(capInsets: EdgeInsets())
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(height: 80.0)
-                                            
-                                        //                                Image("HomePageBox2")
-                                        //                                    .resizable()
-                                        //                                    .aspectRatio(contentMode: .fit)
-                                        //                                    .frame(width: 350.0)
-                                        //                                Text("Activity: " + event.Name)
-                                        //                                    .foregroundColor(Color.white)
-                                        //                                    .offset(y: -140)
-                                        //                                Text("Time: \(event.StartTime) - \(event.EndTime)")
-                                        //                                    .foregroundColor(Color.white)
-                                        //                                    .offset(y: -120)
-                                        //                                Text(event.Description)
-                                        //
-                                    }
-                                    .padding()
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                                
-                            
+                            .padding(.horizontal)
 
-    
-//
-                            }
-                            .padding()
-                        }
+//                        ForEach(amodel.array.sorted(by: {
+//                            let dateFormatter = DateFormatter()
+//                            dateFormatter.dateFormat = "MM/dd/yyyy"
+//                            guard let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) else {
+//                                return false
+//                            }
+//                            return date1 < date2
+//                        }).prefix(2)) { event in
+//                            VStack {
+//                                ZStack {
+//                                    RoundedRectangle(cornerRadius: 20)
+//                                        .fill(Color.white)
+//                                        .shadow(radius: 5)
+//                                    
+//                                    HStack {
+//                                        VStack(alignment: .leading, spacing: 10) {
+//                                            Text("Activity: " + event.Name)
+//                                                .font(.headline)
+//                                                .foregroundColor(.black)
+//                                            
+//                                            Text("Time: \(event.StartTime) - \(event.EndTime)")
+//                                                .font(.caption)
+//                                                .foregroundColor(.gray)
+//                                            
+//                                            Text("Description: " + event.Description)
+//                                                .font(.caption)
+//                                                .foregroundColor(.black)
+//                                                .lineLimit(3)
+//                                        }
+//                                        Image("calendarimage")
+//                                            .resizable(capInsets: EdgeInsets())
+//                                            .aspectRatio(contentMode: .fit)
+//                                            .frame(height: 80.0)
+//                                    }
+//                                    .padding()
+//                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                }
+//                            }
+//                            .padding(.horizontal)
+//                        }
                         
-
-                        
+                        CustomWebView(url: URL(string: "https://www.edenpr.org/experience/calendar")!)
+                            .frame(height: 400) // Adjust the height as needed
+                            .padding(.horizontal)
                     }
-                    .padding(.top, 50.0)
+                    .padding(.top, 20)
+                    
                 }
                 Rectangle()
                     .frame(width: 390.0, height: 70.0)
                     .foregroundColor(.white)
-                    .offset(y: 385)
+                    .offset(y: UIScreen.main.bounds.height / 2 - 35)
             }
             .onAppear {
                 amodel.getData()
@@ -237,6 +226,8 @@ struct NamePromptView: View {
         }
     }
 }
+
+
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {

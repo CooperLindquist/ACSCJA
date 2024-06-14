@@ -8,7 +8,7 @@ struct ACSCJAApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                AdminScoresView()
+                HomePageView()
             }
         }
     }
