@@ -21,7 +21,7 @@ struct AdminScoresView: View {
                                 .font(.system(size: 45))
                                 .padding(.trailing, 60.0)
                             
-                            NavigationLink(destination: AddScoreView()) {
+                            NavigationLink(destination: StudentLogin()) {
                                 Image(systemName: "plus")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)

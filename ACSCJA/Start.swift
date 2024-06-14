@@ -15,7 +15,7 @@ struct Start: View {
                 .frame(width: 500.0)
                 .ignoresSafeArea()
             VStack {
-                NavigationLink(destination: StudentLogin(isSignedOut: $isSignedOut)) {
+                NavigationLink(destination: StudentLogin()) {
                     Text("Student / Teacher")
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)

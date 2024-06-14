@@ -2,7 +2,7 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    @Binding var isSignedOut: Bool
+    
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
@@ -20,7 +20,7 @@ struct SignUpView: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $navigateToLogin) {
-                StudentLogin(isSignedOut: $isSignedOut)
+                StudentLogin()
             }
         }
     }
@@ -135,6 +135,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(isSignedOut: .constant(true))
+        SignUpView()
     }
 }

@@ -9,7 +9,7 @@ struct ProfileView: View {
     
     var body: some View {
         if isSignedOut {
-            StudentLogin(isSignedOut: $isSignedOut)
+            StudentLogin()
         } else {
             ZStack {
                 Image("HomePageBackground")

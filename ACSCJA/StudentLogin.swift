@@ -18,7 +18,7 @@ extension Color {
 }
 
 struct StudentLogin: View {
-    @Binding var isSignedOut: Bool
+    
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
@@ -33,9 +33,9 @@ struct StudentLogin: View {
             ZStack {
                 if userIsLoggedIn {
                     if isAdmin {
-                        AdminTabBarView(isSignedOut: $isSignedOut) // Navigate to AdminTabBarView if admin
+                        AddScoreView() // Navigate to AdminTabBarView if admin
                     } else {
-                        TabBarView(isSignedOut: $isSignedOut) // Otherwise, navigate to TabBarView
+                        AddScoreView() // Otherwise, navigate to TabBarView
                     }
                 } else {
                     content
@@ -54,7 +54,7 @@ struct StudentLogin: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
+        
     }
 
     var content: some View {
@@ -115,7 +115,7 @@ struct StudentLogin: View {
 
             Button {
                 login()
-                isSignedOut = false
+                
             } label: {
                 Text("Sign in")
                     .fontWeight(.bold)
@@ -132,7 +132,7 @@ struct StudentLogin: View {
             Text("Don't have an account yet?")
                 .offset(x: -30, y: 290)
 
-            NavigationLink(destination: SignUpView(isSignedOut: $isSignedOut)) {
+            NavigationLink(destination: SignUpView()) {
                 Text("Sign up")
                     .fontWeight(.bold)
                     .foregroundColor(Color.blue)
@@ -178,6 +178,6 @@ struct StudentLogin: View {
 
 struct StudentLogin_Previews: PreviewProvider {
     static var previews: some View {
-        StudentLogin(isSignedOut: .constant(true))
+        StudentLogin()
     }
 }
