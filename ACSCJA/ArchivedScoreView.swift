@@ -55,19 +55,34 @@ struct ArchivedScoreView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(height: 55)
-                                        
-                                        Text("\(item.EPScore) - \(item.OtherScore)")
+
+                                        Text("\(item.EPScore)")
                                             .fontWeight(.semibold)
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(Color.white) // Set explicit color
                                             .font(.system(size: 30))
-                                        if let awayTeamImage = UIImage(named: item.AwayTeam) {
-                                            Image(uiImage: awayTeamImage)
+                                        
+                                        Image(item.Sport)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 50.0)
+                                            
+                                        Text("\(item.OtherScore)")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.white) // Set explicit color
+                                            .font(.system(size: 30))
+                                        if(item.AwayTeam == "Minnetonka") {
+                                            Image(item.AwayTeam)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(height: 40)
+                                        }
+                                        else {
+                                            Image(item.AwayTeam)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(height: 60)
-                                        } else {
-                                            Text("No \n Image")
                                         }
+
                                     }
                                     .padding(.trailing)
                                     HStack {

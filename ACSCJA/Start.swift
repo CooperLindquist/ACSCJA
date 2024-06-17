@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Start: View {
-    @Binding var isSignedOut: Bool
+    
 
     var body: some View {
         ZStack {
@@ -47,6 +47,6 @@ struct Start: View {
 
 struct Start_Previews: PreviewProvider {
     static var previews: some View {
-        Start(isSignedOut: .constant(true))
+        Start()
     }
 }

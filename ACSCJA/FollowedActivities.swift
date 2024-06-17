@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct followedActivity: Identifiable, Equatable {
+struct FollowedActivity: Identifiable, Equatable {
     let name: String
     let id = UUID()
 }

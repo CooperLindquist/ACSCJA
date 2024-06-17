@@ -31,7 +31,7 @@ struct StudentLogin: View {
         NavigationStack {
             ZStack {
                 if userIsLoggedIn {
-                    AddScoreView() // Navigate to AddScoreView
+                    AdminTabBarView() // Navigate to AddScoreView
                 } else {
                     content
                         .alert(isPresented: $showErrorAlert) {

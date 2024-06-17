@@ -2,11 +2,66 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>ACSCJA</string>
+	<key>CFBundleIdentifier</key>
+	<string>epschools.ACSCJA</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Bold.ttf</string>
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to allow you to take photos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to upload photos.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to your location to provide location-based services.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone to record audio.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We need access to your contacts to improve your experience.</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>yourapp</string>
+			</array>
+		</dict>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mailto</string>
+		<string>tel</string>
+	</array>
+	<key>UIAccessibilityConfiguration</key>
+	<dict>
+		<key>SomeAccessibilitySetting</key>
+		<string>Value</string>
+	</dict>
+	<key>GoogleService-Info</key>
+	<dict/>
 </dict>
 </plist>

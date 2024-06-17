@@ -89,7 +89,7 @@ struct TabBarView: View {
         case "magnify":
             screen = AnyView(ActivitesView())
         case "person":
-            screen = AnyView(ProfileView(isSignedOut: $isSignedOut))
+            screen = AnyView(ProfileView())
         default:
             screen = AnyView(HomePageView())
         }

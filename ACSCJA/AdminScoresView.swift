@@ -56,29 +56,42 @@ struct AdminScoresView: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(height: 55)
 
-                                        Text("\(item.EPScore) - \(item.OtherScore)")
+                                        Text("\(item.EPScore)")
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.white) // Set explicit color
                                             .font(.system(size: 30))
-                                        if let awayTeamImage = UIImage(named: item.AwayTeam) {
-                                            Image(uiImage: awayTeamImage)
+                                        Image(item.Sport)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 50.0)
+                                            
+                                        Text("\(item.OtherScore)")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.white) // Set explicit color
+                                            .font(.system(size: 30))
+                                        if(item.AwayTeam == "Minnetonka") {
+                                            Image(item.AwayTeam)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(height: 40)
+                                        }
+                                        else {
+                                            Image(item.AwayTeam)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(height: 60)
-                                        } else {
-                                            Text("No \n Image")
-                                                .foregroundColor(Color.white) // Set explicit color
                                         }
+
                                     }
                                     .padding(.trailing)
                                     HStack {
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
-                                            .foregroundColor(Color.white) // Set explicit color
+                                            .foregroundColor(Color.black) // Set explicit color
                                             .offset(y: 50)
                                         Text(item.Date)
                                             .fontWeight(.heavy)
-                                            .foregroundColor(Color.white) // Set explicit color
+                                            .foregroundColor(Color.black) // Set explicit color
                                             .offset(y: 50)
                                     }
                                 }

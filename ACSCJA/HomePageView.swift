@@ -14,6 +14,9 @@ struct HomePageView: View {
     @State private var showingNamePrompt = false
     @AppStorage("userName") private var storedUserName: String = ""
     
+    // Assume userID is available here
+    @AppStorage("userID") private var userID: String = "some_user_id" // Replace with actual user ID retrieval
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -49,7 +52,7 @@ struct HomePageView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .padding(.leading)
-                                        .frame(width: 350.0)
+                                        .frame(width: 380.0)
                                     Text("Eden Prairie vs \(item.AwayTeam)")
                                         .foregroundColor(Color.white)
                                         .multilineTextAlignment(.center)
@@ -59,34 +62,44 @@ struct HomePageView: View {
                                         Image("EP")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .padding(.leading)
                                             .frame(height: 55)
-                                        
-                                        Text("\(item.EPScore) - \(item.OtherScore)")
+
+                                        Text("\(item.EPScore)")
                                             .fontWeight(.semibold)
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(Color.white) // Set explicit color
                                             .font(.system(size: 30))
-                                            .padding(.leading)
-                                        if let awayTeamImage = UIImage(named: item.AwayTeam) {
-                                            Image(uiImage: awayTeamImage)
+                                        Image(item.Sport)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 50.0)
+                                            
+                                        Text("\(item.OtherScore)")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.white) // Set explicit color
+                                            .font(.system(size: 30))
+                                        if(item.AwayTeam == "Minnetonka") {
+                                            Image(item.AwayTeam)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .padding(.leading)
-                                                .frame(height: 60)
-                                        } else {
-                                            Text("No \n Image")
-                                                .padding(.leading)
+                                                .frame(height: 40)
                                         }
+                                        else {
+                                            Image(item.AwayTeam)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(height: 60)
+                                        }
+
                                     }
                                     .padding(.trailing)
                                     HStack {
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
-                                            .padding(.leading)
+                                           
                                             .offset(y: 50)
                                         Text(item.Date)
                                             .fontWeight(.heavy)
-                                            .padding(.leading)
+                                          
                                             .offset(y: 50)
                                     }
                                 }
@@ -111,17 +124,17 @@ struct HomePageView: View {
 //                                    RoundedRectangle(cornerRadius: 20)
 //                                        .fill(Color.white)
 //                                        .shadow(radius: 5)
-//                                    
+//
 //                                    HStack {
 //                                        VStack(alignment: .leading, spacing: 10) {
 //                                            Text("Activity: " + event.Name)
 //                                                .font(.headline)
 //                                                .foregroundColor(.black)
-//                                            
+//
 //                                            Text("Time: \(event.StartTime) - \(event.EndTime)")
 //                                                .font(.caption)
 //                                                .foregroundColor(.gray)
-//                                            
+//
 //                                            Text("Description: " + event.Description)
 //                                                .font(.caption)
 //                                                .foregroundColor(.black)
@@ -140,7 +153,7 @@ struct HomePageView: View {
 //                        }
                         
                         CustomWebView(url: URL(string: "https://www.edenpr.org/experience/calendar")!)
-                            .frame(height: 400) // Adjust the height as needed
+                            .frame(height: 600) // Increased height for web view
                             .padding(.horizontal)
                     }
                     .padding(.top, 20)
@@ -160,7 +173,7 @@ struct HomePageView: View {
                 print("HomePageView appeared") // Debugging line
             }
             .sheet(isPresented: $showingNamePrompt) {
-                NamePromptView(userName: $userName, storedUserName: $storedUserName, showingNamePrompt: $showingNamePrompt)
+                NamePromptView(userName: $userName, storedUserName: $storedUserName, showingNamePrompt: $showingNamePrompt, userID: userID)
             }
         }
     }
@@ -181,56 +194,9 @@ struct HomePageView: View {
         }
     }
 }
-
-struct NamePromptView: View {
-    @Binding var userName: String
-    @Binding var storedUserName: String
-    @Binding var showingNamePrompt: Bool
-
-    var body: some View {
-        VStack {
-            Text("Enter your name")
-                .font(.title)
-                .padding()
-
-            TextField("Name", text: $userName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            Button(action: {
-                storeUserName()
-                showingNamePrompt = false
-            }) {
-                Text("OK")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-        }
-        .padding()
-    }
-
-    private func storeUserName() {
-        // Store the user name in AppStorage for persistence
-        storedUserName = userName
-        
-        // Store the user name in Firebase
-        let db = Firestore.firestore()
-        db.collection("DisplayNames").addDocument(data: ["name": userName]) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Document added with ID: \(String(describing: userName))")
-            }
-        }
-    }
-}
-
-
-
 struct HomePageView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePageView()
-    }
+static var previews: some View {
+HomePageView()
 }
+}
+

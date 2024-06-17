@@ -1,16 +1,20 @@
 import SwiftUI
+import Firebase
 import FirebaseAuth
 
 struct ProfileView: View {
-    @ObservedObject var viewModel = ActivityViewModel()
-    @Binding var isSignedOut: Bool
-    @State private var showingActivitySelection = false
-    let activities: [String] = ["Baseball", "Football", "Soccer"]
+    @StateObject var viewModel = ActivityViewModel()
     
+    @State private var showingActivitySelection = false
+    @State private var showingNamePrompt = false
+    @State private var userName: String = ""
+    @AppStorage("userName") private var storedUserName: String = ""
+    
+    @State private var userID: String = ""
+    @State private var isSignedOut = false // State variable to manage navigation
+
     var body: some View {
-        if isSignedOut {
-            StudentLogin()
-        } else {
+        NavigationStack {
             ZStack {
                 Image("HomePageBackground")
                     .resizable()
@@ -24,7 +28,7 @@ struct ProfileView: View {
                             .foregroundColor(.white)
                     }
                     .sheet(isPresented: $showingActivitySelection) {
-                        ActivitySelectionView(activities: activities) { selectedActivity in
+                        ActivitySelectionView(activities: viewModel.availableSports) { selectedActivity in
                             viewModel.addFollowedActivity(selectedActivity)
                             showingActivitySelection = false
                         }
@@ -42,7 +46,7 @@ struct ProfileView: View {
                     
                     ScrollView {
                         VStack(alignment: .leading) {
-                            if viewModel.followedActivities.isEmpty {
+                            if viewModel.FollowedActivities.isEmpty {
                                 Text("You don't follow any activities!")
                                     .foregroundColor(.white)
                                     .padding()
@@ -54,18 +58,27 @@ struct ProfileView: View {
                                             .cornerRadius(10)
                                     )
                             } else {
-                                ForEach(viewModel.followedActivities, id: \.self) { item in
-                                    Text(item)
-                                        .foregroundColor(.white)
-                                        .padding(10.0)
-                                        .frame(maxWidth: .infinity)
-                                        .background(
-                                            Rectangle()
-                                                .fill(Color.white)
-                                                .opacity(0.4)
-                                                .cornerRadius(10)
-                                                .padding(.vertical, 2)
-                                        )
+                                ForEach(viewModel.FollowedActivities, id: \.self) { item in
+                                    HStack {
+                                        Text(item)
+                                            .foregroundColor(.white)
+                                            .padding(10.0)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .background(
+                                                Rectangle()
+                                                    .fill(Color.white)
+                                                    .opacity(0.4)
+                                                    .cornerRadius(10)
+                                                    .padding(.vertical, 2)
+                                            )
+                                        Button(action: {
+                                            viewModel.removeFollowedActivity(item)
+                                        }) {
+                                            Image(systemName: "trash")
+                                                .foregroundColor(.red)
+                                        }
+                                        .padding(.trailing, 10)
+                                    }
                                 }
                             }
                         }
@@ -77,7 +90,7 @@ struct ProfileView: View {
                         .padding(.top, 20)
                     
                     Button(action: {
-                        // Add action for changing name
+                        showingNamePrompt = true
                     }) {
                         Text("Change name")
                             .foregroundColor(.white)
@@ -118,7 +131,18 @@ struct ProfileView: View {
                 )
             }
             .onAppear {
-                viewModel.getFollowedActivities()
+                if let user = Auth.auth().currentUser {
+                    userID = user.uid
+                    viewModel.userID = userID
+                    viewModel.getFollowedActivities()
+                    viewModel.getAvailableSports()
+                }
+            }
+            .sheet(isPresented: $showingNamePrompt) {
+                NamePromptView(userName: $userName, storedUserName: $storedUserName, showingNamePrompt: $showingNamePrompt, userID: userID)
+            }
+            .navigationDestination(isPresented: $isSignedOut) {
+                Start()
             }
         }
     }
@@ -135,6 +159,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(isSignedOut: .constant(true))
+        ProfileView()
     }
 }

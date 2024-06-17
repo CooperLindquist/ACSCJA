@@ -7,6 +7,11 @@ struct CustomWebView: UIViewRepresentable {
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.navigationDelegate = context.coordinator
+        
+        // Disable scrolling
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.bounces = false
+        
         return webView
     }
     
