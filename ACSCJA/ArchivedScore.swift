@@ -15,4 +15,5 @@ struct ArchivedScore : Identifiable {
     var EPScore : Int
     var OtherScore : Int
     var Sport : String
+    var Gender : String
 }

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct AdminTabBarView: View {
-    
     @State var selectedTab: String = "house"
     @State var screen: AnyView = AnyView(HomePageView())
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -16,13 +15,14 @@ struct AdminTabBarView: View {
             .onAppear {
                 screen = AnyView(HomePageView())
             }
+            .navigationBarBackButtonHidden(true)  // Just for extra precaution
+            .navigationBarHidden(true)
             
             HStack {
                 Spacer()
                 tabButton(tab: "house", imageName: "house", filledImageName: "house.fill", width: 35.0)
                 Spacer()
                 tabButton(tab: "court", imageName: "sportscourt", filledImageName: "sportscourt.fill", width: 40.0)
-               
                 Spacer()
                 tabButton(tab: "person", imageName: "person", filledImageName: "person.fill", width: 28.0)
                 Spacer()

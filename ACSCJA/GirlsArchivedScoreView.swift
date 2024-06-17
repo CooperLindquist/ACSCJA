@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArchivedScoreView: View {
+struct GirlsArchivedScoreView: View {
     @ObservedObject var model = ArchivedScoreViewModel()
     @State private var selectedSport: String = "" // Initialize selectedSport
     @State private var showFilterOptions: Bool = false // State variable to control filter options visibility
@@ -39,7 +39,7 @@ struct ArchivedScoreView: View {
                     
                     VStack {
                         // Show documents filtered by selectedSport
-                        ForEach(model.array.filter { $0.Gender == "Boys" }.sorted(by: {
+                        ForEach(model.array.filter { $0.Gender == "Girls" }.sorted(by: {
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MM/dd/yyyy"
                             if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
@@ -153,8 +153,8 @@ struct ArchivedScoreView: View {
     }
 }
 
-struct ArchivedScoreView_Previews: PreviewProvider {
+struct GirlsArchivedScoreView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchivedScoreView()
+        GirlsArchivedScoreView()
     }
 }

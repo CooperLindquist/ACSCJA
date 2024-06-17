@@ -1,5 +1,6 @@
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 extension Color {
     init(hex: String) {
@@ -49,6 +50,7 @@ struct StudentLogin: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 
     var content: some View {
@@ -155,7 +157,28 @@ struct StudentLogin: View {
                 showErrorAlert = true
                 print(error.localizedDescription)
             } else {
+                guard let userID = result?.user.uid else { return }
+                checkAndAddAdminUser(userID: userID)
                 userIsLoggedIn = true
+            }
+        }
+    }
+
+    func checkAndAddAdminUser(userID: String) {
+        let db = Firestore.firestore()
+        let adminRef = db.collection("Admin").document(userID)
+
+        adminRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                print("Document exists")
+            } else {
+                adminRef.setData(["Admin": false]) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                    } else {
+                        print("Document added with ID: \(userID)")
+                    }
+                }
             }
         }
     }

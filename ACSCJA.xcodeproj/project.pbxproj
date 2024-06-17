@@ -107,6 +107,8 @@
 		DB5AA3172C1E34540082AAA3 /* CalendarWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3162C1E34540082AAA3 /* CalendarWebView.swift */; };
 		DB5AA3192C20030C0082AAA3 /* NamePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3182C20030C0082AAA3 /* NamePromptView.swift */; };
 		DB5AA31B2C2005310082AAA3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA31A2C2005310082AAA3 /* ImagePicker.swift */; };
+		DB5AA3292C20B02F0082AAA3 /* GirlsAdminScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3282C20B02F0082AAA3 /* GirlsAdminScoresView.swift */; };
+		DB5AA32B2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA32A2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift */; };
 		DBFF26CF2C1CA3E9009D839E /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BB2C1CA3E8009D839E /* OFL.txt */; };
 		DBFF26D02C1CA3E9009D839E /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */; };
 		DBFF26D12C1CA3E9009D839E /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */; };
@@ -119,7 +121,6 @@
 		DBFF26D82C1CA3E9009D839E /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26C42C1CA3E8009D839E /* Poppins-Italic.ttf */; };
 		DBFF26D92C1CA3E9009D839E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26C52C1CA3E8009D839E /* Poppins-Light.ttf */; };
 		DBFF26DA2C1CA3E9009D839E /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26C62C1CA3E8009D839E /* Poppins-LightItalic.ttf */; };
-		DBFF26DB2C1CA3E9009D839E /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26C72C1CA3E8009D839E /* Poppins-Medium.ttf */; };
 		DBFF26DC2C1CA3E9009D839E /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26C82C1CA3E8009D839E /* Poppins-MediumItalic.ttf */; };
 		DBFF26DD2C1CA3E9009D839E /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26C92C1CA3E8009D839E /* Poppins-Regular.ttf */; };
 		DBFF26DE2C1CA3E9009D839E /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26CA2C1CA3E8009D839E /* Poppins-SemiBold.ttf */; };
@@ -164,6 +165,8 @@
 		DB5AA3162C1E34540082AAA3 /* CalendarWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWebView.swift; sourceTree = "<group>"; };
 		DB5AA3182C20030C0082AAA3 /* NamePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamePromptView.swift; sourceTree = "<group>"; };
 		DB5AA31A2C2005310082AAA3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		DB5AA3282C20B02F0082AAA3 /* GirlsAdminScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsAdminScoresView.swift; sourceTree = "<group>"; };
+		DB5AA32A2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsArchivedScoreView.swift; sourceTree = "<group>"; };
 		DBFF26BB2C1CA3E8009D839E /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
 		DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -302,7 +305,9 @@
 				69DD94572BE3F72A00529A29 /* ScoresView.swift */,
 				69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */,
 				69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */,
+				DB5AA3282C20B02F0082AAA3 /* GirlsAdminScoresView.swift */,
 				69DD945F2BEA85DC00529A29 /* ArchivedScoreView.swift */,
+				DB5AA32A2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift */,
 				69DD945B2BE9163B00529A29 /* AddScoreView.swift */,
 				69DD94512BE3F6EC00529A29 /* StudentLogin.swift */,
 				69DD94672BEE681800529A29 /* SignUpView.swift */,
@@ -480,7 +485,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					6925209A2B98BEB400319760 = {
 						CreatedOnToolsVersion = 15.2;
@@ -529,7 +534,6 @@
 				692520A32B98BEB800319760 /* Assets.xcassets in Resources */,
 				DBFF26D82C1CA3E9009D839E /* Poppins-Italic.ttf in Resources */,
 				DBFF26D22C1CA3E9009D839E /* Poppins-Bold.ttf in Resources */,
-				DBFF26DB2C1CA3E9009D839E /* Poppins-Medium.ttf in Resources */,
 				DBFF26D32C1CA3E9009D839E /* Poppins-BoldItalic.ttf in Resources */,
 				DBFF26D72C1CA3E9009D839E /* Poppins-ExtraLightItalic.ttf in Resources */,
 				DBFF26DF2C1CA3E9009D839E /* Poppins-SemiBoldItalic.ttf in Resources */,
@@ -568,7 +572,9 @@
 				69DD94552BE3F6EC00529A29 /* StudentLogin.swift in Sources */,
 				69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */,
 				69EA56742BFED67D0008EDFB /* ActivitySelectionView.swift in Sources */,
+				DB5AA32B2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift in Sources */,
 				69EA567A2BFEDAC80008EDFB /* AdminScoresView.swift in Sources */,
+				DB5AA3292C20B02F0082AAA3 /* GirlsAdminScoresView.swift in Sources */,
 				DB5AA3192C20030C0082AAA3 /* NamePromptView.swift in Sources */,
 				69DD945E2BEA852B00529A29 /* ArchivedScore.swift in Sources */,
 				6925209F2B98BEB400319760 /* ACSCJAApp.swift in Sources */,

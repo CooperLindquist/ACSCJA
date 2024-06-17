@@ -37,7 +37,8 @@ class ViewModel: ObservableObject {
                             let date = data["Date"] as? String,
                             let epsScore = data["EPScore"] as? Int,
                             let otherScore = data["OtherScore"] as? Int,
-                            let sport = data["Sport"] as? String
+                            let sport = data["Sport"] as? String,
+                            let gender = data["Gender"] as? String
                         else {
                             print("Invalid data for document \(document.documentID)")
                             return nil
@@ -49,7 +50,8 @@ class ViewModel: ObservableObject {
                             AwayTeam: awayTeam,
                             EPScore: epsScore,
                             OtherScore: otherScore,
-                            Sport: sport
+                            Sport: sport,
+                            Gender: gender
                         )
                     }
                 }

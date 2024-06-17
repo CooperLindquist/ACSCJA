@@ -93,6 +93,10 @@ struct HomePageView: View {
                                     }
                                     .padding(.trailing)
                                     HStack {
+                                        Text(item.Gender)
+                                            .fontWeight(.heavy)
+                                           
+                                            .offset(y: 50)
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
                                            

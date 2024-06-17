@@ -9,9 +9,11 @@ struct AddScoreView: View {
     @State private var selectedSport: String = "Football"
     @State private var customAwayTeam: String = ""
     @State private var customSport: String = ""
+    @State private var selectedGender: String = "Boys"
     
     let awayTeams = ["Hopkins", "Edina", "Wayzata", "Buffalo", "Minnetonka", "STMA", "Other"]
     let sports = ["Football", "Basketball", "Baseball", "Soccer", "Hockey", "Volleyball", "Lacrosse", "Other"]
+    let genders = ["Boys", "Girls"]
     
     var body: some View {
         ZStack {
@@ -94,6 +96,25 @@ struct AddScoreView: View {
                         .frame(maxWidth: 300)
                 }
                 
+                Menu {
+                    ForEach(genders, id: \.self) { gender in
+                        Button(action: {
+                            selectedGender = gender
+                        }) {
+                            Text(gender)
+                        }
+                    }
+                } label: {
+                    Text("Gender: \(selectedGender)")
+                        .padding()
+                        .frame(maxWidth: 300)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .frame(maxWidth: 300)
+                
                 Button(action: {
                     saveOrUpdateScore()
                 }) {
@@ -106,16 +127,16 @@ struct AddScoreView: View {
                 }
                 .padding()
                 
-//                Button(action: {
-//                    clearCollection(collectionPath: "Score")
-//                }) {
-//                    Text("Clear All Scores")
-//                        .padding()
-//                        .foregroundColor(.white)
-//                        .background(Color.blue)
-//                        .cornerRadius(8)
-//                }
-//                .padding()
+                Button(action: {
+                    clearCollection(collectionPath: "Score")
+                }) {
+                    Text("Clear All Scores")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding()
             }
         }
     }
@@ -135,9 +156,10 @@ struct AddScoreView: View {
         let awayTeam = selectedAwayTeam == "Other" ? customAwayTeam : selectedAwayTeam
         let sportToSave = selectedSport == "Other" ? customSport : selectedSport
         
-        // Check if the document with the specified sport exists
+        // Check if the document with the specified sport and gender exists
         db.collection("Score")
             .whereField("Sport", isEqualTo: sportToSave)
+            .whereField("Gender", isEqualTo: selectedGender)
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error querying documents: \(error.localizedDescription)")
@@ -158,6 +180,7 @@ struct AddScoreView: View {
                     "EPScore": epsScore,
                     "OtherScore": otherScore,
                     "Sport": sportToSave,
+                    "Gender": selectedGender,
                     "Timestamp": Date().timeIntervalSince1970
                 ]) { error in
                     if let error = error {
@@ -171,6 +194,7 @@ struct AddScoreView: View {
                         self.otherScoreString = ""
                         self.selectedSport = sports[0]
                         self.customSport = ""
+                        self.selectedGender = genders[0]
                     }
                 }
             }
