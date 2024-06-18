@@ -11,7 +11,8 @@ struct AddScoreView: View {
     @State private var customSport: String = ""
     @State private var selectedGender: String = "Boys"
     @State private var selectedLevel: String = "Varsity"
-    
+    @State private var showAlert = false
+
     let awayTeams = ["Hopkins", "Edina", "Wayzata", "Buffalo", "Minnetonka", "STMA", "Other"]
     let sports = ["Football", "Basketball", "Baseball", "Soccer", "Hockey", "Volleyball", "Lacrosse", "Other"]
     let genders = ["Boys", "Girls"]
@@ -19,146 +20,98 @@ struct AddScoreView: View {
 
     var body: some View {
         ZStack {
-            Image("HomePageBackground")
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
-
-            VStack {
+            Color(hex: "18181b")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 20) {
                 Text("Add Score")
-                    .font(.system(size: 60))
+                    .font(.system(size: 40))
                     .fontWeight(.bold)
-                    .underline()
+                    .foregroundColor(.white)
+                    .padding(.top, 40)
 
-                Menu {
-                    ForEach(awayTeams, id: \.self) { team in
-                        Button(action: {
-                            selectedAwayTeam = team
-                        }) {
-                            Text(team)
-                        }
+                HStack(spacing: 20) {
+                    CustomMenu(title: "Sport", selection: $selectedSport, options: sports)
+                    if selectedSport == "Other" {
+                        CustomTextField("Enter Sport", text: $customSport)
                     }
-                } label: {
-                    Text("Away Team: \(selectedAwayTeam)")
-                        .padding()
-                        .frame(maxWidth: 300)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                .padding()
-                .frame(maxWidth: 300)
-
-                if selectedAwayTeam == "Other" {
-                    TextField("Enter Away Team", text: $customAwayTeam)
-                        .padding()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(maxWidth: 300)
+                    CustomMenu(title: "Away Team", selection: $selectedAwayTeam, options: awayTeams)
+                    if selectedAwayTeam == "Other" {
+                        CustomTextField("Enter Away Team", text: $customAwayTeam)
+                    }
                 }
 
                 DatePicker("Date", selection: $date, displayedComponents: .date)
                     .padding()
                     .frame(maxWidth: 300)
+                    .background(Color(hex: "27272a"))
+                    .cornerRadius(8)
+                    .foregroundColor(.white)
 
-                TextField("EPS Score", text: $epsScoreString)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .frame(maxWidth: 300)
-
-                TextField("Other Score", text: $otherScoreString)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .frame(maxWidth: 300)
-
-                Menu {
-                    ForEach(sports, id: \.self) { sport in
-                        Button(action: {
-                            selectedSport = sport
-                        }) {
-                            Text(sport)
-                        }
-                    }
-                } label: {
-                    Text("Sport: \(selectedSport)")
-                        .padding()
-                        .frame(maxWidth: 300)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                .padding()
-                .frame(maxWidth: 300)
-
-                if selectedSport == "Other" {
-                    TextField("Enter Sport", text: $customSport)
-                        .padding()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(maxWidth: 300)
+                HStack(spacing: 20) {
+                    CustomTextField("EP Score", text: $epsScoreString)
+                        
+                    CustomTextField("Other Score", text: $otherScoreString)
                 }
 
-                Menu {
-                    ForEach(genders, id: \.self) { gender in
-                        Button(action: {
-                            selectedGender = gender
-                        }) {
-                            Text(gender)
-                        }
-                    }
-                } label: {
-                    Text("Gender: \(selectedGender)")
-                        .padding()
-                        .frame(maxWidth: 300)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                HStack(spacing: 20) {
+                    CustomMenu(title: "Gender", selection: $selectedGender, options: genders)
+                    CustomMenu(title: "Level", selection: $selectedLevel, options: levels)
                 }
-                .padding()
-                .frame(maxWidth: 300)
-                
-                Menu {
-                    ForEach(levels, id: \.self) { level in
-                        Button(action: {
-                            selectedLevel = level
-                        }) {
-                            Text(level)
-                        }
-                    }
-                } label: {
-                    Text("Level: \(selectedLevel)")
-                        .padding()
-                        .frame(maxWidth: 300)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                .padding()
-                .frame(maxWidth: 300)
 
                 Button(action: {
                     saveOrUpdateScore()
                 }) {
                     Text("Save Score")
                         .padding()
-                        .frame(maxWidth: 270)
+                        .frame(maxWidth: 300)
                         .foregroundColor(.white)
-                        .background(Color.green)
+                        .background(Color.red)
                         .cornerRadius(8)
                 }
-                .padding()
-
-                Button(action: {
-                    clearCollection(collectionPath: "Score")
-                }) {
-                    Text("Clear All Scores")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                .padding(.bottom, 20)
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Success"), message: Text("Score saved successfully"), dismissButton: .default(Text("OK")))
                 }
-                .padding()
             }
+            .padding(.bottom, 50.0)
         }
+    }
+
+    func CustomTextField(_ placeholder: String, text: Binding<String>) -> some View {
+        TextField(placeholder, text: text)
+            .keyboardType(.numberPad) // Set keyboard to number pad
+            .padding()
+            .frame(maxWidth: 140)
+            .background(Color(hex: "27272a"))
+            .cornerRadius(8)
+            .foregroundColor(.white)
+            .placeholder(when: text.wrappedValue.isEmpty) {
+                Text(placeholder)
+                    .foregroundColor(.gray)
+                    .padding(.leading, 10)
+            }
+    }
+
+    func CustomMenu(title: String, selection: Binding<String>, options: [String]) -> some View {
+        Menu {
+            ForEach(options, id: \.self) { option in
+                Button(action: {
+                    selection.wrappedValue = option
+                }) {
+                    Text(option)
+                        .foregroundColor(.white)
+                }
+            }
+        } label: {
+            Text("\(title): \(selection.wrappedValue)")
+                .padding()
+                .frame(maxWidth: 140)
+                .foregroundColor(.white)
+                .background(Color(hex: "27272a"))
+                .cornerRadius(8)
+        }
+        .padding(.bottom, 10)
     }
 
     func saveOrUpdateScore() {
@@ -176,7 +129,6 @@ struct AddScoreView: View {
         let awayTeam = selectedAwayTeam == "Other" ? customAwayTeam : selectedAwayTeam
         let sportToSave = selectedSport == "Other" ? customSport : selectedSport
 
-        // Check if the document with the specified sport and gender exists
         db.collection("Score")
             .whereField("Sport", isEqualTo: sportToSave)
             .whereField("Gender", isEqualTo: selectedGender)
@@ -188,13 +140,11 @@ struct AddScoreView: View {
                 }
 
                 if let snapshot = snapshot, !snapshot.documents.isEmpty {
-                    // Move the existing document(s) to ArchivedScore collection
                     for document in snapshot.documents {
                         moveDocumentToArchive(document: document)
                     }
                 }
 
-                // Add a new document or update the existing one
                 db.collection("Score").addDocument(data: [
                     "AwayTeam": awayTeam,
                     "Date": dateString,
@@ -209,7 +159,6 @@ struct AddScoreView: View {
                         print("Error adding document: \(error)")
                     } else {
                         print("Document added successfully")
-                        // Optionally, you can clear the text fields after saving
                         self.selectedAwayTeam = awayTeams[0]
                         self.customAwayTeam = ""
                         self.epsScoreString = ""
@@ -218,6 +167,7 @@ struct AddScoreView: View {
                         self.customSport = ""
                         self.selectedGender = genders[0]
                         self.selectedLevel = levels[0]
+                        self.showAlert = true
                     }
                 }
             }
@@ -231,7 +181,6 @@ struct AddScoreView: View {
             if let error = error {
                 print("Error adding document to ArchivedScore: \(error.localizedDescription)")
             } else {
-                // Delete the original document from Score collection
                 db.collection("Score").document(document.documentID).delete { error in
                     if let error = error {
                         print("Error deleting document from Score: \(error.localizedDescription)")
@@ -242,35 +191,23 @@ struct AddScoreView: View {
             }
         }
     }
+}
 
-    func clearCollection(collectionPath: String) {
-        let db = Firestore.firestore()
-        db.collection(collectionPath).getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error clearing collection: \(error.localizedDescription)")
-                return
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+        ZStack(alignment: alignment) {
+            if shouldShow {
+                placeholder()
             }
-
-            guard let snapshot = snapshot else {
-                print("Snapshot is nil")
-                return
-            }
-
-            let batch = db.batch()
-            snapshot.documents.forEach { document in
-                batch.deleteDocument(db.collection(collectionPath).document(document.documentID))
-            }
-
-            batch.commit { error in
-                if let error = error {
-                    print("Error committing batch delete: \(error.localizedDescription)")
-                } else {
-                    print("Collection cleared successfully")
-                }
-            }
+            self
         }
     }
 }
+
+
 
 struct AddScoreView_Previews: PreviewProvider {
     static var previews: some View {

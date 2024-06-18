@@ -8,10 +8,10 @@
 import Foundation
 
 struct CalendarEvent: Identifiable {
-    var id: String
-    var Date: String
-    var Description: String
-    var EndTime: String
-    var Name: String
-    var StartTime: String
+    let id = UUID()
+    let title: String
+    let date: String
+    let time: String
+    let location: String
+    let link: String
 }

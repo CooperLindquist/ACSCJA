@@ -4,7 +4,6 @@ import WebKit
 
 struct HomePageView: View {
     @ObservedObject var model = ViewModel()
-    @ObservedObject var amodel = CalendarViewModel()
     @State private var house = "house.fill"
     @State private var calendar = "calendar"
     @State private var court = "sportscourt"
@@ -119,46 +118,7 @@ struct HomePageView: View {
                             .foregroundColor(Color.white)
                             .padding(.horizontal)
 
-//                        ForEach(amodel.array.sorted(by: {
-//                            let dateFormatter = DateFormatter()
-//                            dateFormatter.dateFormat = "MM/dd/yyyy"
-//                            guard let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) else {
-//                                return false
-//                            }
-//                            return date1 < date2
-//                        }).prefix(2)) { event in
-//                            VStack {
-//                                ZStack {
-//                                    RoundedRectangle(cornerRadius: 20)
-//                                        .fill(Color.white)
-//                                        .shadow(radius: 5)
-//
-//                                    HStack {
-//                                        VStack(alignment: .leading, spacing: 10) {
-//                                            Text("Activity: " + event.Name)
-//                                                .font(.headline)
-//                                                .foregroundColor(.black)
-//
-//                                            Text("Time: \(event.StartTime) - \(event.EndTime)")
-//                                                .font(.caption)
-//                                                .foregroundColor(.gray)
-//
-//                                            Text("Description: " + event.Description)
-//                                                .font(.caption)
-//                                                .foregroundColor(.black)
-//                                                .lineLimit(3)
-//                                        }
-//                                        Image("calendarimage")
-//                                            .resizable(capInsets: EdgeInsets())
-//                                            .aspectRatio(contentMode: .fit)
-//                                            .frame(height: 80.0)
-//                                    }
-//                                    .padding()
-//                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                }
-//                            }
-//                            .padding(.horizontal)
-//                        }
+
                         
                         CustomWebView(url: URL(string: "https://www.edenpr.org/experience/calendar")!)
                             .frame(height: 600) // Increased height for web view
@@ -173,7 +133,7 @@ struct HomePageView: View {
                     .offset(y: UIScreen.main.bounds.height / 2 - 35)
             }
             .onAppear {
-                amodel.getData()
+                
                 if storedUserName.isEmpty {
                     showingNamePrompt = true
                 }
@@ -207,4 +167,3 @@ static var previews: some View {
 HomePageView()
 }
 }
-

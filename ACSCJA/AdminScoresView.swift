@@ -135,7 +135,9 @@ struct AdminScoresView: View {
                 GirlsAdminScoresView()
                     .tabItem {
                         Label("Girls", systemImage: "person.2.fill")
+                           
                     }
+                
             }
         }
     }

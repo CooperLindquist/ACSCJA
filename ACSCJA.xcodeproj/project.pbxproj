@@ -116,6 +116,7 @@
 		DB5AA3392C20FB1A0082AAA3 /* GuestLevelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3382C20FB1A0082AAA3 /* GuestLevelPickerView.swift */; };
 		DB5AA33B2C20FBB70082AAA3 /* JVScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA33A2C20FBB70082AAA3 /* JVScoresView.swift */; };
 		DB5AA33D2C20FC700082AAA3 /* GirlsJVScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA33C2C20FC700082AAA3 /* GirlsJVScoresView.swift */; };
+		DB5AA3402C215AD50082AAA3 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = DB5AA33F2C215AD50082AAA3 /* SwiftSoup */; };
 		DBFF26CF2C1CA3E9009D839E /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BB2C1CA3E8009D839E /* OFL.txt */; };
 		DBFF26D02C1CA3E9009D839E /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */; };
 		DBFF26D12C1CA3E9009D839E /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */; };
@@ -268,6 +269,7 @@
 				69348DFF2BD6D31E002DC202 /* FirebaseAnalytics in Frameworks */,
 				69348E032BD6D31E002DC202 /* FirebaseAnalyticsSwift in Frameworks */,
 				692520C22B98CCC600319760 /* FirebaseDatabaseSwift in Frameworks */,
+				DB5AA3402C215AD50082AAA3 /* SwiftSoup in Frameworks */,
 				692520CC2B98CCC600319760 /* FirebaseFunctions in Frameworks */,
 				692520E22B98CCC600319760 /* FirebaseStorageCombine-Community in Frameworks */,
 				692520DC2B98CCC600319760 /* FirebaseRemoteConfig in Frameworks */,
@@ -493,6 +495,7 @@
 				69348E0E2BDA9B59002DC202 /* FirebaseAnalyticsSwift */,
 				69348E102BDA9B59002DC202 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				69348E122BDA9B59002DC202 /* FirebaseAppCheck */,
+				DB5AA33F2C215AD50082AAA3 /* SwiftSoup */,
 			);
 			productName = ACSCJA;
 			productReference = 6925209B2B98BEB400319760 /* ACSCJA.app */;
@@ -525,6 +528,7 @@
 			packageReferences = (
 				692520AC2B98CCC500319760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				691E738E2BB46A370039704B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				DB5AA33E2C215AD50082AAA3 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 6925209C2B98BEB400319760 /* Products */;
 			projectDirPath = "";
@@ -836,6 +840,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.22.0;
+			};
+		};
+		DB5AA33E2C215AD50082AAA3 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1195,6 +1207,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 692520AC2B98CCC500319760 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		DB5AA33F2C215AD50082AAA3 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB5AA33E2C215AD50082AAA3 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
