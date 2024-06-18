@@ -22,18 +22,20 @@ struct AdminScoresView: View {
                                     .font(.system(size: 45))
                                     .padding(.trailing, 60.0)
                                 
-                                NavigationLink(destination: AddScoreView()) {
-                                    Image(systemName: "plus")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundColor(Color.blue) // Set explicit color
-                                        .frame(width: 25.0)
+                                if model.isAdmin {
+                                    NavigationLink(destination: AddScoreView()) {
+                                        Image(systemName: "plus")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(Color.blue) // Set explicit color
+                                            .frame(width: 25.0)
+                                    }
+                                    .offset(x: 30, y: 0)
+                                    .padding()
                                 }
-                                .offset(x: 30, y: 0)
-                                .padding()
                             }
 
-                            ForEach(model.array.filter { $0.Gender == "Boys" }.sorted(by: {
+                            ForEach(model.array.filter { $0.Gender == "Boys" && $0.Level == "Varsity" }.sorted(by: {
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "MM/dd/yyyy"
                                 if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
@@ -75,18 +77,20 @@ struct AdminScoresView: View {
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(height: 40)
-                                            }
-                                            else {
+                                            } else {
                                                 Image(item.AwayTeam)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(height: 60)
                                             }
-
                                         }
                                         .padding(.trailing)
                                         HStack {
                                             Text(item.Gender)
+                                                .fontWeight(.heavy)
+                                                .foregroundColor(Color.black) // Set explicit color
+                                                .offset(y: 50)
+                                            Text(item.Level)
                                                 .fontWeight(.heavy)
                                                 .foregroundColor(Color.black) // Set explicit color
                                                 .offset(y: 50)
@@ -125,6 +129,7 @@ struct AdminScoresView: View {
                 }
                 .onAppear {
                     model.getData2()
+                    model.checkAdminStatus() // Ensure admin status is checked on appear
                 }
 
                 GirlsAdminScoresView()

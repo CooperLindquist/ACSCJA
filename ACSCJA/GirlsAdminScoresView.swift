@@ -21,18 +21,20 @@ struct GirlsAdminScoresView: View {
                                 .font(.system(size: 45))
                                 .padding(.trailing, 60.0)
                             
-                            NavigationLink(destination: AddScoreView()) {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(Color.blue) // Set explicit color
-                                    .frame(width: 25.0)
-                            }
-                            .offset(x: 30, y: 0)
-                            .padding()
-                        }
+                            if model.isAdmin {
+                                                                NavigationLink(destination: AddScoreView()) {
+                                                                    Image(systemName: "plus")
+                                                                        .resizable()
+                                                                        .aspectRatio(contentMode: .fit)
+                                                                        .foregroundColor(Color.blue) // Set explicit color
+                                                                        .frame(width: 25.0)
+                                                                }
+                                                                .offset(x: 30, y: 0)
+                                                                .padding()
+                                                            }
+                                                        }
 
-                        ForEach(model.array.filter { $0.Gender == "Girls" }.sorted(by: {
+                        ForEach(model.array.filter { $0.Gender == "Girls" && $0.Level == "Varsity" }.sorted(by: {
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "MM/dd/yyyy"
                             if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
@@ -64,7 +66,7 @@ struct GirlsAdminScoresView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 50.0)
-                                            
+
                                         Text("\(item.OtherScore)")
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.white) // Set explicit color
@@ -81,11 +83,14 @@ struct GirlsAdminScoresView: View {
                                                 .aspectRatio(contentMode: .fit)
                                                 .frame(height: 60)
                                         }
-
                                     }
                                     .padding(.trailing)
                                     HStack {
                                         Text(item.Gender)
+                                            .fontWeight(.heavy)
+                                            .foregroundColor(Color.black) // Set explicit color
+                                            .offset(y: 50)
+                                        Text(item.Level)
                                             .fontWeight(.heavy)
                                             .foregroundColor(Color.black) // Set explicit color
                                             .offset(y: 50)

@@ -23,6 +23,7 @@ struct StudentLogin: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
+    @State private var isAdmin = false
     @State private var errorMessage = ""
     @State private var showErrorAlert = false
     @State private var isLoading = false
@@ -32,7 +33,11 @@ struct StudentLogin: View {
         NavigationStack {
             ZStack {
                 if userIsLoggedIn {
-                    AdminTabBarView() // Navigate to AddScoreView
+                    if isAdmin {
+                        AdminTabBarView() // Navigate to AdminTabBarView
+                    } else {
+                        AdminTabBarView() // Navigate to TabBarView for non-admin users
+                    }
                 } else {
                     content
                         .alert(isPresented: $showErrorAlert) {
@@ -158,19 +163,21 @@ struct StudentLogin: View {
                 print(error.localizedDescription)
             } else {
                 guard let userID = result?.user.uid else { return }
-                checkAndAddAdminUser(userID: userID)
-                userIsLoggedIn = true
+                checkIfAdmin(userID: userID)
             }
         }
     }
 
-    func checkAndAddAdminUser(userID: String) {
+    func checkIfAdmin(userID: String) {
         let db = Firestore.firestore()
         let adminRef = db.collection("Admin").document(userID)
 
         adminRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                print("Document exists")
+                if let isAdmin = document.get("Admin") as? Bool {
+                    self.isAdmin = isAdmin
+                    self.userIsLoggedIn = true
+                }
             } else {
                 adminRef.setData(["Admin": false]) { error in
                     if let error = error {
@@ -179,6 +186,8 @@ struct StudentLogin: View {
                         print("Document added with ID: \(userID)")
                     }
                 }
+                self.isAdmin = false
+                self.userIsLoggedIn = true
             }
         }
     }

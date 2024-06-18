@@ -95,15 +95,19 @@ struct HomePageView: View {
                                     HStack {
                                         Text(item.Gender)
                                             .fontWeight(.heavy)
-                                           
+                                            .foregroundColor(Color.black) // Set explicit color
+                                            .offset(y: 50)
+                                        Text(item.Level)
+                                            .fontWeight(.heavy)
+                                            .foregroundColor(Color.black) // Set explicit color
                                             .offset(y: 50)
                                         Text(item.Sport)
                                             .fontWeight(.heavy)
-                                           
+                                            .foregroundColor(Color.black) // Set explicit color
                                             .offset(y: 50)
                                         Text(item.Date)
                                             .fontWeight(.heavy)
-                                          
+                                            .foregroundColor(Color.black) // Set explicit color
                                             .offset(y: 50)
                                     }
                                 }

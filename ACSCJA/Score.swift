@@ -15,6 +15,7 @@ struct Score: Identifiable, Hashable, Codable {
     var OtherScore : Int
     var Sport : String
     var Gender : String
+    var Level : String
     func hash(into hasher: inout Hasher) {
            hasher.combine(id)
            // Hash other properties if needed

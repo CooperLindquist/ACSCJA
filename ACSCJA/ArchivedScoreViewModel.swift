@@ -26,7 +26,8 @@ class ArchivedScoreViewModel: ObservableObject {
                         let epsScore = data["EPScore"] as? Int,
                         let otherScore = data["OtherScore"] as? Int,
                         let sport = data["Sport"] as? String,
-                        let gender = data["Gender"] as? String
+                        let gender = data["Gender"] as? String,
+                        let level = data["Level"] as? String
                     else {
                         print("Invalid data for document \(document.documentID)")
                         return nil
@@ -39,7 +40,8 @@ class ArchivedScoreViewModel: ObservableObject {
                         EPScore: epsScore,
                         OtherScore: otherScore,
                         Sport: sport,
-                        Gender: gender
+                        Gender: gender,
+                        Level: level
                     )
                 }
             }

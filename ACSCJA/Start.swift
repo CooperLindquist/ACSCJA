@@ -28,7 +28,7 @@ struct Start: View {
                 }
                 Spacer()
                     .frame(height: 30.0)
-                NavigationLink(destination: ScoresView()) {
+                NavigationLink(destination: GuestLevelPickerView()) {
                     Text("Guest")
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)

@@ -53,7 +53,7 @@ struct AdminTabBarView: View {
         case "house":
             screen = AnyView(HomePageView())
         case "court":
-            screen = AnyView(AdminScoresView())
+            screen = AnyView(LevelPickerView())
         case "magnify":
             screen = AnyView(ActivitesView())
         case "person":

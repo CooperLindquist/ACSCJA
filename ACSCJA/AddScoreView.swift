@@ -10,23 +10,25 @@ struct AddScoreView: View {
     @State private var customAwayTeam: String = ""
     @State private var customSport: String = ""
     @State private var selectedGender: String = "Boys"
+    @State private var selectedLevel: String = "Varsity"
     
     let awayTeams = ["Hopkins", "Edina", "Wayzata", "Buffalo", "Minnetonka", "STMA", "Other"]
     let sports = ["Football", "Basketball", "Baseball", "Soccer", "Hockey", "Volleyball", "Lacrosse", "Other"]
     let genders = ["Boys", "Girls"]
-    
+    let levels = ["JV", "Varsity"]
+
     var body: some View {
         ZStack {
             Image("HomePageBackground")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
-            
+
             VStack {
                 Text("Add Score")
                     .font(.system(size: 60))
                     .fontWeight(.bold)
                     .underline()
-                
+
                 Menu {
                     ForEach(awayTeams, id: \.self) { team in
                         Button(action: {
@@ -42,34 +44,33 @@ struct AddScoreView: View {
                         .foregroundColor(.white)
                         .background(Color.blue)
                         .cornerRadius(8)
-                    
                 }
                 .padding()
                 .frame(maxWidth: 300)
-                
+
                 if selectedAwayTeam == "Other" {
                     TextField("Enter Away Team", text: $customAwayTeam)
                         .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(maxWidth: 300)
                 }
-                
+
                 DatePicker("Date", selection: $date, displayedComponents: .date)
                     .padding()
                     .frame(maxWidth: 300)
-                
+
                 TextField("EPS Score", text: $epsScoreString)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
                     .frame(maxWidth: 300)
-                
+
                 TextField("Other Score", text: $otherScoreString)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
                     .frame(maxWidth: 300)
-                
+
                 Menu {
                     ForEach(sports, id: \.self) { sport in
                         Button(action: {
@@ -88,14 +89,14 @@ struct AddScoreView: View {
                 }
                 .padding()
                 .frame(maxWidth: 300)
-                
+
                 if selectedSport == "Other" {
                     TextField("Enter Sport", text: $customSport)
                         .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .frame(maxWidth: 300)
                 }
-                
+
                 Menu {
                     ForEach(genders, id: \.self) { gender in
                         Button(action: {
@@ -115,6 +116,25 @@ struct AddScoreView: View {
                 .padding()
                 .frame(maxWidth: 300)
                 
+                Menu {
+                    ForEach(levels, id: \.self) { level in
+                        Button(action: {
+                            selectedLevel = level
+                        }) {
+                            Text(level)
+                        }
+                    }
+                } label: {
+                    Text("Level: \(selectedLevel)")
+                        .padding()
+                        .frame(maxWidth: 300)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .frame(maxWidth: 300)
+
                 Button(action: {
                     saveOrUpdateScore()
                 }) {
@@ -126,7 +146,7 @@ struct AddScoreView: View {
                         .cornerRadius(8)
                 }
                 .padding()
-                
+
                 Button(action: {
                     clearCollection(collectionPath: "Score")
                 }) {
@@ -140,39 +160,40 @@ struct AddScoreView: View {
             }
         }
     }
-    
+
     func saveOrUpdateScore() {
         guard let epsScore = Int(epsScoreString),
               let otherScore = Int(otherScoreString) else {
             // Handle invalid input
             return
         }
-        
+
         let db = Firestore.firestore()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let dateString = dateFormatter.string(from: date)
-        
+
         let awayTeam = selectedAwayTeam == "Other" ? customAwayTeam : selectedAwayTeam
         let sportToSave = selectedSport == "Other" ? customSport : selectedSport
-        
+
         // Check if the document with the specified sport and gender exists
         db.collection("Score")
             .whereField("Sport", isEqualTo: sportToSave)
             .whereField("Gender", isEqualTo: selectedGender)
+            .whereField("Level", isEqualTo: selectedLevel)
             .getDocuments { (snapshot, error) in
                 if let error = error {
                     print("Error querying documents: \(error.localizedDescription)")
                     return
                 }
-                
+
                 if let snapshot = snapshot, !snapshot.documents.isEmpty {
                     // Move the existing document(s) to ArchivedScore collection
                     for document in snapshot.documents {
                         moveDocumentToArchive(document: document)
                     }
                 }
-                
+
                 // Add a new document or update the existing one
                 db.collection("Score").addDocument(data: [
                     "AwayTeam": awayTeam,
@@ -181,6 +202,7 @@ struct AddScoreView: View {
                     "OtherScore": otherScore,
                     "Sport": sportToSave,
                     "Gender": selectedGender,
+                    "Level": selectedLevel,
                     "Timestamp": Date().timeIntervalSince1970
                 ]) { error in
                     if let error = error {
@@ -195,15 +217,16 @@ struct AddScoreView: View {
                         self.selectedSport = sports[0]
                         self.customSport = ""
                         self.selectedGender = genders[0]
+                        self.selectedLevel = levels[0]
                     }
                 }
             }
     }
-    
+
     func moveDocumentToArchive(document: DocumentSnapshot) {
         let db = Firestore.firestore()
         let data = document.data() ?? [:]
-        
+
         db.collection("ArchivedScore").addDocument(data: data) { error in
             if let error = error {
                 print("Error adding document to ArchivedScore: \(error.localizedDescription)")
@@ -219,7 +242,7 @@ struct AddScoreView: View {
             }
         }
     }
-    
+
     func clearCollection(collectionPath: String) {
         let db = Firestore.firestore()
         db.collection(collectionPath).getDocuments { (snapshot, error) in
@@ -227,17 +250,17 @@ struct AddScoreView: View {
                 print("Error clearing collection: \(error.localizedDescription)")
                 return
             }
-            
+
             guard let snapshot = snapshot else {
                 print("Snapshot is nil")
                 return
             }
-            
+
             let batch = db.batch()
             snapshot.documents.forEach { document in
                 batch.deleteDocument(db.collection(collectionPath).document(document.documentID))
             }
-            
+
             batch.commit { error in
                 if let error = error {
                     print("Error committing batch delete: \(error.localizedDescription)")

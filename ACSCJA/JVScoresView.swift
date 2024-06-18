@@ -1,7 +1,7 @@
 import SwiftUI
 import Firebase
 
-struct ScoresView: View {
+struct JVScoresView: View {
     @ObservedObject var model = ViewModel()
     @State private var userInput: String = "" // State variable to store user input
 
@@ -23,9 +23,9 @@ struct ScoresView: View {
                                     .padding(.trailing, 60.0)
                                 
                                 
-                            }
+                                                            }
 
-                            ForEach(model.array.filter { $0.Gender == "Boys" && $0.Level == "Varsity" }.sorted(by: {
+                            ForEach(model.array.filter { $0.Gender == "Boys" && $0.Level == "JV" }.sorted(by: {
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "MM/dd/yyyy"
                                 if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
@@ -67,12 +67,14 @@ struct ScoresView: View {
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(height: 40)
-                                            } else {
+                                            }
+                                            else {
                                                 Image(item.AwayTeam)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(height: 60)
                                             }
+
                                         }
                                         .padding(.trailing)
                                         HStack {
@@ -119,10 +121,9 @@ struct ScoresView: View {
                 }
                 .onAppear {
                     model.getData2()
-                    model.checkAdminStatus() // Ensure admin status is checked on appear
                 }
 
-                GirlsScoresView()
+                GirlsJVScoresView()
                     .tabItem {
                         Label("Girls", systemImage: "person.2.fill")
                     }
@@ -132,9 +133,9 @@ struct ScoresView: View {
 }
 
 #if DEBUG
-struct ScoresView_Previews: PreviewProvider {
+struct JVScoresView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoresView()
+        JVScoresView()
     }
 }
 #endif

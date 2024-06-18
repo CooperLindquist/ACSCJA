@@ -1,7 +1,7 @@
 import SwiftUI
 import Firebase
 
-struct ScoresView: View {
+struct AdminJVScoresView: View {
     @ObservedObject var model = ViewModel()
     @State private var userInput: String = "" // State variable to store user input
 
@@ -22,10 +22,20 @@ struct ScoresView: View {
                                     .font(.system(size: 45))
                                     .padding(.trailing, 60.0)
                                 
-                                
-                            }
+                                if model.isAdmin {
+                                                                    NavigationLink(destination: AddScoreView()) {
+                                                                        Image(systemName: "plus")
+                                                                            .resizable()
+                                                                            .aspectRatio(contentMode: .fit)
+                                                                            .foregroundColor(Color.blue) // Set explicit color
+                                                                            .frame(width: 25.0)
+                                                                    }
+                                                                    .offset(x: 30, y: 0)
+                                                                    .padding()
+                                                                }
+                                                            }
 
-                            ForEach(model.array.filter { $0.Gender == "Boys" && $0.Level == "Varsity" }.sorted(by: {
+                            ForEach(model.array.filter { $0.Gender == "Boys" && $0.Level == "JV" }.sorted(by: {
                                 let dateFormatter = DateFormatter()
                                 dateFormatter.dateFormat = "MM/dd/yyyy"
                                 if let date1 = dateFormatter.date(from: $0.Date), let date2 = dateFormatter.date(from: $1.Date) {
@@ -67,12 +77,14 @@ struct ScoresView: View {
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(height: 40)
-                                            } else {
+                                            }
+                                            else {
                                                 Image(item.AwayTeam)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
                                                     .frame(height: 60)
                                             }
+
                                         }
                                         .padding(.trailing)
                                         HStack {
@@ -119,10 +131,9 @@ struct ScoresView: View {
                 }
                 .onAppear {
                     model.getData2()
-                    model.checkAdminStatus() // Ensure admin status is checked on appear
                 }
 
-                GirlsScoresView()
+                GirlsAdminJVScoresView()
                     .tabItem {
                         Label("Girls", systemImage: "person.2.fill")
                     }
@@ -132,9 +143,9 @@ struct ScoresView: View {
 }
 
 #if DEBUG
-struct ScoresView_Previews: PreviewProvider {
+struct AdminJVScoresView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoresView()
+        AdminJVScoresView()
     }
 }
 #endif
