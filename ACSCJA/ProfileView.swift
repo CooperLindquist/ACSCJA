@@ -7,6 +7,7 @@ struct ProfileView: View {
     
     @State private var showingActivitySelection = false
     @State private var showingNamePrompt = false
+    @State private var showingChangePassword = false // Add this line
     @State private var userName: String = ""
     @AppStorage("userName") private var storedUserName: String = ""
     
@@ -21,18 +22,18 @@ struct ProfileView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    Button {
-                        showingActivitySelection = true
-                    } label: {
-                        Image(systemName: "plus")
-                            .foregroundColor(.white)
-                    }
-                    .sheet(isPresented: $showingActivitySelection) {
-                        ActivitySelectionView(activities: viewModel.availableSports) { selectedActivity in
-                            viewModel.addFollowedActivity(selectedActivity)
-                            showingActivitySelection = false
-                        }
-                    }
+//                    Button {
+//                        showingActivitySelection = true
+//                    } label: {
+//                        Image(systemName: "plus")
+//                            .foregroundColor(.white)
+//                    }
+//                    .sheet(isPresented: $showingActivitySelection) {
+//                        ActivitySelectionView(activities: viewModel.availableSports) { selectedActivity in
+//                            viewModel.addFollowedActivity(selectedActivity)
+//                            showingActivitySelection = false
+//                        }
+//                    }
                     
                     Text("Your Profile")
                         .font(.system(size: 40))
@@ -40,50 +41,50 @@ struct ProfileView: View {
                         .foregroundColor(.white)
                         .padding(.top, 50)
                     
-                    Text("Followed Activities")
-                        .foregroundColor(.white)
-                        .padding(.top, 20)
+//                    Text("Followed Activities")
+//                        .foregroundColor(.white)
+//                        .padding(.top, 20)
                     
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            if viewModel.FollowedActivities.isEmpty {
-                                Text("You don't follow any activities!")
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(
-                                        Rectangle()
-                                            .fill(Color.black)
-                                            .opacity(0.4)
-                                            .cornerRadius(10)
-                                    )
-                            } else {
-                                ForEach(viewModel.FollowedActivities, id: \.self) { item in
-                                    HStack {
-                                        Text(item)
-                                            .foregroundColor(.white)
-                                            .padding(10.0)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .background(
-                                                Rectangle()
-                                                    .fill(Color.white)
-                                                    .opacity(0.4)
-                                                    .cornerRadius(10)
-                                                    .padding(.vertical, 2)
-                                            )
-                                        Button(action: {
-                                            viewModel.removeFollowedActivity(item)
-                                        }) {
-                                            Image(systemName: "trash")
-                                                .foregroundColor(.red)
-                                        }
-                                        .padding(.trailing, 10)
-                                    }
-                                }
-                            }
-                        }
-                        .padding()
-                    }
+//                    ScrollView {
+//                        VStack(alignment: .leading) {
+//                            if viewModel.FollowedActivities.isEmpty {
+//                                Text("You don't follow any activities!")
+//                                    .foregroundColor(.white)
+//                                    .padding()
+//                                    .frame(maxWidth: .infinity)
+//                                    .background(
+//                                        Rectangle()
+//                                            .fill(Color.black)
+//                                            .opacity(0.4)
+//                                            .cornerRadius(10)
+//                                    )
+//                            } else {
+//                                ForEach(viewModel.FollowedActivities, id: \.self) { item in
+//                                    HStack {
+//                                        Text(item)
+//                                            .foregroundColor(.white)
+//                                            .padding(10.0)
+//                                            .frame(maxWidth: .infinity, alignment: .leading)
+//                                            .background(
+//                                                Rectangle()
+//                                                    .fill(Color.white)
+//                                                    .opacity(0.4)
+//                                                    .cornerRadius(10)
+//                                                    .padding(.vertical, 2)
+//                                            )
+//                                        Button(action: {
+//                                            viewModel.removeFollowedActivity(item)
+//                                        }) {
+//                                            Image(systemName: "trash")
+//                                                .foregroundColor(.red)
+//                                        }
+//                                        .padding(.trailing, 10)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        .padding()
+//                    }
                     
                     Text("Settings")
                         .foregroundColor(.white)
@@ -107,6 +108,26 @@ struct ProfileView: View {
                     .padding(.bottom, 20)
                     
                     Button(action: {
+                        showingChangePassword = true // Add this line
+                    }) {
+                        Text("Change Password")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(10.0)
+                            .background(
+                                Rectangle()
+                                    .fill(Color.white)
+                                    .opacity(0.4)
+                                    .cornerRadius(10)
+                            )
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+                    .sheet(isPresented: $showingChangePassword) { // Add this block
+                        ChangePasswordView(isPresented: $showingChangePassword)
+                    }
+                    
+                    Button(action: {
                         signOut()
                     }) {
                         Text("Sign Out")
@@ -128,6 +149,7 @@ struct ProfileView: View {
                     Rectangle()
                         .fill(Color.black.opacity(0.5))
                         .edgesIgnoringSafeArea(.all)
+                        .frame(height: 800)
                 )
             }
             .onAppear {

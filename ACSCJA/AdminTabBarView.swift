@@ -13,7 +13,7 @@ struct AdminTabBarView: View {
                     .navigationBarHidden(true)
             }
             .onAppear {
-                screen = AnyView(HomePageView())
+               
             }
             .navigationBarBackButtonHidden(true)  // Just for extra precaution
             .navigationBarHidden(true)
@@ -23,6 +23,8 @@ struct AdminTabBarView: View {
                 tabButton(tab: "house", imageName: "house", filledImageName: "house.fill", width: 35.0)
                 Spacer()
                 tabButton(tab: "court", imageName: "sportscourt", filledImageName: "sportscourt.fill", width: 40.0)
+                Spacer()
+                tabButton(tab: "group", imageName: "person.3", filledImageName: "person.3.fill", width: 50.0)
                 Spacer()
                 tabButton(tab: "person", imageName: "person", filledImageName: "person.fill", width: 28.0)
                 Spacer()
@@ -54,8 +56,8 @@ struct AdminTabBarView: View {
             screen = AnyView(HomePageView())
         case "court":
             screen = AnyView(LevelPickerView())
-        case "magnify":
-            screen = AnyView(ActivitesView())
+        case "group":
+            screen = AnyView(GroupListView())
         case "person":
             screen = AnyView(ProfileView())
         default:

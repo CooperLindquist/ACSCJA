@@ -177,17 +177,54 @@ struct StudentLogin: View {
                 if let isAdmin = document.get("Admin") as? Bool {
                     self.isAdmin = isAdmin
                     self.userIsLoggedIn = true
+                    updateEmailField(userID: userID)
                 }
             } else {
-                adminRef.setData(["Admin": false]) { error in
-                    if let error = error {
-                        print("Error adding document: \(error)")
+                checkDuplicateEmail { isDuplicate in
+                    if !isDuplicate {
+                        adminRef.setData(["Admin": false, "email": self.email]) { error in
+                            if let error = error {
+                                print("Error adding document: \(error)")
+                            } else {
+                                print("Document added with ID: \(userID)")
+                            }
+                        }
+                        self.isAdmin = false
+                        self.userIsLoggedIn = true
                     } else {
-                        print("Document added with ID: \(userID)")
+                        errorMessage = "Email already exists"
+                        showErrorAlert = true
                     }
                 }
-                self.isAdmin = false
-                self.userIsLoggedIn = true
+            }
+        }
+    }
+
+    func updateEmailField(userID: String) {
+        let db = Firestore.firestore()
+        let adminRef = db.collection("Admin").document(userID)
+        
+        adminRef.updateData(["email": self.email]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
+
+    func checkDuplicateEmail(completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("Admin").whereField("email", isEqualTo: self.email).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error checking for duplicate email: \(error)")
+                completion(false)
+            } else {
+                if let documents = querySnapshot?.documents, !documents.isEmpty {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
             }
         }
     }

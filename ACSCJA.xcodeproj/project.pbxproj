@@ -117,6 +117,9 @@
 		DB5AA33B2C20FBB70082AAA3 /* JVScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA33A2C20FBB70082AAA3 /* JVScoresView.swift */; };
 		DB5AA33D2C20FC700082AAA3 /* GirlsJVScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA33C2C20FC700082AAA3 /* GirlsJVScoresView.swift */; };
 		DB5AA3402C215AD50082AAA3 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = DB5AA33F2C215AD50082AAA3 /* SwiftSoup */; };
+		DBA1DAEF2C22AE5800E161C7 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1DAEE2C22AE5800E161C7 /* ChangePasswordView.swift */; };
+		DBA1DAF12C23522200E161C7 /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1DAF02C23522200E161C7 /* GroupListView.swift */; };
+		DBA1DAF32C23558D00E161C7 /* SportHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA1DAF22C23558D00E161C7 /* SportHomeView.swift */; };
 		DBFF26CF2C1CA3E9009D839E /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BB2C1CA3E8009D839E /* OFL.txt */; };
 		DBFF26D02C1CA3E9009D839E /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */; };
 		DBFF26D12C1CA3E9009D839E /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */; };
@@ -182,6 +185,9 @@
 		DB5AA3382C20FB1A0082AAA3 /* GuestLevelPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestLevelPickerView.swift; sourceTree = "<group>"; };
 		DB5AA33A2C20FBB70082AAA3 /* JVScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JVScoresView.swift; sourceTree = "<group>"; };
 		DB5AA33C2C20FC700082AAA3 /* GirlsJVScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsJVScoresView.swift; sourceTree = "<group>"; };
+		DBA1DAEE2C22AE5800E161C7 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		DBA1DAF02C23522200E161C7 /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
+		DBA1DAF22C23558D00E161C7 /* SportHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportHomeView.swift; sourceTree = "<group>"; };
 		DBFF26BB2C1CA3E8009D839E /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		DBFF26BC2C1CA3E8009D839E /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
 		DBFF26BD2C1CA3E8009D839E /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -345,6 +351,9 @@
 				69348DEA2BC83114002DC202 /* TabBarView.swift */,
 				69348DEE2BC8662C002DC202 /* ActivitesView.swift */,
 				69348DF02BC86CDA002DC202 /* ProfileView.swift */,
+				DBA1DAF02C23522200E161C7 /* GroupListView.swift */,
+				DBA1DAF22C23558D00E161C7 /* SportHomeView.swift */,
+				DBA1DAEE2C22AE5800E161C7 /* ChangePasswordView.swift */,
 				DB5AA31A2C2005310082AAA3 /* ImagePicker.swift */,
 				DB5AA3182C20030C0082AAA3 /* NamePromptView.swift */,
 				69348DF22BC872AB002DC202 /* FollowedActivities.swift */,
@@ -583,6 +592,7 @@
 				DB5AA3172C1E34540082AAA3 /* CalendarWebView.swift in Sources */,
 				69348DF92BD6A3EC002DC202 /* Score.swift in Sources */,
 				6923A8262BB1B96C00BA99F1 /* CalendarEvent.swift in Sources */,
+				DBA1DAEF2C22AE5800E161C7 /* ChangePasswordView.swift in Sources */,
 				69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */,
 				69DD94682BEE681800529A29 /* SignUpView.swift in Sources */,
 				69EA56762BFED6A80008EDFB /* ActivityViewModel.swift in Sources */,
@@ -597,8 +607,10 @@
 				F3CD1A892BFF85AB00EA6284 /* AdminCalendarView.swift in Sources */,
 				F3958EF22BBAFE170087E872 /* CalendarView.swift in Sources */,
 				DB5AA3392C20FB1A0082AAA3 /* GuestLevelPickerView.swift in Sources */,
+				DBA1DAF32C23558D00E161C7 /* SportHomeView.swift in Sources */,
 				69DD94552BE3F6EC00529A29 /* StudentLogin.swift in Sources */,
 				69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */,
+				DBA1DAF12C23522200E161C7 /* GroupListView.swift in Sources */,
 				DB5AA33D2C20FC700082AAA3 /* GirlsJVScoresView.swift in Sources */,
 				DB5AA3312C20EA9A0082AAA3 /* AdminJVScoresView.swift in Sources */,
 				DB5AA32F2C20E93A0082AAA3 /* LevelPickerView.swift in Sources */,
