@@ -8,7 +8,10 @@ struct GroupListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "#FFFFFF")
+                // Set the background image
+                Image("HomePageBackground")
+                    .resizable()
+                    .scaledToFill()
                     .ignoresSafeArea()
 
                 VStack {
@@ -18,17 +21,22 @@ struct GroupListView: View {
                         .foregroundColor(Color(hex: "#AE0000"))
                         .padding(.top, 40)
 
-                    List(viewModel.availableSports, id: \.self) { sport in
-                        NavigationLink(destination: SportHomeView(sport: sport)) {
-                            Text(sport)
-                                .foregroundColor(Color(hex: "#000000"))
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                    List {
+                        ForEach(viewModel.availableSports, id: \.self) { sport in
+                            NavigationLink(destination: MainTabView(sport: sport)) {
+                                Text(sport)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(hex: "#000000"))
+                                    .padding()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .listRowBackground(Color.clear) // Make the list row background clear
                         }
-                        .listRowBackground(Color(hex: "#FFFFFF"))
                     }
                     .listStyle(PlainListStyle())
+                    .background(Color.clear) // Make the entire list background clear
                 }
+                .offset(y: 50)
             }
             .navigationTitle("Groups")
         }
@@ -43,5 +51,3 @@ struct GroupListView_Previews: PreviewProvider {
         GroupListView()
     }
 }
-
-
