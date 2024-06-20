@@ -1,8 +1,11 @@
 import SwiftUI
+import Combine
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct SportHomeView: View {
+    @ObservedObject var model = ViewModel()
     @StateObject private var viewModel = SportHomeViewModel()
     @State private var showingAddEventSheet = false
     var sport: String
@@ -10,7 +13,7 @@ struct SportHomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("\(sport) Events")
+                Text("\(sport) Updates")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding()
@@ -23,7 +26,7 @@ struct SportHomeView: View {
                                 .foregroundColor(.gray) // Placeholder for image or icon
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text(event.subject)
+                                    Text(event.displayName)
                                         .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundColor(.black)
@@ -48,12 +51,17 @@ struct SportHomeView: View {
             .background(Image("HomePageBackground").ignoresSafeArea(.all))
             .onAppear {
                 viewModel.getEvents(for: sport)
+                viewModel.checkAdminStatus()
             }
-            .navigationBarItems(trailing: Button(action: {
-                showingAddEventSheet = true
-            }) {
-                Image(systemName: "plus")
-                    .foregroundColor(.black)
+            .navigationBarItems(trailing: Group {
+                if viewModel.isAdmin {
+                    Button(action: {
+                        showingAddEventSheet = true
+                    }) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.black)
+                    }
+                }
             })
             .sheet(isPresented: $showingAddEventSheet) {
                 AddEventView(viewModel: viewModel, sport: sport)
@@ -64,9 +72,12 @@ struct SportHomeView: View {
 
 
 
+
+
+
+
 struct AddEventView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var subject = ""
     @State private var event = ""
     @State private var sport: String
     @ObservedObject var viewModel: SportHomeViewModel
@@ -79,25 +90,32 @@ struct AddEventView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Event Details")) {
-                    TextField("Subject", text: $subject)
-                    TextField("Event", text: $event)
+                Section(header: Text("Type Message Here")) {
+                    TextField("Message", text: $event)
                 }
             }
-            .navigationBarTitle("Add Event", displayMode: .inline)
+            .navigationBarTitle("Send Message", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
                 presentationMode.wrappedValue.dismiss()
             }, trailing: Button("Save") {
-                let newEvent = Event(subject: subject, event: event, sport: sport, date: Date())
-                viewModel.addEvent(newEvent)
-                presentationMode.wrappedValue.dismiss()
+                viewModel.addEvent(event: event, sport: sport) { success in
+                    if success {
+                        presentationMode.wrappedValue.dismiss()
+                    } else {
+                        // Handle the error, e.g., show an alert
+                    }
+                }
             })
         }
     }
 }
 
+
+
+
 class SportHomeViewModel: ObservableObject {
     @Published var events: [Event] = []
+    @Published var isAdmin: Bool = false
     private var db = Firestore.firestore()
 
     func getEvents(for sport: String) {
@@ -105,34 +123,87 @@ class SportHomeViewModel: ObservableObject {
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
-                self.events = snapshot?.documents.compactMap { document -> Event? in
+                self.events.removeAll()
+                let group = DispatchGroup()
+                
+                for document in snapshot!.documents {
+                    group.enter()
+                    
                     let data = document.data()
                     let subject = data["Subject"] as? String ?? "No Subject"
                     let event = data["Event"] as? String ?? "No Event"
                     let date = (data["Date"] as? Timestamp)?.dateValue() ?? Date()
                     let id = document.documentID
-                    return Event(id: id, subject: subject, event: event, sport: sport, date: date)
-                } ?? []
+                    
+                    self.db.collection("DisplayName").document(subject).getDocument { (displayNameDocument, error) in
+                        if let displayNameDocument = displayNameDocument, displayNameDocument.exists {
+                            let displayName = displayNameDocument.data()?["name"] as? String ?? "No Name"
+                            let eventItem = Event(id: id, subject: subject, event: event, sport: sport, date: date, displayName: displayName)
+                            self.events.append(eventItem)
+                        } else {
+                            print("DisplayName document does not exist or error: \(String(describing: error))")
+                        }
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    self.events.sort(by: { $0.date < $1.date }) // Sort events by date
+                }
             }
         }
     }
 
-    func addEvent(_ event: Event) {
-        let newEventRef = db.collection("Events").document()
-        newEventRef.setData([
-            "Subject": event.subject,
-            "Event": event.event,
-            "Sport": event.sport,
-            "Date": Timestamp(date: event.date)
-        ]) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
+    func addEvent(event: String, sport: String, completion: @escaping (Bool) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            completion(false)
+            return
+        }
+        
+        db.collection("DisplayName").document(userID).getDocument { (document, error) in
+            if let document = document, document.exists, let displayName = document.data()?["name"] as? String {
+                let newEvent = Event(subject: userID, event: event, sport: sport, date: Date(), displayName: displayName)
+                let newEventRef = self.db.collection("Events").document()
+                newEventRef.setData([
+                    "Subject": newEvent.subject,
+                    "Event": newEvent.event,
+                    "Sport": newEvent.sport,
+                    "Date": Timestamp(date: newEvent.date)
+                ]) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                        completion(false)
+                    } else {
+                        self.getEvents(for: sport)
+                        completion(true)
+                    }
+                }
             } else {
-                self.getEvents(for: event.sport)
+                print("Error fetching display name: \(String(describing: error))")
+                completion(false)
+            }
+        }
+    }
+
+    func checkAdminStatus() {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            self.isAdmin = false
+            return
+        }
+        
+        db.collection("Admin").document(userID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.isAdmin = document.data()?["Admin"] as? Bool ?? false
+            } else {
+                print("Document does not exist or error: \(String(describing: error))")
+                self.isAdmin = false
             }
         }
     }
 }
+
+
+
 
 struct Event: Identifiable {
     var id: String = UUID().uuidString
@@ -140,6 +211,7 @@ struct Event: Identifiable {
     var event: String
     var sport: String
     var date: Date
+    var displayName: String
 
     var formattedDate: String {
         let formatter = DateFormatter()
@@ -148,3 +220,4 @@ struct Event: Identifiable {
         return formatter.string(from: date)
     }
 }
+

@@ -3,7 +3,8 @@ import Firebase
 import FirebaseFirestore
 
 struct CalendarEventView: View {
-    @StateObject private var viewModel = CalendarEventViewModel()
+    @ObservedObject var model = ViewModel()
+    @ObservedObject private var viewModel = CalendarEventViewModel()
     @State private var showingAddEventSheet = false
     var sport: String
     @State private var currentDate = Date()
@@ -11,41 +12,45 @@ struct CalendarEventView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Text("\(sport) Calendar Events")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-
-                CalendarGridView(currentDate: $currentDate, selectedDate: $selectedDate, events: viewModel.calendarEvents)
-
-                if let selectedDate = selectedDate {
-                    Text("Events on \(selectedDate, formatter: DateFormatter.shortDateFormatter)")
-                        .font(.title2)
+            ScrollView {
+                VStack {
+                    Text("\(sport) Calendar")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                         .padding()
 
-                    ScrollView {
-                        ForEach(eventsForSelectedDate(), id: \.id) { event in
-                            HStack {
-                                Image("calendarimage")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 30.0)
-                                VStack(alignment: .leading) {
-                                    Text(event.title)
-                                        .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.black)
-                                    Text(event.description)
-                                        .foregroundColor(.black)
-                                }
-                                Spacer()
-                            }
+                    CalendarGridView(currentDate: $currentDate, selectedDate: $selectedDate, events: viewModel.calendarEvents)
+
+                    if let selectedDate = selectedDate {
+                        Text("Events on \(selectedDate, formatter: DateFormatter.shortDateFormatter)")
+                            .font(.title2)
                             .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                            .padding(.top, 10)
+
+                        ScrollView {
+                            ForEach(eventsForSelectedDate(), id: \.id) { event in
+                                HStack {
+                                    Image("calendarimage")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 30.0)
+                                    VStack(alignment: .leading) {
+                                        Text(event.title)
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.black)
+                                        Text(event.description)
+                                            .foregroundColor(.black)
+                                        Text(event.formattedDate)
+                                            .foregroundColor(.gray) // Display formatted date and time
+                                    }
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                                .padding(.top, 10)
+                            }
                         }
                     }
                 }
@@ -54,12 +59,17 @@ struct CalendarEventView: View {
             .background(Image("HomePageBackground").ignoresSafeArea(.all))
             .onAppear {
                 viewModel.getCalendarEvents(for: sport)
+                viewModel.checkAdminStatus()
             }
-            .navigationBarItems(trailing: Button(action: {
-                showingAddEventSheet = true
-            }) {
-                Image(systemName: "plus")
-                    .foregroundColor(.black)
+            .navigationBarItems(trailing: Group {
+                if viewModel.isAdmin {
+                    Button(action: {
+                        showingAddEventSheet = true
+                    }) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.black)
+                    }
+                }
             })
             .sheet(isPresented: $showingAddEventSheet) {
                 AddCalendarEventView(viewModel: viewModel, sport: sport)
@@ -72,6 +82,9 @@ struct CalendarEventView: View {
         return viewModel.calendarEvents.filter { Calendar.current.isDate($0.date, inSameDayAs: selectedDate) }
     }
 }
+
+
+
 
 
 struct CalendarGridView: View {
@@ -200,7 +213,7 @@ struct AddCalendarEventView: View {
                 Section(header: Text("Calendar Event Details")) {
                     TextField("Title", text: $title)
                     TextField("Description", text: $description)
-                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                    DatePicker("Date and Time", selection: $date)
                 }
             }
             .navigationBarTitle("Add Calendar Event", displayMode: .inline)
@@ -215,8 +228,10 @@ struct AddCalendarEventView: View {
     }
 }
 
+
 class CalendarEventViewModel: ObservableObject {
     @Published var calendarEvents: [CalendarEvent] = []
+    @Published var isAdmin: Bool = false
     private var db = Firestore.firestore()
 
     func getCalendarEvents(for sport: String) {
@@ -251,14 +266,34 @@ class CalendarEventViewModel: ObservableObject {
             }
         }
     }
+    
+    func checkAdminStatus() {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            self.isAdmin = false
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("Admin").document(userID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.isAdmin = document.data()?["Admin"] as? Bool ?? false
+            } else {
+                print("Document does not exist or error: \(String(describing: error))")
+                self.isAdmin = false
+            }
+        }
+    }
 }
+
+
+
 
 struct CalendarEvent: Identifiable {
     var id: String = UUID().uuidString
     var title: String
     var description: String
     var sport: String
-    var date: Date
+    var date: Date // This will now include both date and time
 
     var formattedDate: String {
         let formatter = DateFormatter()
@@ -267,6 +302,7 @@ struct CalendarEvent: Identifiable {
         return formatter.string(from: date)
     }
 }
+
 
 extension DateFormatter {
     static var shortDateFormatter: DateFormatter {
