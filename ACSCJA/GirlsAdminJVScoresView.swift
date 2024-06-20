@@ -111,7 +111,7 @@ struct GirlsAdminJVScoresView: View {
                             .font(.system(size: 20))
                             .foregroundColor(Color.white) // Set explicit color
 
-                        NavigationLink(destination: GirlsArchivedScoreView()) {
+                        NavigationLink(destination: ArchivedScoreView()) {
                             Text("Click Here")
                                 .font(.system(size: 20))
                                 .foregroundColor(.blue) // Set explicit color

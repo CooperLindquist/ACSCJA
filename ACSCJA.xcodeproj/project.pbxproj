@@ -101,13 +101,13 @@
 		69EA567A2BFEDAC80008EDFB /* AdminScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */; };
 		69EA567C2BFEDB500008EDFB /* AdminTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */; };
 		69EA567E2BFF86550008EDFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA567D2BFF86550008EDFB /* AppDelegate.swift */; };
+		DB470CAE2C24E17900BF407E /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB470CAD2C24E17900BF407E /* AdminView.swift */; };
 		DB5AA3112C1CEC4C0082AAA3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3102C1CEC4C0082AAA3 /* WebView.swift */; };
 		DB5AA3132C1CFDC20082AAA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AA3122C1CFDC10082AAA3 /* GoogleService-Info.plist */; };
 		DB5AA3172C1E34540082AAA3 /* CalendarWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3162C1E34540082AAA3 /* CalendarWebView.swift */; };
 		DB5AA3192C20030C0082AAA3 /* NamePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3182C20030C0082AAA3 /* NamePromptView.swift */; };
 		DB5AA31B2C2005310082AAA3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA31A2C2005310082AAA3 /* ImagePicker.swift */; };
 		DB5AA3292C20B02F0082AAA3 /* GirlsAdminScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3282C20B02F0082AAA3 /* GirlsAdminScoresView.swift */; };
-		DB5AA32B2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA32A2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift */; };
 		DB5AA32F2C20E93A0082AAA3 /* LevelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA32E2C20E93A0082AAA3 /* LevelPickerView.swift */; };
 		DB5AA3312C20EA9A0082AAA3 /* AdminJVScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3302C20EA9A0082AAA3 /* AdminJVScoresView.swift */; };
 		DB5AA3332C20EBFB0082AAA3 /* GirlsAdminJVScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AA3322C20EBFB0082AAA3 /* GirlsAdminJVScoresView.swift */; };
@@ -172,13 +172,13 @@
 		69EA56792BFEDAC80008EDFB /* AdminScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminScoresView.swift; sourceTree = "<group>"; };
 		69EA567B2BFEDB500008EDFB /* AdminTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarView.swift; sourceTree = "<group>"; };
 		69EA567D2BFF86550008EDFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DB470CAD2C24E17900BF407E /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		DB5AA3102C1CEC4C0082AAA3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		DB5AA3122C1CFDC10082AAA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DB5AA3162C1E34540082AAA3 /* CalendarWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWebView.swift; sourceTree = "<group>"; };
 		DB5AA3182C20030C0082AAA3 /* NamePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamePromptView.swift; sourceTree = "<group>"; };
 		DB5AA31A2C2005310082AAA3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DB5AA3282C20B02F0082AAA3 /* GirlsAdminScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsAdminScoresView.swift; sourceTree = "<group>"; };
-		DB5AA32A2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsArchivedScoreView.swift; sourceTree = "<group>"; };
 		DB5AA32E2C20E93A0082AAA3 /* LevelPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPickerView.swift; sourceTree = "<group>"; };
 		DB5AA3302C20EA9A0082AAA3 /* AdminJVScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminJVScoresView.swift; sourceTree = "<group>"; };
 		DB5AA3322C20EBFB0082AAA3 /* GirlsAdminJVScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GirlsAdminJVScoresView.swift; sourceTree = "<group>"; };
@@ -337,11 +337,11 @@
 				DB5AA3302C20EA9A0082AAA3 /* AdminJVScoresView.swift */,
 				DB5AA3322C20EBFB0082AAA3 /* GirlsAdminJVScoresView.swift */,
 				DB5AA33C2C20FC700082AAA3 /* GirlsJVScoresView.swift */,
-				DB5AA32A2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift */,
 				69DD945B2BE9163B00529A29 /* AddScoreView.swift */,
 				69DD94512BE3F6EC00529A29 /* StudentLogin.swift */,
 				69DD94672BEE681800529A29 /* SignUpView.swift */,
 				69DD94592BE3F7D500529A29 /* ViewModel.swift */,
+				DB470CAD2C24E17900BF407E /* AdminView.swift */,
 				69DD94632BEA868600529A29 /* ArchivedScoreViewModel.swift */,
 				69348DF82BD6A3EC002DC202 /* Score.swift */,
 				DB5AA33A2C20FBB70082AAA3 /* JVScoresView.swift */,
@@ -593,6 +593,7 @@
 			files = (
 				69DD945C2BE9163B00529A29 /* AddScoreView.swift in Sources */,
 				69DD94602BEA85DC00529A29 /* ArchivedScoreView.swift in Sources */,
+				DB470CAE2C24E17900BF407E /* AdminView.swift in Sources */,
 				F310FFBC2BF592CB00A32DA9 /* AddCalendarView.swift in Sources */,
 				DB5AA3332C20EBFB0082AAA3 /* GirlsAdminJVScoresView.swift in Sources */,
 				DB5AA3172C1E34540082AAA3 /* CalendarWebView.swift in Sources */,
@@ -623,7 +624,6 @@
 				DB5AA3312C20EA9A0082AAA3 /* AdminJVScoresView.swift in Sources */,
 				DB5AA32F2C20E93A0082AAA3 /* LevelPickerView.swift in Sources */,
 				69EA56742BFED67D0008EDFB /* ActivitySelectionView.swift in Sources */,
-				DB5AA32B2C20B9E50082AAA3 /* GirlsArchivedScoreView.swift in Sources */,
 				69EA567A2BFEDAC80008EDFB /* AdminScoresView.swift in Sources */,
 				DB5AA3292C20B02F0082AAA3 /* GirlsAdminScoresView.swift in Sources */,
 				DB5AA3372C20F99F0082AAA3 /* GirlsScoresView.swift in Sources */,

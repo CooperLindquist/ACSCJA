@@ -4,7 +4,7 @@ import FirebaseAuth
 
 struct ProfileView: View {
     @StateObject var viewModel = ActivityViewModel()
-    
+
     @State private var showingActivitySelection = false
     @State private var showingNamePrompt = false
     @State private var showingChangePassword = false
@@ -18,18 +18,18 @@ struct ProfileView: View {
                 Image("HomePageBackground")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
-                
+
                 VStack {
                     Text("Your Profile")
                         .font(.system(size: 40))
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
                         .padding(.top, 50)
-                    
+
                     Text("Settings")
                         .foregroundColor(.white)
                         .padding(.top, 20)
-                    
+
                     Button(action: {
                         showingNamePrompt = true
                     }) {
@@ -46,7 +46,7 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 20)
-                    
+
                     Button(action: {
                         showingChangePassword = true
                     }) {
@@ -66,7 +66,7 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingChangePassword) {
                         ChangePasswordView(isPresented: $showingChangePassword)
                     }
-                    
+
                     Button(action: {
                         signOut()
                     }) {
@@ -96,7 +96,6 @@ struct ProfileView: View {
                 if let user = Auth.auth().currentUser {
                     userID = user.uid
                     viewModel.userID = userID
-                    viewModel.getFollowedActivities()
                     viewModel.getAvailableSports()
                 }
             }
