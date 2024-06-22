@@ -4,6 +4,7 @@ import FirebaseFirestore
 
 class ActivityViewModel: ObservableObject {
     @Published var availableSports: [String] = []
+    @Published var followedSports: [String] = []
     private var db = Firestore.firestore()
     var userID: String = "" // Remove the default hardcoded value
 
@@ -32,4 +33,39 @@ class ActivityViewModel: ObservableObject {
             }
         }
     }
-}
+    func getFollowedSports() {
+            guard !userID.isEmpty else { return }
+            db.collection("FollowedActivity").document(userID).getDocument { document, error in
+                if let document = document, document.exists, let data = document.data() {
+                    self.followedSports = data["sports"] as? [String] ?? []
+                }
+            }
+        }
+
+        func followSport(_ sport: String) {
+            guard !userID.isEmpty else { return }
+            db.collection("FollowedActivity").document(userID).setData([
+                "sports": FieldValue.arrayUnion([sport])
+            ], merge: true) { error in
+                if let error = error {
+                    print("Error following sport: \(error)")
+                } else {
+                    self.getFollowedSports()
+                }
+            }
+        }
+
+        func unfollowSport(_ sport: String) {
+            guard !userID.isEmpty else { return }
+            db.collection("FollowedActivity").document(userID).updateData([
+                "sports": FieldValue.arrayRemove([sport])
+            ]) { error in
+                if let error = error {
+                    print("Error unfollowing sport: \(error)")
+                } else {
+                    self.getFollowedSports()
+                }
+            }
+        }
+    }
+

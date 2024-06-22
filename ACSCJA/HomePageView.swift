@@ -4,6 +4,7 @@ import FirebaseFirestore
 
 struct HomePageView: View {
     @ObservedObject var model = ViewModel()
+    @ObservedObject private var eventViewModel = CalendarEventViewModel()
     @State private var house = "house.fill"
     @State private var calendar = "calendar"
     @State private var court = "sportscourt"
@@ -118,9 +119,31 @@ struct HomePageView: View {
                                 .foregroundColor(Color.white)
                                 .padding(.horizontal)
 
-                            CustomWebView(url: URL(string: "https://www.edenpr.org/experience/calendar")!)
-                                .frame(height: 600) // Increased height for web view
+                            // Display the 3 most upcoming events
+                            ForEach(eventViewModel.calendarEvents.prefix(3)) { event in
+                                HStack {
+                                    Image("calendarimage")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 50.0)
+                                    VStack(alignment: .leading) {
+                                        Text(event.title)
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.black)
+                                        Text(event.description)
+                                            .foregroundColor(.black)
+                                        Text(event.formattedDate)
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(10)
                                 .padding(.horizontal)
+                                .padding(.top, 10)
+                            }
                         }
                         .padding(.top, 20)
                     }
@@ -136,6 +159,7 @@ struct HomePageView: View {
                     fetchUserName()
                 }
                 model.getData2()
+                eventViewModel.getCalendarEvents(for: "All") // Assuming a method to fetch all events
                 print("HomePageView appeared") // Debugging line
             }
             .sheet(isPresented: $showingNamePrompt) {

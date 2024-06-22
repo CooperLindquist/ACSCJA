@@ -41,7 +41,7 @@ struct CalendarEventView: View {
                                         Text(event.description)
                                             .foregroundColor(.black)
                                         Text(event.formattedDate)
-                                            .foregroundColor(.gray) // Display formatted date and time
+                                            .foregroundColor(.gray)
                                     }
                                     Spacer()
                                 }
@@ -62,30 +62,26 @@ struct CalendarEventView: View {
                 viewModel.checkAdminStatus()
             }
             .navigationBarItems(trailing: Group {
-                if viewModel.isAdmin {
-                    Button(action: {
-                        showingAddEventSheet = true
-                    }) {
-                        Image(systemName: "plus")
-                            .foregroundColor(.black)
+                            if viewModel.isAdmin {
+                                Button(action: {
+                                    showingAddEventSheet = true
+                                }) {
+                                    Image(systemName: "plus")
+                                        .foregroundColor(.black)
+                                }
+                            }
+                        })
+                        .sheet(isPresented: $showingAddEventSheet) {
+                            AddCalendarEventView(viewModel: viewModel, sport: sport)
+                        }
                     }
                 }
-            })
-            .sheet(isPresented: $showingAddEventSheet) {
-                AddCalendarEventView(viewModel: viewModel, sport: sport)
-            }
-        }
-    }
 
     private func eventsForSelectedDate() -> [CalendarEvent] {
         guard let selectedDate = selectedDate else { return [] }
         return viewModel.calendarEvents.filter { Calendar.current.isDate($0.date, inSameDayAs: selectedDate) }
     }
 }
-
-
-
-
 
 struct CalendarGridView: View {
     @Binding var currentDate: Date
@@ -96,15 +92,15 @@ struct CalendarGridView: View {
         Calendar.current
     }
 
-    private var daysInMonth: Int {
-        let range = calendar.range(of: .day, in: .month, for: currentDate)!
-        return range.count
+    private var monthInterval: DateInterval {
+        calendar.dateInterval(of: .month, for: currentDate)!
     }
 
-    private var firstWeekday: Int {
-        let components = calendar.dateComponents([.year, .month], from: currentDate)
-        let firstDayOfMonth = calendar.date(from: components)!
-        return calendar.component(.weekday, from: firstDayOfMonth)
+    private var daysInMonth: [Date] {
+        calendar.generateDates(
+            inside: monthInterval,
+            matching: DateComponents(hour: 0, minute: 0, second: 0)
+        )
     }
 
     private var monthYearFormatter: DateFormatter {
@@ -117,11 +113,8 @@ struct CalendarGridView: View {
         calendar.shortWeekdaySymbols
     }
 
-    private func hasEvents(on day: Int) -> Bool {
-        var components = calendar.dateComponents([.year, .month], from: currentDate)
-        components.day = day
-        let date = calendar.date(from: components)!
-        return events.contains { Calendar.current.isDate($0.date, inSameDayAs: date) }
+    private func hasEvents(on day: Date) -> Bool {
+        return events.contains { Calendar.current.isDate($0.date, inSameDayAs: day) }
     }
 
     var body: some View {
@@ -154,20 +147,15 @@ struct CalendarGridView: View {
                         .frame(maxWidth: .infinity)
                 }
 
-                ForEach(1..<firstWeekday, id: \.self) { _ in
-                    Text("")
-                        .frame(maxWidth: .infinity)
-                }
-
-                ForEach(1...daysInMonth, id: \.self) { day in
+                ForEach(daysInMonth, id: \.self) { date in
                     VStack {
-                        Text("\(day)")
+                        Text("\(calendar.component(.day, from: date))")
                             .frame(maxWidth: .infinity)
                             .onTapGesture {
-                                selectDate(day: day)
+                                selectedDate = date
                             }
-                            .background(selectedDateBackground(day: day))
-                        if hasEvents(on: day) {
+                            .background(selectedDateBackground(date: date))
+                        if hasEvents(on: date) {
                             Circle()
                                 .fill(Color.red)
                                 .frame(width: 8, height: 8)
@@ -180,16 +168,7 @@ struct CalendarGridView: View {
         }
     }
 
-    private func selectDate(day: Int) {
-        var components = calendar.dateComponents([.year, .month], from: currentDate)
-        components.day = day
-        selectedDate = calendar.date(from: components)
-    }
-
-    private func selectedDateBackground(day: Int) -> some View {
-        var components = calendar.dateComponents([.year, .month], from: currentDate)
-        components.day = day
-        let date = calendar.date(from: components)!
+    private func selectedDateBackground(date: Date) -> some View {
         return calendar.isDate(date, inSameDayAs: selectedDate ?? Date()) ? Color.blue.opacity(0.2) : Color.clear
     }
 }
@@ -228,14 +207,13 @@ struct AddCalendarEventView: View {
     }
 }
 
-
 class CalendarEventViewModel: ObservableObject {
     @Published var calendarEvents: [CalendarEvent] = []
     @Published var isAdmin: Bool = false
     private var db = Firestore.firestore()
 
     func getCalendarEvents(for sport: String) {
-        db.collection("CalendarEvents").whereField("Sport", isEqualTo: sport).getDocuments { snapshot, error in
+        db.collection("CalendarEvents").order(by: "Date", descending: false).limit(to: 3).getDocuments { snapshot, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -244,10 +222,10 @@ class CalendarEventViewModel: ObservableObject {
                     let title = data["Title"] as? String ?? "No Title"
                     let description = data["Description"] as? String ?? "No Description"
                     let date = (data["Date"] as? Timestamp)?.dateValue() ?? Date()
+                    let sport = data["Sport"] as? String ?? "Unknown Sport"
                     let id = document.documentID
                     return CalendarEvent(id: id, title: title, description: description, sport: sport, date: date)
-                } ?? []
-            }
+                } ?? []            }
         }
     }
 
@@ -266,43 +244,63 @@ class CalendarEventViewModel: ObservableObject {
             }
         }
     }
-    
+
     func checkAdminStatus() {
         guard let userID = Auth.auth().currentUser?.uid else {
             self.isAdmin = false
             return
         }
-        
+
         let db = Firestore.firestore()
         db.collection("Admin").document(userID).getDocument { (document, error) in
             if let document = document, document.exists {
-                self.isAdmin = document.data()?["Admin"] as? Bool ?? false
+                self.isAdmin = document.data()?["isAdmin"] as? Bool ?? false
             } else {
-                print("Document does not exist or error: \(String(describing: error))")
                 self.isAdmin = false
             }
         }
     }
 }
 
-
-
-
 struct CalendarEvent: Identifiable {
     var id: String = UUID().uuidString
     var title: String
     var description: String
     var sport: String
-    var date: Date // This will now include both date and time
+    var date: Date
 
     var formattedDate: String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
 }
 
+extension Calendar {    func generateDates(
+        inside interval: DateInterval,
+        matching components: DateComponents
+    ) -> [Date] {
+        var dates: [Date] = []
+        dates.append(interval.start)
+
+        enumerateDates(
+            startingAfter: interval.start,
+            matching: components,
+            matchingPolicy: .nextTime
+        ) { date, _, stop in
+            if let date = date {
+                if date < interval.end {
+                    dates.append(date)
+                } else {
+                    stop = true
+                }
+            }
+        }
+
+        return dates
+    }
+}
 
 extension DateFormatter {
     static var shortDateFormatter: DateFormatter {

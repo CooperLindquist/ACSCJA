@@ -6,7 +6,7 @@ import FirebaseAuth
 
 class ViewModel: ObservableObject {
     @Published var array = [Score]()
-    @Published var followedActivities = [String]()
+    
     @Published var isAdmin: Bool = false // Add this property to track admin status
     private var cancellables = Set<AnyCancellable>()
     
@@ -17,7 +17,7 @@ class ViewModel: ObservableObject {
     
     func getData() {
         fetchScores()
-        fetchFollowedActivities()
+        
     }
     
     func getData2() {
@@ -78,25 +78,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    private func fetchFollowedActivities() {
-        let db = Firestore.firestore()
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("User is not logged in")
-            return
-        }
-        
-        print("Fetching followed activities for user ID: \(userID)") // Debugging line
-        db.collection("FollowedActivities").document(userID).getDocument { (document, error) in
-            if let error = error {
-                print("Error getting followed activities document: \(error.localizedDescription)")
-            } else if let document = document, document.exists {
-                self.followedActivities = document.data()?["activities"] as? [String] ?? []
-                print("Fetched followed activities: \(self.followedActivities)") // Debugging line
-            } else {
-                print("Followed activities document does not exist")
-            }
-        }
-    }
+    
     
      func checkAdminStatus() {
         guard let userID = Auth.auth().currentUser?.uid else {
@@ -115,7 +97,4 @@ class ViewModel: ObservableObject {
         }
     }
     
-    var filteredScores: [Score] {
-        array.filter { followedActivities.contains($0.Sport) }
-    }
 }

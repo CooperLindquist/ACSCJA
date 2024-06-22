@@ -77,7 +77,6 @@
 		69348DEB2BC83114002DC202 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DEA2BC83114002DC202 /* TabBarView.swift */; };
 		69348DEF2BC8662C002DC202 /* ActivitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DEE2BC8662C002DC202 /* ActivitesView.swift */; };
 		69348DF12BC86CDA002DC202 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DF02BC86CDA002DC202 /* ProfileView.swift */; };
-		69348DF32BC872AB002DC202 /* FollowedActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DF22BC872AB002DC202 /* FollowedActivities.swift */; };
 		69348DF92BD6A3EC002DC202 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348DF82BD6A3EC002DC202 /* Score.swift */; };
 		69348DFF2BD6D31E002DC202 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 69348DFE2BD6D31E002DC202 /* FirebaseAnalytics */; };
 		69348E012BD6D31E002DC202 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 69348E002BD6D31E002DC202 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -158,7 +157,6 @@
 		69348DEA2BC83114002DC202 /* TabBarView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; tabWidth = 5; };
 		69348DEE2BC8662C002DC202 /* ActivitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitesView.swift; sourceTree = "<group>"; };
 		69348DF02BC86CDA002DC202 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		69348DF22BC872AB002DC202 /* FollowedActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowedActivities.swift; sourceTree = "<group>"; };
 		69348DF82BD6A3EC002DC202 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		69DD94512BE3F6EC00529A29 /* StudentLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLogin.swift; sourceTree = "<group>"; };
 		69DD94592BE3F7D500529A29 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 				DBA1DAEE2C22AE5800E161C7 /* ChangePasswordView.swift */,
 				DB5AA31A2C2005310082AAA3 /* ImagePicker.swift */,
 				DB5AA3182C20030C0082AAA3 /* NamePromptView.swift */,
-				69348DF22BC872AB002DC202 /* FollowedActivities.swift */,
 				69EA56732BFED67D0008EDFB /* ActivitySelectionView.swift */,
 				69EA56752BFED6A80008EDFB /* ActivityViewModel.swift */,
 				6923A8252BB1B96C00BA99F1 /* CalendarEvent.swift */,
@@ -605,7 +602,6 @@
 				69EA56762BFED6A80008EDFB /* ActivityViewModel.swift in Sources */,
 				69EA567E2BFF86550008EDFB /* AppDelegate.swift in Sources */,
 				DB5AA33B2C20FBB70082AAA3 /* JVScoresView.swift in Sources */,
-				69348DF32BC872AB002DC202 /* FollowedActivities.swift in Sources */,
 				69DD94642BEA868600529A29 /* ArchivedScoreViewModel.swift in Sources */,
 				69DD945A2BE3F7D500529A29 /* ViewModel.swift in Sources */,
 				69348DF12BC86CDA002DC202 /* ProfileView.swift in Sources */,
