@@ -137,6 +137,10 @@ struct HomePageView: View {
                                             .foregroundColor(.gray)
                                     }
                                     Spacer()
+                                    Image(event.sport)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 50.0)
                                 }
                                 .padding()
                                 .background(Color.white)

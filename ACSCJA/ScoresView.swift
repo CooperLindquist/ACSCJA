@@ -3,6 +3,7 @@ import Firebase
 
 struct ScoresView: View {
     @ObservedObject var model = ViewModel()
+    @Binding var path: NavigationPath
     @State private var userInput: String = "" // State variable to store user input
 
     var body: some View {
@@ -21,8 +22,6 @@ struct ScoresView: View {
                                     .foregroundColor(Color.white) // Set explicit color
                                     .font(.system(size: 45))
                                     .padding(.trailing, 60.0)
-                                
-                                
                             }
 
                             ForEach(model.array.filter { $0.Gender == "Boys" && $0.Level == "Varsity" }.sorted(by: {
@@ -101,7 +100,7 @@ struct ScoresView: View {
                                 .font(.system(size: 20))
                                 .foregroundColor(Color.white) // Set explicit color
 
-                            NavigationLink(destination: ArchivedScoreView()) {
+                            NavigationLink(value: "ArchivedScores") {
                                 Text("Click Here")
                                     .font(.system(size: 20))
                                     .foregroundColor(.blue) // Set explicit color
@@ -130,11 +129,3 @@ struct ScoresView: View {
         }
     }
 }
-
-#if DEBUG
-struct ScoresView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScoresView()
-    }
-}
-#endif

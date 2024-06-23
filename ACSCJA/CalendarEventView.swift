@@ -4,7 +4,8 @@ import FirebaseFirestore
 
 struct CalendarEventView: View {
     @ObservedObject var model = ViewModel()
-    @ObservedObject private var viewModel = CalendarEventViewModel()
+    @StateObject private var viewModel = CalendarEventViewModel()
+    @StateObject private var viewModel2 = SportHomeViewModel()
     @State private var showingAddEventSheet = false
     var sport: String
     @State private var currentDate = Date()
@@ -59,23 +60,23 @@ struct CalendarEventView: View {
             .background(Image("HomePageBackground").ignoresSafeArea(.all))
             .onAppear {
                 viewModel.getCalendarEvents(for: sport)
-                viewModel.checkAdminStatus()
+                viewModel2.checkAdminStatus()
             }
             .navigationBarItems(trailing: Group {
-                            if viewModel.isAdmin {
-                                Button(action: {
-                                    showingAddEventSheet = true
-                                }) {
-                                    Image(systemName: "plus")
-                                        .foregroundColor(.black)
-                                }
-                            }
-                        })
-                        .sheet(isPresented: $showingAddEventSheet) {
-                            AddCalendarEventView(viewModel: viewModel, sport: sport)
-                        }
+                if viewModel2.isAdmin {
+                    Button(action: {
+                        showingAddEventSheet = true
+                    }) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.black)
                     }
                 }
+            })
+            .sheet(isPresented: $showingAddEventSheet) {
+                AddCalendarEventView(viewModel: viewModel, sport: sport)
+            }
+        }
+    }
 
     private func eventsForSelectedDate() -> [CalendarEvent] {
         guard let selectedDate = selectedDate else { return [] }
@@ -246,21 +247,23 @@ class CalendarEventViewModel: ObservableObject {
     }
 
     func checkAdminStatus() {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            self.isAdmin = false
-            return
-        }
-
-        let db = Firestore.firestore()
-        db.collection("Admin").document(userID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                self.isAdmin = document.data()?["isAdmin"] as? Bool ?? false
-            } else {
+            guard let userID = Auth.auth().currentUser?.uid else {
                 self.isAdmin = false
+                return
+            }
+
+            db.collection("Admin").document(userID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    self.isAdmin = document.data()?["isAdmin"] as? Bool ?? false
+                    print("Admin status: \(self.isAdmin)")
+                } else {
+                    self.isAdmin = false
+                    print("Admin document does not exist or error: \(String(describing: error))")
+                }
             }
         }
     }
-}
+
 
 struct CalendarEvent: Identifiable {
     var id: String = UUID().uuidString
