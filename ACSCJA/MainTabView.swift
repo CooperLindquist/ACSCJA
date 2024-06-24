@@ -18,6 +18,14 @@ struct MainTabView: View {
             .tabItem {
                 Label("Calendar", systemImage: "calendar")
             }
+            if (sport == "Baseball") {
+                NavigationView {
+                    BaseballStatsView()
+                }
+                .tabItem {
+                    Label("Stats", systemImage: "chart.bar.fill")
+                }
+            }
         }
         .accentColor(.red) // Change tab bar selection color if needed
     }
